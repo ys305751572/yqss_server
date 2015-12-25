@@ -161,7 +161,7 @@ function doSubmit() {
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="price">价格</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="price" name="price" value="${product.price}" style="width:600px;" placeholder="请填写价格" maxlength="1000" check-type="required" required-message="请输入价格" />
+											  	  <input type="text" id="price" name="price" value="${product.price}" style="width:600px;" placeholder="请填写价格" maxlength="1000" check-type="required price" required-message="请输入价格" />
 											  </div>
 											</div>
 										</td>
@@ -184,7 +184,7 @@ function doSubmit() {
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="url">商品链接</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="url" name="url" value="${product.url}" style="width:600px;"  placeholder="请填写商品链接地址" maxlength="1000" check-type="required" required-message="请输入链接地址" />
+											  	  <input type="text" id="url" name="url" value="${product.url}" style="width:600px;"  placeholder="请填写商品链接地址" maxlength="1000" check-type="required url" required-message="请输入链接地址" />
 											  </div>
 											</div>
 										</td>

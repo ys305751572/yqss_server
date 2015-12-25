@@ -66,7 +66,8 @@ public class ProductController extends GenericEntityController<Product, Product,
 		
 		if(id != null) {
 			Product product = manager.queryByPK(id);
-			model.addAttribute("product", product);
+			product.setPrice(product.getPrice());
+			model.addAttribute("product", product); 
 		}
 		// 商品类型
 		Map<String,List<ProductType>> map = new HashMap<String,List<ProductType>>();

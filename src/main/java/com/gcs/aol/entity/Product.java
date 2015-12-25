@@ -1,5 +1,6 @@
 package com.gcs.aol.entity;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -73,7 +74,7 @@ public class Product extends IdAbstartEntity{
 	}
 
 	public double getPrice() {
-		return price;
+		return Double.parseDouble(new DecimalFormat("#.00").format(price));
 	}
 
 	public void setPrice(double price) {
