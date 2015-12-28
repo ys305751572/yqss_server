@@ -31,8 +31,8 @@ import com.gcs.utils.PageUtil;
 @RequestMapping("/management/second/")
 public class SecondHandProductController extends GenericEntityController<SecondHandProduct, SecondHandProduct, SecondHandProductManagerImpl>{
 
-	public static final String SECOND_LIST_PAGE = "management/aol/second/shp-list";
-	public static final String SECOND_DETAIL_PAGE = "managment/aol/second/shp-detail";
+	public static final String SECOND_LIST_PAGE = "management/aol/secondMgr/shp-list";
+	public static final String SECOND_DETAIL_PAGE = "managment/aol/secondMgr/shp-detail";
 	
 	@Autowired
 	private ISecondHandProductManager manager;

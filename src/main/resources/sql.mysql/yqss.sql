@@ -70,6 +70,7 @@ CREATE TABLE `borrow_info` (
   `product_id` int(32) DEFAULT '0' COMMENT '商品ID',
   `stage_id` int(32) DEFAULT '0' COMMENT '分期ID',
   `repay_date` varchar(20) DEFAULT '' COMMENT '还款时间',
+  `is_list`int(2) default 0 comment '是否同意 0:未处理 1:同意 2:拒绝'
   `create_date` bigint(20) DEFAULT NULL COMMENT '借款时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;

@@ -14,41 +14,42 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 
-import com.gcs.aol.dao.BorrowDAO;
-import com.gcs.aol.entity.Borrow;
-import com.gcs.aol.service.IBorrowManager;
+import com.gcs.aol.dao.MessageDAO;
+import com.gcs.aol.entity.Message;
+import com.gcs.aol.service.IMessageManager;
 import com.gcs.sysmgr.service.impl.GenericManagerImpl;
 import com.gcs.utils.DateUtils;
 
-public class BorrowManagerImpl extends GenericManagerImpl<Borrow, BorrowDAO> implements IBorrowManager{
+@Service
+public class MessageManagerImpl extends GenericManagerImpl<Message, MessageDAO> implements IMessageManager{
 
 	@Autowired
-	private BorrowDAO dao;
+	private MessageDAO dao;
 	
 	private Long regTimeQ;
 	
 	private Long regTimeZ;
 	
 	@Override
-	public Page<Borrow> findAll(Borrow borrow,String regTimeQ,String regTimeZ, Integer currentPage, Integer pageSize) {
+	public Page<Message> findAll(Message msg, String regTimeQ, String regTimeZ, Integer currentPage, Integer pageSize) {
 		this.regTimeQ = StringUtils.isNotBlank(regTimeQ) ? DateUtils.stringToLong(regTimeQ + " 00:00:00", "yyyy-MM-dd HH:mm:ss") : null;
 		this.regTimeZ = StringUtils.isNotBlank(regTimeZ) ? DateUtils.stringToLong(regTimeZ + " 00:00:00", "yyyy-MM-dd HH:mm:ss") : null;
-		Specification<Borrow> spec = buildSpecification(borrow);
+		Specification<Message> spec = buildSpecification(msg);
 		return dao.findAll(spec, new PageRequest(currentPage, pageSize, Sort.Direction.DESC));
 	}
 
 	@Override
-	public Specification<Borrow> buildSpecification(final Borrow borrow) {
-		return new Specification<Borrow>() {
+	public Specification<Message> buildSpecification(final Message msg) {
+		return new Specification<Message>() {
 			@Override
-			public Predicate toPredicate(Root<Borrow> root, CriteriaQuery<?> arg1, CriteriaBuilder cb) {
+			public Predicate toPredicate(Root<Message> root, CriteriaQuery<?> arg1, CriteriaBuilder cb) {
+				
 				List<Predicate> list = new ArrayList<Predicate>();
-				
-				if(borrow.getUser().getUserId() != null) {
-					list.add(cb.equal(root.get("userId").as(Integer.class), borrow.getUser().getUserId()));
+				if(msg.getUser().getUserId() != null) {
+					list.add(cb.equal(root.get("userId").as(Integer.class), msg.getUser().getUserId()));
 				}
-				
 				if(regTimeQ != null ) {
 					list.add(cb.gt(root.get("createDate").as(Long.class),regTimeQ));
 				}

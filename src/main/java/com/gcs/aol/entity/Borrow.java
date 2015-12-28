@@ -2,6 +2,8 @@ package com.gcs.aol.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.gcs.sysmgr.entity.IdAbstartEntity;
@@ -17,8 +19,9 @@ public class Borrow extends IdAbstartEntity{
 
 	private static final long serialVersionUID = 6729759147384579516L;
 
-	@Column(name="user_id")
-	private Integer userId;
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private Users user;
 	
 	@Column(name="limit_money")
 	private Integer limitMoney;
@@ -50,12 +53,23 @@ public class Borrow extends IdAbstartEntity{
 	@Column(name="repay_date")
 	private String repayDate;
 
-	public Integer getUserId() {
-		return userId;
+	@Column(name="is_list")
+	private Integer isList;
+	
+	public Integer getIsList() {
+		return isList;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setIsList(Integer isList) {
+		this.isList = isList;
+	}
+	
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
 	public Integer getLimitMoney() {

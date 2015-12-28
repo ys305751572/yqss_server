@@ -45,6 +45,17 @@ public class ProductBorrow extends IdAbstartEntity{
 	@Column(name="address")
 	private String address;
 
+	@Column(name="is_list")
+	private Integer isList;
+	
+	public Integer getIsList() {
+		return isList;
+	}
+
+	public void setIsList(Integer isList) {
+		this.isList = isList;
+	}
+
 	public Integer getUserId() {
 		return userId;
 	}
