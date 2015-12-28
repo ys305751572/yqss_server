@@ -65,18 +65,16 @@ Date.prototype.format = function(format){
 				});
 				var delId = "";
 				
-				var columns = [ {'text':'借款用户','dataIndex':'user','render':userRender,'width':'70px'},
-							    {'text':'借款额度','dataIndex':'limitMoney','width':'60px'},
-							    {'text':'最大期限','dataIndex':'maxDays','width':'60px'},
-							    {'text':'用户名称','dataIndex':'username','width':'60px'},
-							    {'text':'身份证','dataIndex':'username','width':'60px'},
+				var columns = [ {'text':'消息用户','dataIndex':'user','render':userRender,'width':'70px'},
+							    {'text':'消息标题','dataIndex':'title','width':'60px'},
+							    {'text':'消息内容','dataIndex':'content','render':contentRender,'width':'60px'},
 							    {'text':'创建时间','dataIndex':'createDate','render': timeRender,'width':'70'}
 							    ];
 				var arrayObj = [];
 				var dataTableObj ;
 				$(function() {
 					dataTableObj  = new czTools.dataTable({"columns":columns,"render":"doctorListDataTable",
-												"url":"${contextPath}/management/pb/findAll",
+												"url":"${contextPath}/management/msg/findAll",
 												"para":arrayObj,
 												"autoIframeHeight":false,
 												"showIndex":true,
@@ -100,6 +98,14 @@ Date.prototype.format = function(format){
 					
 				});
 				
+				function contentRender(row) {
+					if(row.url.length > 30){
+						return '<a  href="' + row.url + '" target="_blank">' + row.url.substr(0, 30) + "......" + '</a>';
+					} else {
+						return '<a  href="' + row.url + '" target="_blank">' + row.url + '</a>';
+					}
+				}
+				
 				function userRender(row) {
 					return row.user.name;
 				}
@@ -119,53 +125,10 @@ Date.prototype.format = function(format){
 					];
 					dataTableObj.search(arrayObj);
 				}
-				// 同意借贷
-				function agree(){
-					if(!dataTableObj.getSelectedRow()){
-						jAlert('请选择要操作的记录','提示');
-						return;
-					} else {
-						var id = dataTableObj.getSelectedRow().id;
-						jConfirm('是否确认同意此次借贷？',"提示",function(r){
-							if(r) { 
-								$.post("${contextPath}/management/pb/agree",{"id":id},function(result){
-									if(result.success){
-										window.location.href = "${contextPath}/management/pb/listPage";
-									}
-									else {
-										jAlert(result.msg,'提示');
-									}
-								});
-						 	}
-						});
-					}
-				}
-				
-				// 拒绝借贷
-				function refuse(){
-					if(!dataTableObj.getSelectedRow()){
-						jAlert('请选择要操作的记录','提示');
-						return;
-					} else {
-						var id = dataTableObj.getSelectedRow().id;
-						jConfirm('是否确认拒绝此次借贷？',"提示",function(r){
-							if(r) { 
-								$.post("${contextPath}/management/pb/refuse",{"id":id},function(result){
-									if(result.success){
-										window.location.href = "${contextPath}/management/pb/listPage";
-									}
-									else {
-										jAlert(result.msg,'提示');
-									}
-								});
-						 	}
-						});
-					}
-				}
 				
 			    //查看用户信息
 			    function detail(){
-			    	window.location.href = "${contextPath}/management/pb/detail?id="+dataTableObj.getSelectedRow().id;
+			    	window.location.href = "${contextPath}/management/msg/detail?id="+dataTableObj.getSelectedRow().id;
 				}
 		</script>
 	</head>
@@ -173,15 +136,6 @@ Date.prototype.format = function(format){
 		<!--detail start-->
 		<div class="row-fluid z-ulnone" id="proList">
 			<div class="box span12">			
-				<!-- 操作按钮start -->
-				<div class="breadcrumb">
-					<li><a href="javascript:detail();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;查看商品</a></li>
-					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:agree();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;同意</a></li>
-					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:refuse();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;拒绝</a></li>
-					
-				</div>
 				<!-- 操作按钮end -->
 			
 				<div class="box-content"   style="padding: 0px;border: 0px">
@@ -190,7 +144,7 @@ Date.prototype.format = function(format){
 						<form id="form1" name="form1" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
 								<tr>
-									<td>申请时间范围：</td>
+									<td>消息时间范围：</td>
 									<td>
 										<input type="text" name="regTimeQ"  id="regTimeQ"  readonly   class="form_datetime"  required="required"  style="width: 90px"/>
 										~

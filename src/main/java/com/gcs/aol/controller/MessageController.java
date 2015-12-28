@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gcs.aol.entity.Borrow;
 import com.gcs.aol.entity.Message;
 import com.gcs.aol.service.IMessageManager;
 import com.gcs.aol.service.impl.MessageManagerImpl;
@@ -22,6 +22,8 @@ import com.gcs.utils.JSONParam;
 import com.gcs.utils.JSONResponse;
 import com.gcs.utils.PageUtil;
 
+@RequestMapping("/management/msg/")
+@Controller
 public class MessageController extends GenericEntityController<Message, Message, MessageManagerImpl>{
 
 	public final static String MSG_LIST_PAGE = "management/aol/msgMgr/msg-list";
