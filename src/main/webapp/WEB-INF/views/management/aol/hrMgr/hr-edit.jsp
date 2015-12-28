@@ -55,29 +55,7 @@ function doSubmit() {
 		return false;
 	}		
 	
-	var array = new Array();
-	$("input[type='file']").each(function(){
-		array.push($(this).attr("id"));
-	});
-	console.log(array);
-	
-	$.ajaxFileUpload({
-		url : "${contextPath}/management/ads/edit",
-		type : 'post',
-		secureuri : false,
-		frameId : 'temp_upload_frame',
-		fileElementId : 'add_img', //文件选择框的id属性
-		dataType : 'json', //服务器返回的格式，可以是json
-		param : {
-			"id" : $("#id").val(),
-			"title" : $("#title").val(),
-			"type" : $("#type").val(),
-			"productId" : $("#product").val(),
-		},
-		success : function(data) {
-			window.location.href = "${contextPath}/management/ads/listPage";
-		}
-	});
+	#("form").submit();
 }
 </script>
 </head>

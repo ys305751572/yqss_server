@@ -67,7 +67,7 @@ Date.prototype.format = function(format){
 				
 				var columns = [ {'text':'招聘标题','dataIndex':'title','width':'70px'},
 							    {'text':'薪资范围','dataIndex':'salaryMin','render': salaryRender,'width':'60px'},
-							    {'text':'手机','dataIndex':'mobile','render': typeRender,'width':'60px'},
+							    {'text':'手机','dataIndex':'mobile','width':'60px'},
 							    {'text':'职位','dataIndex':'position','width':'70'},
 							    {'text':'人数','dataIndex':'counts','width':'50px'}
 							    ];
@@ -108,36 +108,11 @@ Date.prototype.format = function(format){
 					if((min != null || min != '') && (max ==null && max == '')) {
 						return min + "以上";
 					}
-					
-					return row.productType.name;
+					else {
+						return min + "~" + max;
+					}
 				}
 
-				function typeRender(row) {
-					var type = row.type;
-					if(type == '1') {
-						return "首页广告";
-					}
-					else if(type == '2') {
-						return "商城广告";
-					}
-					else {
-						return "二手商品";
-					}
-					return row.type;
-				}
-				
-				function isListRender(row) {
-					if(row.isList == 1) {
-						return '已发布';
-					}
-					else if(row.isList == 2) {
-						return '已下架';
-					}
-					else if(row.isList == 0) {
-						return '未发布';
-					}
-				}
-				
 				function timeRender(row) {
 					var regtime = "";
 					if(row.createDate){
@@ -148,39 +123,37 @@ Date.prototype.format = function(format){
 				
 				function searchBtnClick(){
 					var arrayObj = [
-						{"name":"title","value":$("#title").val()},
-						{"name":"isList","value":$("#isList").val()},
-						{"name":"type","value":$("#type").val()}
+						{"name":"title","value":$("#title").val()}
 					];
 					dataTableObj.search(arrayObj);
 				}
 				
 				// 新增医师
-				function addAds() {
-					window.location.href = "${contextPath}/management/ads/editPage";
+				function add() {
+					window.location.href = "${contextPath}/management/hr/editPage";
 				}
 				
 				// 编辑商品
-				function editAds() {
+				function edit() {
 					if(!dataTableObj.getSelectedRow()){
-						jAlert('请选择要查看的广告','提示');
+						jAlert('请选择要查看的记录','提示');
 						return;
 					} else{
-						window.location.href = "${contextPath}/management/ads/editPage?id="+dataTableObj.getSelectedRow().id;
+						window.location.href = "${contextPath}/management/hr/editPage?id="+dataTableObj.getSelectedRow().id;
 					}
 				}
 				
-				function delAds(){
+				function del(){
 					if(!dataTableObj.getSelectedRow()){
 						jAlert('请选择要删除的记录','提示');
 						return;
 					} else {
 						var id = dataTableObj.getSelectedRow().id;
-						jConfirm('是否确认删除广告？',"提示",function(r){
+						jConfirm('是否确认删除记录？',"提示",function(r){
 							if(r) { 
-								$.post("${contextPath}/management/ads/delete",{"id":id},function(result){
+								$.post("${contextPath}/management/hr/delete",{"id":id},function(result){
 									if(result.success){
-										window.location.href = "${contextPath}/management/ads/listPage";
+										window.location.href = "${contextPath}/management/hr/listPage";
 									}
 									else {
 										jAlert(result.msg,'提示');
@@ -192,8 +165,8 @@ Date.prototype.format = function(format){
 				}
 				
 			    //查看用户信息
-			    function detailAds(){
-			    	window.location.href = "${contextPath}/management/ads/detail?id="+dataTableObj.getSelectedRow().id;
+			    function detail(){
+			    	window.location.href = "${contextPath}/management/hr/detail?id="+dataTableObj.getSelectedRow().id;
 				}
 			    
 			    // 商品发布
@@ -258,50 +231,17 @@ Date.prototype.format = function(format){
 			<div class="box span12">			
 				<!-- 操作按钮start -->
 				<div class="breadcrumb">
-					<li><a href="javascript:addAds();" class="button button-rounded button-flat button-tiny" style="width: 120px;"><i class="icon-6" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;新增广告</a></li>
+					<li><a href="javascript:add();" class="button button-rounded button-flat button-tiny" style="width: 120px;"><i class="icon-6" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;新增广告</a></li>
 					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:editAds();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;编辑广告</a></li>
+					<li><a href="javascript:edit();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;编辑广告</a></li>
 					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:delAds();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;删除广告</a></li>
-					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:publish();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-13" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;发布</a></li>
-					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:unPublish();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-12" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;下架</a></li>
-					
+					<li><a href="javascript:del();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;删除广告</a></li>
 				</div>
 				<!-- 操作按钮end -->
 				<div class="box-content"   style="padding: 0px;border: 0px">
 					<!-- 搜索条件start -->
 					<div class="modal-header" style="float: left;width: 100%; ">
 						<form id="form1" name="form1" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
-								<tr>
-									<td>状态：</td>
-									<td>
-									<select id="isList" name="isList"  style="width: 60px;">
-										<option value="" <c:if test="${isList ==''}">selected="selected" </c:if>>全部</option>
-										<option <c:if test="${isList=='1'}">selected="selected" </c:if> value="0">未发布</option>
-										<option <c:if test="${isList=='1'}">selected="selected" </c:if> value="1">已发布</option>
-										<option <c:if test="${isList=='2'}">selected="selected" </c:if> value="2">已下架</option>
-									</select>
-									</td>
-									<td width="20px">&nbsp;</td>
-								</tr>
-							</table>
-							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
-								<tr>
-									<td>位置：</td>
-									<td>
-									<select id="type" name="type"  style="width: 60px;">
-										<option value="" <c:if test="${type ==''}">selected="selected" </c:if>>全部</option>
-										<option <c:if test="${type=='1'}">selected="selected" </c:if> value="1">首页</option>
-										<option <c:if test="${type=='2'}">selected="selected" </c:if> value="2">商城</option>
-										<option <c:if test="${type=='3'}">selected="selected" </c:if> value="3">二手商品</option>
-									</select>
-									</td>
-									<td width="20px">&nbsp;</td>
-								</tr>
-							</table>
 							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
 								<tr>
 									<td>广告标题：</td>
