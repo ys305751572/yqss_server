@@ -65,17 +65,17 @@ Date.prototype.format = function(format){
 				});
 				var delId = "";
 				
-				var columns = [ {'text':'广告标题','dataIndex':'title','width':'70px'},
-							    {'text':'指向产品','dataIndex':'product','render': productRender,'width':'60px'},
-							    {'text':'广告类型','dataIndex':'type','render': typeRender,'width':'60px'},
-							    {'text':'是否发布','dataIndex':'isList','render': isListRender,'width':'70'},
-							    {'text':'发布时间','dataIndex':'createDate','width':'50px','render': timeRender}
+				var columns = [ {'text':'招聘标题','dataIndex':'title','width':'70px'},
+							    {'text':'薪资范围','dataIndex':'salaryMin','render': salaryRender,'width':'60px'},
+							    {'text':'手机','dataIndex':'mobile','render': typeRender,'width':'60px'},
+							    {'text':'职位','dataIndex':'position','width':'70'},
+							    {'text':'人数','dataIndex':'counts','width':'50px'}
 							    ];
 				var arrayObj = [];
 				var dataTableObj ;
 				$(function() {
 					dataTableObj  = new czTools.dataTable({"columns":columns,"render":"doctorListDataTable",
-												"url":"${contextPath}/management/ads/findAll",
+												"url":"${contextPath}/management/hr/findAll",
 												"para":arrayObj,
 												"autoIframeHeight":false,
 												"showIndex":true,
@@ -99,7 +99,16 @@ Date.prototype.format = function(format){
 					
 				});
 				
-				function productRender(row) {
+				function salaryRender(row) {
+					var min = row.salaryMin;
+					var max = row.salaryMax;
+					if((min == null || min == '') && (max !=null && max != '')) {
+						return max + "以下";
+					}
+					if((min != null || min != '') && (max ==null && max == '')) {
+						return min + "以上";
+					}
+					
 					return row.productType.name;
 				}
 
