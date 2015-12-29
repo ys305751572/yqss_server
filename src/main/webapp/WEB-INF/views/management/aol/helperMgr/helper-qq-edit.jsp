@@ -54,8 +54,8 @@ function doSubmit() {
 	if($("#productForm").valid(this) == false) {
 		return false;
 	}		
+	$("form").submit();
 	
-	$("form").submmit();
 }
 </script>
 </head>
@@ -68,7 +68,7 @@ function doSubmit() {
 					<!--box span12 start-->
 					<div class="box span12" style="height: auto;">
 						<div class="box-header well z-h2">
-							<h2><i class="icon-film"></i> 新增/编辑帮助</h2>
+							<h2><i class="icon-film"></i> 新增/编辑帮助(QQ,电话)</h2>
 							<jsp:include page="/WEB-INF/views/backDiv.jsp" flush="true">
 								<jsp:param name="url" value="${contextPath}/management/helper/listPage"/>
 							</jsp:include>
@@ -84,9 +84,9 @@ function doSubmit() {
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="type">帮助类型</label>
+											  <label class="control-label" style="width:60px;" for="question">QQ</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="type" name="type" value="${helper.type}" style="width:600px;" placeholder="请填写帮助类型" maxlength="1000" check-type="required" required-message="请输入帮助类型"/>
+											  	  <input type="text" id="question" name="question" value="${helper.question}" style="width:600px;" placeholder="请填写QQ" maxlength="1000" check-type="required" required-message="请输入QQ"/>
 											  </div>
 											</div>
 										</td>
@@ -94,19 +94,9 @@ function doSubmit() {
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="question">问题</label>
+											  <label class="control-label" style="width:60px;" for="answer">电话</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="question" name="question" value="${helper.question}" style="width:600px;" placeholder="请填写帮助问题" maxlength="1000" check-type="required" required-message="请输入帮助问题"/>
-											  </div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="answer">答案</label>
-											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="answer" name="answer" value="${helper.answer}" style="width:600px;" placeholder="请填写帮助答案" maxlength="1000" check-type="required" required-message="请输入帮助答案"/>
+											  	  <input type="text" id="answer" name="answer" value="${helper.answer}" style="width:600px;" placeholder="请填写电话" maxlength="1000" check-type="required" required-message="请输入帮助电话"/>
 											  </div>
 											</div>
 										</td>

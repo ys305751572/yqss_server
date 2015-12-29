@@ -244,7 +244,7 @@ Date.prototype.format = function(format){
 						<form id="form1" name="form1" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
 								<tr>
-									<td>广告标题：</td>
+									<td>招聘信息标题：</td>
 									<td><input id="title" name="title" type="text" value="" style="width: 120px; height: 15px;" /></td>
 									<td width="10px">&nbsp;</td>
 									<td height="40px" align="right">

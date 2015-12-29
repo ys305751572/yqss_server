@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.gcs.aol.entity.Borrow;
 import com.gcs.aol.entity.HrMessage;
 import com.gcs.aol.service.IHrMessageManager;
 import com.gcs.aol.service.impl.HrMessageManagerImpl;

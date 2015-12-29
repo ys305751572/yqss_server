@@ -54,8 +54,7 @@ function doSubmit() {
 	if($("#productForm").valid(this) == false) {
 		return false;
 	}		
-	
-	#("form").submit();
+	$("form").submit();
 }
 </script>
 </head>
@@ -64,13 +63,13 @@ function doSubmit() {
 	<div class="row-fluid">
 		<div id="content" class="span12">
 			<div class="row-fluid z-ulnone">
-				<form class="form-horizontal" method="post" id="productForm" name="doctorForm" action="" enctype="multipart/form-data">
+				<form class="form-horizontal" method="post" id="productForm" name="doctorForm" action="${contextPath}/management/hr/edit" enctype="multipart/form-data">
 					<!--box span12 start-->
 					<div class="box span12" style="height: auto;">
 						<div class="box-header well z-h2">
-							<h2><i class="icon-film"></i> 新增/编辑商品</h2>
+							<h2><i class="icon-film"></i> 新增/编辑招聘信息</h2>
 							<jsp:include page="/WEB-INF/views/backDiv.jsp" flush="true">
-								<jsp:param name="url" value="${contextPath}/management/ads/listPage"/>
+								<jsp:param name="url" value="${contextPath}/management/hr/listPage"/>
 							</jsp:include>
 						</div>
 						
@@ -80,57 +79,94 @@ function doSubmit() {
 							<!--z-informa2 start-->
 							<div class="z-informa2" style="margin-bottom: 10px;">
 								<table>
-									<input type="hidden" id="id" name="id" value="${ads.id}">
+									<input type="hidden" id="id" name="id" value="${hr.id}">
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="title">广告标题</label>
+											  <label class="control-label" style="width:60px;" for="title">招聘标题</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="title" name="title" value="${ads.title}" style="width:600px;" placeholder="请填写广告标题" maxlength="1000" check-type="required" required-message="请输入广告标题"/>
+											  	  <input type="text" id="title" name="title" value="${hr.title}" style="width:600px;" placeholder="请填写招聘标题" maxlength="1000" check-type="required" required-message="请输入招聘标题"/>
 											  </div>
 											</div>
 										</td>
 									</tr>
-									<tr >
+									<tr>
 										<td>
 											<div class="control-group">
-											<label class="control-label"  style="width:60px;" for="type">广告位置</label>
+											  <label class="control-label" style="width:60px;" for="content">招聘内容</label>
+											  <div class="controls" style="margin-left: 80px;">
+											  	  <input type="text" id="content" name="content" value="${hr.content}" style="width:600px;" placeholder="请填写招聘内容" maxlength="1000" check-type="required" required-message="请输入招聘内容"/>
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="salaryMin">薪资下限</label>
+											  <div class="controls" style="margin-left: 80px;">
+											  	  <input type="text" id="salaryMin" name="salaryMin" value="${hr.salaryMin}" style="width:600px;" placeholder="请填写招聘薪资(下限)" maxlength="1000" check-type="required" required-message="请输入招聘薪资(下限)"/>
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="salaryMax">薪资上限</label>
+											  <div class="controls" style="margin-left: 80px;">
+											  	  <input type="text" id="salaryMax" name="salaryMax" value="${hr.salaryMax}" style="width:600px;" placeholder="请填写招聘薪资(上限)" maxlength="1000" check-type="required" required-message="请输入招聘薪资(上限)"/>
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="mobile">手机</label>
+											  <div class="controls" style="margin-left: 80px;">
+											  	  <input type="text" id="mobile" name="mobile" value="${hr.mobile}" style="width:600px;" placeholder="请填写手机" maxlength="1000" check-type="required" required-message="请输入手机"/>
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="address">地址</label>
+											  <div class="controls" style="margin-left: 80px;">
+											  	  <input type="text" id="address" name="address" value="${hr.address}" style="width:600px;" placeholder="请填写地址" maxlength="1000" check-type="required" required-message="请输入地址"/>
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="company">公司名称</label>
+											  <div class="controls" style="margin-left: 80px;">
+											  	  <input type="text" id="company" name="company" value="${hr.company}" style="width:600px;" placeholder="请填写公司名称" maxlength="1000" check-type="required" required-message="请输入公司名称"/>
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="position">职位</label>
+											  <div class="controls" style="margin-left: 80px;">
+											  	  <input type="text" id="position" name="position" value="${hr.position}" style="width:600px;" placeholder="请填写应聘职位" maxlength="1000" check-type="required" required-message="请输入应聘职位"/>
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											<label class="control-label"  style="width:60px;" for="counts">招聘人数</label>
 											<div class="controls" style="margin-left: 80px;">
-												<select id="type" name="type"  style="width: 120px;">
-													<option <c:if test="${ads.type eq 1 or empty ads.type}">selected="selected" </c:if> value="1">首页</option>
-													<option <c:if test="${ads.type eq 2}">selected="selected" </c:if> value="2">商城</option>
-													<option <c:if test="${ads.type eq 3}">selected="selected" </c:if> value="3">二手商品</option>
-												</select>
+											  	 <input type="text" id="counts" name="counts" value="${hr.counts}" style="width:600px;" placeholder="请填写招聘人数" maxlength="1000" check-type="required" required-message="请输入招聘人数"/>
 											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="url">指向商品</label>
-											  <div class="controls" style="margin-left: 80px;">
-											  	  <select id="type" name="type"  style="width: 120px;">
-											  	  	<c:forEach items="${map.productList}" var="product">
-											  	  		<option <c:if test="${product.id eq ads.productId}">selected="selected" </c:if> value="${product.id }">${product.name }</option>
-											  	  	</c:forEach>
-												</select>
-											  </div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="url">商品图片</label>
-										</td>
-									</tr>
-									<tr>
-										<td>
-										<div>
-											<input type="file" style="height: 20px; width: 220px"
-												name="add_img" id="add_img" /> <input
-												type="hidden" id="hpicture" name="picture" value="" />
-										</div>
 										</td>
 									</tr>
 									<tr>
