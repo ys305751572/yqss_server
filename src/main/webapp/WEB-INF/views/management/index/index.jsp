@@ -158,8 +158,60 @@
                    <li id="menu2">
                        <a href="#" name="firstMenu"><span class="aol aol-system"></span> 产品管理<span class="fa arrow"></span></a>
                        <ul class="nav nav-second-level">
-                           <li id="menu2_1" onclick="changeMenu(this.id,'产品管理&nbsp;>&nbsp;产品列表')">
-                               <a href="${contextPath}/management/product/listPage" target="mainIFrame">产品列表</a>
+                           <li id="menu2_1" onclick="changeMenu(this.id,'产品管理&nbsp;>&nbsp;商品列表')">
+                               <a href="${contextPath}/management/product/listPage" target="mainIFrame">商品列表</a>
+                           </li>
+                           <li id="menu2_2" onclick="changeMenu(this.id,'产品管理&nbsp;>&nbsp;二手商品列表')">
+                               <a href="${contextPath}/management/second/listPage" target="mainIFrame">二手商品列表</a>
+                           </li>
+                       </ul>
+                   </li>
+                   <li id="menu3">
+                       <a href="#" name="firstMenu"><span class="aol aol-system"></span> 借贷管理<span class="fa arrow"></span></a>
+                       <ul class="nav nav-second-level">
+                           <li id="menu3_1" onclick="changeMenu(this.id,'借贷管理&nbsp;>&nbsp;借贷列表')">
+                               <a href="${contextPath}/management/borrow/listPage" target="mainIFrame">借贷列表</a>
+                           </li>
+                            <li id="menu3_2" onclick="changeMenu(this.id,'借贷管理&nbsp;>&nbsp;购买列表')">
+                               <a href="${contextPath}/management/pb/listPage" target="mainIFrame">购买列表</a>
+                           </li>
+                       </ul>
+                   </li>
+                   <li id="menu4">
+                       <a href="#" name="firstMenu"><span class="aol aol-system"></span> 招聘管理<span class="fa arrow"></span></a>
+                       <ul class="nav nav-second-level">
+                           <li id="menu4_1" onclick="changeMenu(this.id,'招聘管理&nbsp;>&nbsp;招聘列表')">
+                               <a href="${contextPath}/management/hr/listPage" target="mainIFrame">招聘列表</a>
+                           </li>
+                       </ul>
+                   </li>
+                    <li id="menu5">
+                       <a href="#" name="firstMenu"><span class="aol aol-system"></span> 消息管理<span class="fa arrow"></span></a>
+                       <ul class="nav nav-second-level">
+                           <li id="menu5_1" onclick="changeMenu(this.id,'消息管理&nbsp;>&nbsp;消息列表')">
+                               <a href="${contextPath}/management/msg/listPage" target="mainIFrame">消息列表</a>
+                           </li>
+                       </ul>
+                   </li>
+                   <li id="menu6">
+                       <a href="#" name="firstMenu"><span class="aol aol-system"></span> 广告管理<span class="fa arrow"></span></a>
+                       <ul class="nav nav-second-level">
+                           <li id="menu6_1" onclick="changeMenu(this.id,'广告管理&nbsp;>&nbsp;广告列表')">
+                               <a href="${contextPath}/management/ads/listPage" target="mainIFrame">广告列表</a>
+                           </li>
+                       </ul>
+                   </li>
+                   <li id="menu7">
+                       <a href="#" name="firstMenu"><span class="aol aol-system"></span> 基础设置管理<span class="fa arrow"></span></a>
+                       <ul class="nav nav-second-level">
+                           <li id="menu7_1" onclick="changeMenu(this.id,'基础设置管理&nbsp;>&nbsp;银行列表')">
+                               <a href="${contextPath}/management/ads/listPage" target="mainIFrame">银行列表</a>
+                           </li>
+                           <li id="menu7_2" onclick="changeMenu(this.id,'基础设置管理&nbsp;>&nbsp;帮助列表')">
+                               <a href="${contextPath}/management/ads/listPage" target="mainIFrame">帮助列表</a>
+                           </li>
+                           <li id="menu7_3" onclick="changeMenu(this.id,'基础设置管理&nbsp;>&nbsp;视频列表')">
+                               <a href="${contextPath}/management/ads/listPage" target="mainIFrame">视频列表</a>
                            </li>
                        </ul>
                    </li>

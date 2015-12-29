@@ -1,6 +1,8 @@
 package com.gcs.aol.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.gcs.sysmgr.entity.IdAbstartEntity;
 
@@ -12,6 +14,8 @@ import com.gcs.sysmgr.entity.IdAbstartEntity;
  * @date 2015年12月28日
      *
  */
+@Entity
+@Table(name="video")
 public class Video extends IdAbstartEntity{
 
 	private static final long serialVersionUID = 3240829083917610464L;

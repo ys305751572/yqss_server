@@ -1,6 +1,7 @@
 package com.gcs.aol.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gcs.aol.entity.SecondHandProduct;
+import com.gcs.aol.entity.SecondHandProductImage;
 import com.gcs.aol.service.ISecondHandProductManager;
+import com.gcs.aol.service.IShpImageService;
 import com.gcs.aol.service.impl.SecondHandProductManagerImpl;
 import com.gcs.sysmgr.controller.GenericEntityController;
 import com.gcs.sysmgr.entity.MsgJsonReturn;
@@ -32,16 +35,19 @@ import com.gcs.utils.PageUtil;
 public class SecondHandProductController extends GenericEntityController<SecondHandProduct, SecondHandProduct, SecondHandProductManagerImpl>{
 
 	public static final String SECOND_LIST_PAGE = "management/aol/secondMgr/shp-list";
-	public static final String SECOND_DETAIL_PAGE = "managment/aol/secondMgr/shp-detail";
+	public static final String SECOND_DETAIL_PAGE = "management/aol/secondMgr/shp-detail";
 	
 	@Autowired
 	private ISecondHandProductManager manager;
+	
+	@Autowired
+	private IShpImageService imageService;
 	
 	/**
 	 * 列表页面
 	 * @return
 	 */
-	@RequestMapping(value="listPage", method = RequestMethod.POST)
+	@RequestMapping(value="listPage", method = RequestMethod.GET)
 	public String listPage() {
 		return SECOND_LIST_PAGE;
 	}
@@ -52,7 +58,7 @@ public class SecondHandProductController extends GenericEntityController<SecondH
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="detailPage", method = RequestMethod.POST)
+	@RequestMapping(value="detailPage", method = RequestMethod.GET)
 	public String detailPage(Integer id,Model model) {
 		
 		SecondHandProduct shp = manager.queryByPK(id);
@@ -89,7 +95,12 @@ public class SecondHandProductController extends GenericEntityController<SecondH
 	@ResponseBody
 	public MsgJsonReturn delete(Integer id){
 		
-		manager.deleteByPK(id);
+		SecondHandProduct shp = manager.queryByPK(id);
+		List<SecondHandProductImage> list = shp.getPicList();
+		for (SecondHandProductImage secondHandProductImage : list) {
+			imageService.delete(secondHandProductImage);
+		}
+		manager.delete(shp);
 		return new MsgJsonReturn(true,"删除成功");
 	}
 }

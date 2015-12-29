@@ -253,6 +253,7 @@ CREATE TABLE `product_comment` (
   `to_user_id` int(32) DEFAULT '0' COMMENT '被评论用户ID',
   `content` varchar(500) DEFAULT '' COMMENT '评论内容',
   `score` int(2) DEFAULT '5' COMMENT '评论等级 1-5',
+  `is_list` int(2) default 1 comment '1:未读 2:已读',
   `create_date` bigint(20) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;

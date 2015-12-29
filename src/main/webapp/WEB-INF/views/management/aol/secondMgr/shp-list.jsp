@@ -140,7 +140,11 @@ Date.prototype.format = function(format){
 				
 			    //查看用户信息
 			    function detailProduct(){
-			    	window.location.href = "${contextPath}/management/product/detail?id="+dataTableObj.getSelectedRow().id;
+			    	if(!dataTableObj.getSelectedRow()){
+						jAlert('请选择要查看的记录','提示');
+						return;
+					} 
+			    	window.location.href = "${contextPath}/management/second/detailPage?id="+dataTableObj.getSelectedRow().id;
 				}
 		</script>
 	</head>

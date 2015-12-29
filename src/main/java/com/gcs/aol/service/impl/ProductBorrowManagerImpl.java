@@ -39,7 +39,7 @@ public class ProductBorrowManagerImpl extends GenericManagerImpl<ProductBorrow, 
 		this.retimeZ = StringUtils.isNotBlank(retimeZ) ? DateUtils.stringToLong(retimeZ + " 00:00:00", "yyyy-MM-dd HH:mm:ss") : null;
 		
 		Specification<ProductBorrow> spec = this.buildSpecification(pb);
-		return dao.findAll(spec, new PageRequest(currentPage,pageSize,Sort.Direction.DESC));
+		return dao.findAll(spec, new PageRequest(currentPage,pageSize,Sort.Direction.DESC,"id"));
 	}
 
 	@Override

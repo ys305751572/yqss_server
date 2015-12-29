@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -32,7 +34,7 @@ public class SecondHandProduct extends IdAbstartEntity{
 	private double price;
 	
 	@OneToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name="user_id",referencedColumnName="user_id")
 	public Users user;
 	
 	@OneToMany

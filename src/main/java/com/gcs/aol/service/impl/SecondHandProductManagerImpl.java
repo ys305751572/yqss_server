@@ -29,7 +29,7 @@ public class SecondHandProductManagerImpl extends GenericManagerImpl<SecondHandP
 	@Override
 	public Page<SecondHandProduct> findAll(SecondHandProduct shp, Integer currentPage, Integer pageSize) {
 		Specification<SecondHandProduct> spec = buildSpecification(shp);
-		return dao.findAll(spec, new PageRequest(currentPage, pageSize, Sort.Direction.DESC));
+		return dao.findAll(spec, new PageRequest(currentPage, pageSize, Sort.Direction.DESC,"id"));
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class SecondHandProductManagerImpl extends GenericManagerImpl<SecondHandP
 				List<Predicate> list = new ArrayList<Predicate>();
 				
 				if(shp.getTitle() != null) {
-					list.add(cb.like(root.get("root").as(String.class), "%" + shp.getTitle() + "%"));
+					list.add(cb.like(root.get("title").as(String.class), "%" + shp.getTitle() + "%"));
 				}
 				
 				Predicate[] p = new Predicate[list.size()];

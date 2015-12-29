@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 
 import com.gcs.aol.dao.BorrowDAO;
 import com.gcs.aol.entity.Borrow;
@@ -21,6 +22,7 @@ import com.gcs.aol.service.IBorrowManager;
 import com.gcs.sysmgr.service.impl.GenericManagerImpl;
 import com.gcs.utils.DateUtils;
 
+@Service
 public class BorrowManagerImpl extends GenericManagerImpl<Borrow, BorrowDAO> implements IBorrowManager{
 
 	@Autowired
@@ -35,7 +37,7 @@ public class BorrowManagerImpl extends GenericManagerImpl<Borrow, BorrowDAO> imp
 		this.regTimeQ = StringUtils.isNotBlank(regTimeQ) ? DateUtils.stringToLong(regTimeQ + " 00:00:00", "yyyy-MM-dd HH:mm:ss") : null;
 		this.regTimeZ = StringUtils.isNotBlank(regTimeZ) ? DateUtils.stringToLong(regTimeZ + " 00:00:00", "yyyy-MM-dd HH:mm:ss") : null;
 		Specification<Borrow> spec = buildSpecification(borrow);
-		return dao.findAll(spec, new PageRequest(currentPage, pageSize, Sort.Direction.DESC));
+		return dao.findAll(spec, new PageRequest(currentPage, pageSize, Sort.Direction.DESC,"id"));
 	}
 
 	@Override

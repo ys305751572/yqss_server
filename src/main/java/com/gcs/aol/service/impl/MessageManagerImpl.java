@@ -37,7 +37,7 @@ public class MessageManagerImpl extends GenericManagerImpl<Message, MessageDAO> 
 		this.regTimeQ = StringUtils.isNotBlank(regTimeQ) ? DateUtils.stringToLong(regTimeQ + " 00:00:00", "yyyy-MM-dd HH:mm:ss") : null;
 		this.regTimeZ = StringUtils.isNotBlank(regTimeZ) ? DateUtils.stringToLong(regTimeZ + " 00:00:00", "yyyy-MM-dd HH:mm:ss") : null;
 		Specification<Message> spec = buildSpecification(msg);
-		return dao.findAll(spec, new PageRequest(currentPage, pageSize, Sort.Direction.DESC));
+		return dao.findAll(spec, new PageRequest(currentPage, pageSize, Sort.Direction.DESC,"id"));
 	}
 
 	@Override

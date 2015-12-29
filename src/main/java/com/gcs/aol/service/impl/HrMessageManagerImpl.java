@@ -29,7 +29,7 @@ public class HrMessageManagerImpl extends GenericManagerImpl<HrMessage, HrMessag
 	@Override
 	public Page<HrMessage> findAll(HrMessage hr, Integer currentPage, Integer pageSize) {
 		Specification<HrMessage> spec = buildSpecification(hr);
-		return dao.findAll(spec, new PageRequest(currentPage, pageSize, Sort.Direction.DESC));
+		return dao.findAll(spec, new PageRequest(currentPage, pageSize, Sort.Direction.DESC,"id"));
 	}
 	
 	@Override

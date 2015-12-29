@@ -29,7 +29,7 @@ public class AdsManagerImpl extends GenericManagerImpl<Ads, AdsDAO> implements I
 	@Override
 	public Page<Ads> findAll(Ads ads, Integer currentPage, Integer pageSize) {
 		Specification<Ads> spec = buildSpecification(ads);
-		return dao.findAll(spec, new PageRequest(currentPage, pageSize, Sort.Direction.DESC));
+		return dao.findAll(spec, new PageRequest(currentPage, pageSize, Sort.Direction.DESC,"id"));
 	}
 
 	@Override
