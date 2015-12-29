@@ -65,17 +65,14 @@ Date.prototype.format = function(format){
 				});
 				var delId = "";
 				
-				var columns = [ {'text':'广告标题','dataIndex':'title','width':'70px'},
-							    {'text':'指向产品','dataIndex':'product','render': productRender,'width':'60px'},
-							    {'text':'广告类型','dataIndex':'type','render': typeRender,'width':'60px'},
-							    {'text':'是否发布','dataIndex':'isList','render': isListRender,'width':'70'},
+				var columns = [ {'text':'银行名称','dataIndex':'name','width':'70px'},
 							    {'text':'发布时间','dataIndex':'createDate','width':'50px','render': timeRender}
 							    ];
 				var arrayObj = [];
 				var dataTableObj ;
 				$(function() {
 					dataTableObj  = new czTools.dataTable({"columns":columns,"render":"doctorListDataTable",
-												"url":"${contextPath}/management/ads/findAll",
+												"url":"${contextPath}/management/bank/findAll",
 												"para":arrayObj,
 												"autoIframeHeight":false,
 												"showIndex":true,
@@ -99,36 +96,6 @@ Date.prototype.format = function(format){
 					
 				});
 				
-				function productRender(row) {
-					return row.productType.name;
-				}
-
-				function typeRender(row) {
-					var type = row.type;
-					if(type == '1') {
-						return "首页广告";
-					}
-					else if(type == '2') {
-						return "商城广告";
-					}
-					else {
-						return "二手商品";
-					}
-					return row.type;
-				}
-				
-				function isListRender(row) {
-					if(row.isList == 1) {
-						return '已发布';
-					}
-					else if(row.isList == 2) {
-						return '已下架';
-					}
-					else if(row.isList == 0) {
-						return '未发布';
-					}
-				}
-				
 				function timeRender(row) {
 					var regtime = "";
 					if(row.createDate){
@@ -138,26 +105,21 @@ Date.prototype.format = function(format){
 				}
 				
 				function searchBtnClick(){
-					var arrayObj = [
-						{"name":"title","value":$("#title").val()},
-						{"name":"isList","value":$("#isList").val()},
-						{"name":"type","value":$("#type").val()}
-					];
 					dataTableObj.search(arrayObj);
 				}
 				
 				// 新增医师
-				function addAds() {
-					window.location.href = "${contextPath}/management/ads/editPage";
+				function add() {
+					window.location.href = "${contextPath}/management/bank/editPage";
 				}
 				
 				// 编辑商品
 				function editAds() {
 					if(!dataTableObj.getSelectedRow()){
-						jAlert('请选择要查看的广告','提示');
+						jAlert('请选择要查看的记录','提示');
 						return;
 					} else{
-						window.location.href = "${contextPath}/management/ads/editPage?id="+dataTableObj.getSelectedRow().id;
+						window.location.href = "${contextPath}/management/bank/editPage?id="+dataTableObj.getSelectedRow().id;
 					}
 				}
 				
@@ -167,11 +129,11 @@ Date.prototype.format = function(format){
 						return;
 					} else {
 						var id = dataTableObj.getSelectedRow().id;
-						jConfirm('是否确认删除广告？',"提示",function(r){
+						jConfirm('是否确认删除记录？',"提示",function(r){
 							if(r) { 
-								$.post("${contextPath}/management/ads/delete",{"id":id},function(result){
+								$.post("${contextPath}/management/bank/delete",{"id":id},function(result){
 									if(result.success){
-										window.location.href = "${contextPath}/management/ads/listPage";
+										window.location.href = "${contextPath}/management/bank/listPage";
 									}
 									else {
 										jAlert(result.msg,'提示');
@@ -182,10 +144,6 @@ Date.prototype.format = function(format){
 					}
 				}
 				
-			    //查看用户信息
-			    function detailAds(){
-			    	window.location.href = "${contextPath}/management/ads/detail?id="+dataTableObj.getSelectedRow().id;
-				}
 			    
 			    // 商品发布
 			    function publish() {

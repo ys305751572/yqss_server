@@ -90,7 +90,7 @@ function doSubmit() {
 					<!--box span12 start-->
 					<div class="box span12" style="height: auto;">
 						<div class="box-header well z-h2">
-							<h2><i class="icon-film"></i> 新增/编辑商品</h2>
+							<h2><i class="icon-film"></i> 新增/编辑广告</h2>
 							<jsp:include page="/WEB-INF/views/backDiv.jsp" flush="true">
 								<jsp:param name="url" value="${contextPath}/management/ads/listPage"/>
 							</jsp:include>
@@ -148,7 +148,8 @@ function doSubmit() {
 									</tr>
 									<tr>
 										<td>
-										<div>
+										<div>	
+											<img id="picture" src="${ads.imageUrl}" style="height: 200px; width: 300px;display: inherit;" border="0"/>
 											<input type="file" style="height: 20px; width: 220px"
 												name="add_img" id="add_img" /> <input
 												type="hidden" id="hpicture" name="picture" value="" />
