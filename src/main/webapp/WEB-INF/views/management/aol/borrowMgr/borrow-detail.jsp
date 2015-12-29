@@ -4,6 +4,7 @@
 <%@page import="com.ckeditor.CKEditorConfig"%>
 <%@ include file="/WEB-INF/views/include.inc.jsp"%>
 <%@ taglib uri="http://ckeditor.com" prefix="ckeditor"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 <head>
@@ -166,9 +167,9 @@ body {
 						<div class="box span12">
 							<div class="box-header well z-h2">
 								<div class="controls" style="margin-left: 10px;">
-									<h2>医师信息详情</h2>
+									<h2>借款详情</h2>
 									<jsp:include page="/WEB-INF/views/backDiv.jsp" flush="true">
-										<jsp:param name="url" value="${contextPath}/management/imageads/adslist"/>
+										<jsp:param name="url" value="${contextPath}/management/borrow/listPage"/>
 									</jsp:include>
 								</div>
 								
@@ -180,13 +181,12 @@ body {
 							<!--z-informa2 start-->
 							<div class="z-informa2" style="margin-bottom: 10px;">
 								<table>
-									<input type="hidden" id="id" name="id" value="${shp.id}">
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="title">商品名称</label>
+											  <label class="control-label" style="width:60px;" for="title">用户账号名称</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  ${shp.title}
+											  	  ${borrow.user.name}
 											  </div>
 											</div>
 										</td>
@@ -194,9 +194,33 @@ body {
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="price">价格</label>
+											  <label class="control-label" style="width:60px;" for="price">贷款额度</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	 ${shp.price }
+											  	 ${borrow.limitMoney }
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="price">借款原因</label>
+											  <div class="controls" style="margin-left: 80px;">
+											  	<c:if test="${borrow.type eq 1}">
+											  		旅游
+											  	</c:if>
+											  	 <c:if test="${borrow.type eq 2}">
+											  		驾校
+											  	</c:if>
+											  	<c:if test="${borrow.type eq 3}">
+											  		购物
+											  	</c:if>
+											  	<c:if test="${borrow.type eq 4}">
+											  		请客
+											  	</c:if>
+											  	<c:if test="${borrow.type eq 5}">
+											  		其他
+											  	</c:if>
 											  </div>
 											</div>
 										</td>
@@ -204,18 +228,18 @@ body {
 									<tr >
 										<td>
 											<div class="control-group">
-											<label class="control-label"  style="width:60px;" for="productType">发布人</label>
+											<label class="control-label"  style="width:60px;" for="productType">最大期限</label>
 											<div class="controls" style="margin-left: 80px;">
-												${shp.user.name }
+												${borrow.maxDay}
 											</div>
 										</td>
 									</tr>
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="url">发布时间</label>
+											  <label class="control-label" style="width:60px;" for="url">姓名</label>
 											  <div class="controls" style="margin-left: 80px;">
-												  	 ${shp.createDate}
+												 ${borrow.username }
 											  </div>
 											</div>
 										</td>
@@ -223,18 +247,51 @@ body {
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="url">商品图片</label>
+											  <label class="control-label" style="width:60px;" for="url">身份证</label>
+											  <div class="controls" style="margin-left: 80px;">
+												 ${borrow.idCard }
+											  </div>
+											</div>
 										</td>
 									</tr>
 									<tr>
 										<td>
-										  <div class="controls" style="margin-left: 0px;" id="pics">
-										  	    <c:forEach items="${product.picList}" var="productImage">
-											  	    <div id="pic_list${productImage.id}"  style="float:left;margin-left: 60px;">
-														<img id="" src="${productImage.imageUrl}" style="height: 200px; width: 300px;display: inherit;" border="0" />
-													</div>
-										  	    </c:forEach>
-										  </div>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="url">手机</label>
+											  <div class="controls" style="margin-left: 80px;">
+												 ${borrow.phone}
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="url">学校</label>
+											  <div class="controls" style="margin-left: 80px;">
+												 ${borrow.schoolName}
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="url">地址</label>
+											  <div class="controls" style="margin-left: 80px;">
+												 ${borrow.address}
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="url">创建时间</label>
+											  <div class="controls" style="margin-left: 80px;">
+												<fmt:formatDate value="${borrow.createDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+											  </div>
+											</div>
 										</td>
 									</tr>
 								</table>
