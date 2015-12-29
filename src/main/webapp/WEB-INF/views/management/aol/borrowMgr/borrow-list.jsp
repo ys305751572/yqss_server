@@ -66,11 +66,12 @@ Date.prototype.format = function(format){
 				var delId = "";
 				
 				var columns = [ {'text':'借款用户','dataIndex':'user','render':userRender,'width':'70px'},
-							    {'text':'借款额度','dataIndex':'limitMoney','width':'60px'},
-							    {'text':'最大期限','dataIndex':'maxDays','width':'60px'},
+							    {'text':'借款额度','dataIndex':'limitMoney','render':moneyRender,'width':'60px'},
+							    {'text':'最大期限','dataIndex':'maxDay','render':dayRender,'width':'60px'},
 							    {'text':'用户名称','dataIndex':'username','width':'60px'},
-							    {'text':'身份证','dataIndex':'username','width':'60px'},
-							    {'text':'创建时间','dataIndex':'createDate','render': timeRender,'width':'70'}
+							    {'text':'身份证','dataIndex':'idCard','width':'60px'},
+							    {'text':'审核状态','dataIndex':'isList','render':isListRender,'width':'60px'},
+							    {'text':'申请时间','dataIndex':'createDate','render': timeRender,'width':'70'}
 							    ];
 				var arrayObj = [];
 				var dataTableObj ;
@@ -100,6 +101,26 @@ Date.prototype.format = function(format){
 					
 				});
 				
+				function isListRender(row) {
+					if(row.isList == 0){
+						return "审核中";
+					}
+					else if(row.isList == 1) {
+						return "同意";
+					}
+					else if(row.isList == 2) {
+						return "拒绝";
+					}
+				}
+				
+				function dayRender(row) {
+					return row.maxDay;
+				}
+				
+				function moneyRender(row) {
+					return row.limitMoney;
+				}
+				
 				function userRender(row) {
 					return row.user.name;
 				}
@@ -107,7 +128,7 @@ Date.prototype.format = function(format){
 				function timeRender(row){
 					var regtime = "";
 					if(row.createDate){
-						regtime = new Date(row.createDate).format("yyyy-MM-dd hh:mm:ss")
+						regtime = new Date(row.createDate).format("yyyy-MM-dd hh:mm:ss");
 					}
 					return regtime;
 				}
@@ -126,10 +147,15 @@ Date.prototype.format = function(format){
 						return;
 					} else {
 						var id = dataTableObj.getSelectedRow().id;
+						if(dataTableObj.getSelectedRow().isList == 1) {
+							jAlert('已同意的借贷无法再次同意','提示');
+							return;
+						}
 						jConfirm('是否确认同意此次借贷？',"提示",function(r){
 							if(r) { 
 								$.post("${contextPath}/management/borrow/agree",{"id":id},function(result){
 									if(result.success){
+										jAlert(result.msg,'提示');
 										window.location.href = "${contextPath}/management/borrow/listPage";
 									}
 									else {
@@ -148,10 +174,15 @@ Date.prototype.format = function(format){
 						return;
 					} else {
 						var id = dataTableObj.getSelectedRow().id;
+						if(dataTableObj.getSelectedRow().isList == 2) {
+							jAlert('已拒绝的借贷无法再次拒绝','提示');
+							return;
+						}
 						jConfirm('是否确认拒绝此次借贷？',"提示",function(r){
 							if(r) { 
 								$.post("${contextPath}/management/borrow/refuse",{"id":id},function(result){
 									if(result.success){
+										jAlert(result.msg,'提示');
 										window.location.href = "${contextPath}/management/borrow/listPage";
 									}
 									else {
@@ -165,7 +196,11 @@ Date.prototype.format = function(format){
 				
 			    //查看用户信息
 			    function detail(){
-			    	window.location.href = "${contextPath}/management/borrow/detail?id="+dataTableObj.getSelectedRow().id;
+			    	if(!dataTableObj.getSelectedRow()){
+						jAlert('请选择要操作的记录','提示');
+						return;
+					}
+			    	window.location.href = "${contextPath}/management/borrow/detailPage?id="+dataTableObj.getSelectedRow().id;
 				}
 		</script>
 	</head>
@@ -175,7 +210,7 @@ Date.prototype.format = function(format){
 			<div class="box span12">			
 				<!-- 操作按钮start -->
 				<div class="breadcrumb">
-					<li><a href="javascript:detail();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;查看商品</a></li>
+					<li><a href="javascript:detail();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;查看详情</a></li>
 					<li style="color: #c5c5c5">|</li>
 					<li><a href="javascript:agree();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;同意</a></li>
 					<li style="color: #c5c5c5">|</li>

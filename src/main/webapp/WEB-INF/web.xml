@@ -95,6 +95,14 @@
   <welcome-file-list>
     <welcome-file>/management/index</welcome-file>
   </welcome-file-list>
+  
+   <jsp-config >
+      <taglib >       
+         <taglib-uri>/tags</taglib-uri >  
+         <taglib-location>/WEB-INF/datetag.tld</taglib-location >           
+      </taglib >  
+  </jsp-config >
+  
   <error-page>
     <exception-type>java.lang.Throwable</exception-type>
     <location>/WEB-INF/views/error/500.jsp</location>

@@ -20,8 +20,8 @@ public class Borrow extends IdAbstartEntity{
 	private static final long serialVersionUID = 6729759147384579516L;
 
 	@OneToOne
-	@JoinColumn(name="user_id")
-	private Users user;
+	@JoinColumn(name="user_id",referencedColumnName="user_id")
+	private Users user = new Users();
 	
 	@Column(name="limit_money")
 	private Integer limitMoney;
@@ -56,6 +56,17 @@ public class Borrow extends IdAbstartEntity{
 	@Column(name="is_list")
 	private Integer isList;
 	
+	@Column(name="create_date")
+	private Long createDate;
+	
+	public Long getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Long createDate) {
+		this.createDate = createDate;
+	}
+
 	public Integer getIsList() {
 		return isList;
 	}

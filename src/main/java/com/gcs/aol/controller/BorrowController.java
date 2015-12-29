@@ -26,7 +26,7 @@ import com.gcs.utils.PageUtil;
 @RequestMapping("/management/borrow/")
 public class BorrowController extends GenericEntityController<Borrow, Borrow, BorrowManagerImpl>{
 
-	public final static String BORROW_LIST_PAGE = "managememnt/aol/borrowMgr/borrow-list";
+	public final static String BORROW_LIST_PAGE = "management/aol/borrowMgr/borrow-list";
 	public final static String BORROW_DETAIL_PAGE = "management/aol/borrowMgr/borrow-detail";
 	
 	@Autowired
@@ -66,7 +66,7 @@ public class BorrowController extends GenericEntityController<Borrow, Borrow, Bo
 	public MsgJsonReturn agree(Borrow borrow) {
 	
 		Borrow _b = manager.queryByPK(borrow.getId());
-		_b.setIsList(borrow.getIsList());
+		_b.setIsList(1);
 		
 		manager.save(_b);
 		return new MsgJsonReturn(true, "操作成功");
@@ -77,7 +77,7 @@ public class BorrowController extends GenericEntityController<Borrow, Borrow, Bo
 	public MsgJsonReturn refuse(Borrow borrow) {
 	
 		Borrow _b = manager.queryByPK(borrow.getId());
-		_b.setIsList(borrow.getIsList());
+		_b.setIsList(2);
 		
 		manager.save(_b);
 		return new MsgJsonReturn(true, "操作成功");
