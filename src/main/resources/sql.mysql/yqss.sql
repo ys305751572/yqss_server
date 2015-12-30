@@ -507,6 +507,19 @@ CREATE TABLE `video` (
 
 insert  into `video`(`id`,`title`,`content`,`url`,`image_url`,`create_date`) values (1,'默认','默认视频','','',NULL),(2,'视频1','视频1','http://www.baidu.com','',NULL),(3,'视频2','视频2','http://www.baidu.com','',NULL),(4,'视频3','视频3','http://www.baidu.com','',NULL);
 
+DROP TABLE IF EXISTS `commons`;
+
+create table `commons` (
+	`id` int(32) AUTO_INCREMENT,
+	`QQ` varchar(30) default '' comment 'QQ',
+	`mobile` varchar(30) default '' comment '手机',
+	`rate` double default 0 comment '利率',
+	
+	PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+insert into `commons` (`QQ`,`mobile`,`rate`) values ('','','');
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

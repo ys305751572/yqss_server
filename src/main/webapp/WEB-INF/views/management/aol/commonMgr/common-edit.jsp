@@ -60,25 +60,7 @@ function doSubmit() {
 	if($("#productForm").valid(this) == false) {
 		return false;
 	}		
-	var array = new Array();
-	
-	$.ajaxFileUpload({
-		url : "${contextPath}/management/video/edit",
-		type : 'post',
-		secureuri : false,
-		frameId : 'temp_upload_frame',
-		fileElementId : 'add_img', //文件选择框的id属性
-		dataType : 'json', //服务器返回的格式，可以是json
-		param : {
-			"id" : $("#id").val(),
-			"title" : $("#title").val(),
-			"content" : $("#content1").val(),
-			"url" : $("#url").val()
-		},
-		success : function(data) {
-			window.location.href = "${contextPath}/management/video/listPage";
-		}
-	});
+	$("form").submit();
 }
 </script>
 </head>
@@ -87,11 +69,11 @@ function doSubmit() {
 	<div class="row-fluid">
 		<div id="content" class="span12">
 			<div class="row-fluid z-ulnone">
-				<form class="form-horizontal" method="post" id="productForm" name="doctorForm" action="" enctype="multipart/form-data">
+				<form class="form-horizontal" method="post" id="productForm" name="doctorForm" action="${contextPath}/management/commons/edit" enctype="multipart/form-data">
 					<!--box span12 start-->
 					<div class="box span12" style="height: auto;">
 						<div class="box-header well z-h2">
-							<h2><i class="icon-film"></i> 新增/编辑视频</h2>
+							<h2><i class="icon-film"></i> 基础设置</h2>
 							<jsp:include page="/WEB-INF/views/backDiv.jsp" flush="true">
 								<jsp:param name="url" value="${contextPath}/management/video/listPage"/>
 							</jsp:include>
@@ -103,13 +85,13 @@ function doSubmit() {
 							<!--z-informa2 start-->
 							<div class="z-informa2" style="margin-bottom: 10px;">
 								<table>
-									<input type="hidden" id="id" name="id" value="${video.id}">
+									<input type="hidden" id="id" name="id" value="${common.id}">
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="title">QQ</label>
+											  <label class="control-label" style="width:60px;" for="qq">QQ</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="title" name="title" value="${video.title}" style="width:600px;" placeholder="请填写视频标题" maxlength="1000" check-type="required" required-message="请输入视频标题"/>
+											  	  <input type="text" id="qq" name="qq" value="${common.qq}" style="width:600px;" placeholder="请填写QQ" maxlength="1000" check-type="required" required-message="请输入QQ"/>
 											  </div>
 											</div>
 										</td>
@@ -117,9 +99,9 @@ function doSubmit() {
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="content">手机</label>
+											  <label class="control-label" style="width:60px;" for="mobile">手机</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="content1" name="content1" value="${video.content}" style="width:600px;" placeholder="请填写视频介绍" maxlength="1000" check-type="required" required-message="请输入视频介绍"/>
+											  	  <input type="text" id="mobile" name="mobile" value="${common.mobile}" style="width:600px;" placeholder="请填写手机" maxlength="1000" check-type="required" required-message="请输入手机"/>
 											  </div>
 											</div>
 										</td>
@@ -127,9 +109,9 @@ function doSubmit() {
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="url">利率</label>
+											  <label class="control-label" style="width:60px;" for="rate">利率</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="url" name="url" value="${video.url}" style="width:600px;" placeholder="请填写视频地址" maxlength="1000" check-type="required" required-message="请输入视频地址"/>%
+											  	  <input type="text" id="rate" name="rate" value="${common.rate}" style="width:600px;" placeholder="请填写利率" maxlength="1000" check-type="required" required-message="请输入利率"/>%
 											  </div>
 											</div>
 										</td>
@@ -149,7 +131,6 @@ function doSubmit() {
 						</div><!--box-content end-->
 					</div><!--box span12 end-->
 				</form>
-				<iframe src="" name="temp_upload_frame" id="temp_upload_frame" style="display: none;"></iframe>
 			</div>
 		</div>
 	</div>

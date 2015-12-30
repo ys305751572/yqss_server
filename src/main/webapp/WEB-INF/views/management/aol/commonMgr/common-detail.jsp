@@ -44,37 +44,9 @@
 </style>
 		
 <script type="text/javascript">
-$(function(){
-	$("form").validation({icon:true});
-});
-
-
-function doSubmit() {
-	
-	if($("#productForm").valid(this) == false) {
-		return false;
-	}		
-	
-	var array = new Array();
-	
-	$.ajaxFileUpload({
-		url : "${contextPath}/management/video/edit",
-		type : 'post',
-		secureuri : false,
-		frameId : 'temp_upload_frame',
-		fileElementId : 'add_img', //文件选择框的id属性
-		dataType : 'json', //服务器返回的格式，可以是json
-		param : {
-			"id" : $("#id").val(),
-			"title" : $("#title").val(),
-			"content" : $("#content").val(),
-			"url" : $("#url").val()
-		},
-		success : function(data) {
-			window.location.href = "${contextPath}/management/video/listPage";
-		}
-	});
-}
+	function doSubmit() {
+		window.location.href = "${contextPath}/management/commons/editPage";
+	}
 </script>
 </head>
 <body>
@@ -86,10 +58,7 @@ function doSubmit() {
 					<!--box span12 start-->
 					<div class="box span12" style="height: auto;">
 						<div class="box-header well z-h2">
-							<h2><i class="icon-film"></i> 视频详情</h2>
-							<jsp:include page="/WEB-INF/views/backDiv.jsp" flush="true">
-								<jsp:param name="url" value="${contextPath}/management/video/listPage"/>
-							</jsp:include>
+							<h2><i class="icon-film"></i> 基础设置</h2>
 						</div>
 						
 						<!--box-content start-->
@@ -102,9 +71,9 @@ function doSubmit() {
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="title">视频标题</label>
+											  <label class="control-label" style="width:60px;" for="title">QQ</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	 ${video.title }
+											  	  ${common.qq }
 											  </div>
 											</div>
 										</td>
@@ -112,9 +81,9 @@ function doSubmit() {
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="content">视频介绍</label>
+											  <label class="control-label" style="width:60px;" for="content">手机</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  ${video.content }
+											  	  ${common.mobile }
 											  </div>
 											</div>
 										</td>
@@ -122,9 +91,9 @@ function doSubmit() {
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="url">视频地址</label>
+											  <label class="control-label" style="width:60px;" for="url">利率</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  ${video.url}
+											  	  ${common.rate }
 											  </div>
 											</div>
 										</td>
@@ -132,14 +101,11 @@ function doSubmit() {
 									<tr>
 										<td>
 											<div class="control-group">
-											  <label class="control-label" style="width:60px;" for="iamgeUrl">视频图片</label>
-										</td>
-									</tr>
-									<tr>
-										<td>
-										<div>
-											<img id="picture" src="${video.imageUrl}" style="height: 200px; width: 300px;display: inherit;" border="0"/>
-										</div>
+												<div class="controls" style="margin-left: 20px;">
+													<input type="hidden" id="saveORsend" name="saveORsend" value=""/>
+													<button id="btnSendBottom" name="btnSendBottom" type="button" onclick="doSubmit();" class="btn btn-primary">编辑</button>
+												</div>
+											</div>
 										</td>
 									</tr>
 								</table>
@@ -147,7 +113,6 @@ function doSubmit() {
 						</div><!--box-content end-->
 					</div><!--box span12 end-->
 				</form>
-				<iframe src="" name="temp_upload_frame" id="temp_upload_frame" style="display: none;"></iframe>
 			</div>
 		</div>
 	</div>
