@@ -27,9 +27,9 @@ import com.gcs.utils.PageUtil;
 @RequestMapping("/management/helper/")
 public class HelperController extends GenericEntityController<Helper, Helper, HelperManagerImpl>{
 
-	public static final String HELP_LIST_PAGE = "management/aol/helpMgr/help-list";
-	public static final String HELP_DETAIL_PAGE = "management/aol/helpMgr/help-detail";
-	public static final String HELP_EDIT_PAGE = "management/aol/helpMgr/help-edit";
+	public static final String HELP_LIST_PAGE = "management/aol/helperMgr/helper-list";
+	public static final String HELP_DETAIL_PAGE = "management/aol/helperMgr/helper-detail";
+	public static final String HELP_EDIT_PAGE = "management/aol/helperMgr/helper-edit";
 	
 	@Autowired
 	private IHelperManager manager;
@@ -71,15 +71,15 @@ public class HelperController extends GenericEntityController<Helper, Helper, He
 	@RequestMapping(value="delete", method = RequestMethod.POST)
 	@ResponseBody
 	public MsgJsonReturn delete(Integer id) {
-		manager.deleteByPK(id);
+		
+		Helper h = manager.queryByPK(id);
+		manager.delete(h);
 		return new MsgJsonReturn(true, "删除成功");
 	}
 	
 	@RequestMapping(value="edit", method = RequestMethod.POST)
-	@ResponseBody
-	public MsgJsonReturn edit(Helper helper) {
-		
+	public String edit(Helper helper) {
 		manager.save(helper);
-		return new MsgJsonReturn(true, helper.getId() == null ? "新增成功": "编辑成功");
+		return HELP_LIST_PAGE;
 	}
 }

@@ -105,7 +105,7 @@ function doSubmit() {
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="salaryMin">薪资下限</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="salaryMin" name="salaryMin" value="${hr.salaryMin}" style="width:600px;" placeholder="请填写招聘薪资(下限)" maxlength="1000" check-type="required" required-message="请输入招聘薪资(下限)"/>
+											  	  <input type="text" id="salaryMin" name="salaryMin" value="${hr.salaryMin}" style="width:600px;" placeholder="请填写招聘薪资(下限)" maxlength="1000" check-type="required number" required-message="请输入招聘薪资(下限)"/>
 											  </div>
 											</div>
 										</td>
@@ -115,7 +115,7 @@ function doSubmit() {
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="salaryMax">薪资上限</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="salaryMax" name="salaryMax" value="${hr.salaryMax}" style="width:600px;" placeholder="请填写招聘薪资(上限)" maxlength="1000" check-type="required" required-message="请输入招聘薪资(上限)"/>
+											  	  <input type="text" id="salaryMax" name="salaryMax" value="${hr.salaryMax}" style="width:600px;" placeholder="请填写招聘薪资(上限)" maxlength="1000" check-type="required number" required-message="请输入招聘薪资(上限)"/>
 											  </div>
 											</div>
 										</td>

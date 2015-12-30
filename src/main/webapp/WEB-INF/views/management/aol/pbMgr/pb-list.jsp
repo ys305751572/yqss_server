@@ -165,7 +165,11 @@ Date.prototype.format = function(format){
 				
 			    //查看用户信息
 			    function detail(){
-			    	window.location.href = "${contextPath}/management/pb/detail?id="+dataTableObj.getSelectedRow().id;
+			    	if(!dataTableObj.getSelectedRow()){
+						jAlert('请选择要操作的记录','提示');
+						return;
+					}
+			    	window.location.href = "${contextPath}/management/pb/detailPage?id="+dataTableObj.getSelectedRow().id;
 				}
 		</script>
 	</head>

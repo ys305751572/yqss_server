@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,8 @@ import com.gcs.utils.JSONParam;
 import com.gcs.utils.JSONResponse;
 import com.gcs.utils.PageUtil;
 
-@RequestMapping("/mangement/hr/")
+@Controller
+@RequestMapping("/management/hr/")
 public class HrMessageController extends GenericEntityController<HrMessage, HrMessage, HrMessageManagerImpl>{
 
 	public final static String HR_LIST_PAGE = "management/aol/hrMgr/hr-list";
@@ -77,5 +79,21 @@ public class HrMessageController extends GenericEntityController<HrMessage, HrMe
 		
 		manager.save(_hr);
 		return new MsgJsonReturn(true, hr.getIsList() == 1 ? "发布成功": "下架成功");
+	}
+	
+	@RequestMapping(value="edit", method = RequestMethod.POST)
+	public String edit(HrMessage hr) {
+		
+		manager.save(hr);
+		return HR_LIST_PAGE;
+	}
+	
+	@RequestMapping(value="delete", method = RequestMethod.POST)
+	@ResponseBody
+	public MsgJsonReturn delete(Integer id) {
+		
+		HrMessage _hr = manager.queryByPK(id);
+		manager.delete(_hr);
+		return new MsgJsonReturn(true, "删除成功");
 	}
 }

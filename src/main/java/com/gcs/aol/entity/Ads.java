@@ -33,6 +33,17 @@ public class Ads extends IdAbstartEntity{
 	@Column(name="is_list")
 	private Integer isList;
 	
+	@Column(name="create_date")
+	private Long createDate = System.currentTimeMillis();
+	
+	public Long getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Long createDate) {
+		this.createDate = createDate;
+	}
+
 	public Integer getIsList() {
 		return isList;
 	}

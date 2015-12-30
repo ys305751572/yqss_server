@@ -16,7 +16,7 @@ public class Bank extends IdAbstartEntity{
 	private String name;
 	
 	@Column(name="create_date")
-	private Long createDate;
+	private Long createDate = System.currentTimeMillis();
 
 	public String getName() {
 		return name;

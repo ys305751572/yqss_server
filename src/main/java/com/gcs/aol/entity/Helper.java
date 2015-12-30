@@ -22,7 +22,7 @@ public class Helper extends IdAbstartEntity{
 	private String answer;
 	
 	@Column(name="create_date")
-	private Long createDate;
+	private Long createDate = System.currentTimeMillis();
 
 	public String getType() {
 		return type;

@@ -151,8 +151,9 @@ Date.prototype.format = function(format){
 						var id = dataTableObj.getSelectedRow().id;
 						jConfirm('是否确认删除记录？',"提示",function(r){
 							if(r) { 
-								$.post("${contextPath}/management/hr/delete",{"id":id},function(result){
+								$.post("${contextPath}/management/hr/delete?id=" + id,function(result){
 									if(result.success){
+										jAlert(result.msg,'提示');
 										window.location.href = "${contextPath}/management/hr/listPage";
 									}
 									else {
@@ -166,7 +167,11 @@ Date.prototype.format = function(format){
 				
 			    //查看用户信息
 			    function detail(){
-			    	window.location.href = "${contextPath}/management/hr/detail?id="+dataTableObj.getSelectedRow().id;
+			    	if(!dataTableObj.getSelectedRow()){
+						jAlert('请选择要删除的记录','提示');
+						return;
+					}
+			    	window.location.href = "${contextPath}/management/hr/detailPage?id="+dataTableObj.getSelectedRow().id;
 				}
 			    
 			    // 商品发布
@@ -231,11 +236,11 @@ Date.prototype.format = function(format){
 			<div class="box span12">			
 				<!-- 操作按钮start -->
 				<div class="breadcrumb">
-					<li><a href="javascript:add();" class="button button-rounded button-flat button-tiny" style="width: 120px;"><i class="icon-6" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;新增广告</a></li>
+					<li><a href="javascript:add();" class="button button-rounded button-flat button-tiny" style="width: 120px;"><i class="icon-6" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;新增</a></li>
 					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:edit();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;编辑广告</a></li>
+					<li><a href="javascript:edit();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;编辑</a></li>
 					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:del();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;删除广告</a></li>
+					<li><a href="javascript:del();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;删除</a></li>
 				</div>
 				<!-- 操作按钮end -->
 				<div class="box-content"   style="padding: 0px;border: 0px">

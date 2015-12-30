@@ -160,7 +160,11 @@ Date.prototype.format = function(format){
 				
 			    //查看用户信息
 			    function detailAds(){
-			    	window.location.href = "${contextPath}/management/video/detail?id="+dataTableObj.getSelectedRow().id;
+			    	if(!dataTableObj.getSelectedRow()){
+						jAlert('请选择要删除的记录','提示');
+						return;
+					}
+			    	window.location.href = "${contextPath}/management/video/detailPage?id="+dataTableObj.getSelectedRow().id;
 				}
 		</script>
 	</head>
@@ -170,15 +174,11 @@ Date.prototype.format = function(format){
 			<div class="box span12">			
 				<!-- 操作按钮start -->
 				<div class="breadcrumb">
-					<li><a href="javascript:addAds();" class="button button-rounded button-flat button-tiny" style="width: 120px;"><i class="icon-6" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;新增广告</a></li>
+					<li><a href="javascript:add();" class="button button-rounded button-flat button-tiny" style="width: 120px;"><i class="icon-6" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;新增视频</a></li>
 					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:editAds();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;编辑广告</a></li>
+					<li><a href="javascript:edit();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;编辑视频</a></li>
 					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:delAds();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;删除广告</a></li>
-					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:publish();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-13" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;发布</a></li>
-					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:unPublish();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-12" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;下架</a></li>
+					<li><a href="javascript:del();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;删除视频</a></li>
 					
 				</div>
 				<!-- 操作按钮end -->

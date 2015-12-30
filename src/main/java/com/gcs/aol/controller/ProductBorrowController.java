@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ import com.gcs.utils.JSONParam;
 import com.gcs.utils.JSONResponse;
 import com.gcs.utils.PageUtil;
 
-@RequestMapping(value="/management/pb/")
+@RequestMapping("/management/pb/")
 @Controller
 public class ProductBorrowController extends GenericEntityController<ProductBorrow, ProductBorrow, ProductBorrowManagerImpl>{
 
@@ -47,14 +48,14 @@ public class ProductBorrowController extends GenericEntityController<ProductBorr
 	
 	@RequestMapping(value="findAll", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONResponse findAll(@RequestParam JSONParam[] params) {
+	public JSONResponse findAll(@RequestBody JSONParam[] params) {
 		
 		HashMap<String, String> paramMap = (HashMap<String, String>) convertToMap(params);
 		String sortStr = paramMap.get("bbSortName");
 		PageParameters pp = PageUtil.getParameter(paramMap, sortStr);
 		
 		ProductBorrow pb = new ProductBorrow();
-		pb.setUserId(paramMap.get("userId") == null ? null : Integer.parseInt(paramMap.get("userId")));
+		pb.getUser().setUserId(paramMap.get("userId") == null ? null : Integer.parseInt(paramMap.get("userId")));
 		String regTimeQ = paramMap.get("regTimeQ");
 		String regTimeZ = paramMap.get("regTimeZ");
 		

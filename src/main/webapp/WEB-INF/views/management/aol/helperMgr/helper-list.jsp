@@ -97,12 +97,17 @@ Date.prototype.format = function(format){
 				    });
 					
 				});
+				function typeRender(row) {
+					if(row.type == 0) {
+						return "QQ,联系方式";
+					}
+				}
 				
 				function answerRender(row) {
 					if(row.answer.length > 30){
-						return '<a  href="' + row.answer + '" target="_blank">' + row.answer.substr(0, 30) + "......" + '</a>';
+						return row.answer.substr(0, 30) + "......";
 					} else {
-						return '<a  href="' + row.answer + '" target="_blank">' + row.answer + '</a>';
+						return row.answer;
 					}
 				}
 
@@ -168,21 +173,16 @@ Date.prototype.format = function(format){
 			<div class="box span12">			
 				<!-- 操作按钮start -->
 				<div class="breadcrumb">
-					<li><a href="javascript:add();" class="button button-rounded button-flat button-tiny" style="width: 120px;"><i class="icon-6" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;新增广告</a></li>
+					<li><a href="javascript:add();" class="button button-rounded button-flat button-tiny" style="width: 120px;"><i class="icon-6" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;新增帮助</a></li>
 					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:edit();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;编辑广告</a></li>
+					<li><a href="javascript:edit();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;编辑帮助</a></li>
 					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:del();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;删除广告</a></li>
+					<li><a href="javascript:del();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;删除帮助</a></li>
 					
 				</div>
 				<!-- 操作按钮end -->
 				<div class="box-content"   style="padding: 0px;border: 0px">
 					<!-- 搜索条件start -->
-					<div class="modal-header" style="float: left;width: 100%; ">
-						<form id="form1" name="form1" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-						</form>
-						
-					</div>
 					<!-- 搜索条件end -->
 
 					<!-- 列表start -->

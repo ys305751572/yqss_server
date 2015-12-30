@@ -1,16 +1,16 @@
 package com.gcs.aol.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.SavepointManager;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.gcs.aol.entity.Ads;
-import com.gcs.aol.entity.ProductImage;
+import com.gcs.aol.entity.Product;
+import com.gcs.aol.entity.SecondHandProduct;
 import com.gcs.aol.service.IAdsManager;
+import com.gcs.aol.service.IProductManager;
+import com.gcs.aol.service.ISecondHandProductManager;
 import com.gcs.aol.service.impl.AdsManagerImpl;
 import com.gcs.aol.utils.CommonUtils;
 import com.gcs.sysmgr.controller.GenericEntityController;
@@ -43,12 +46,18 @@ import com.gcs.utils.PageUtil;
 @RequestMapping("/management/ads/")
 public class AdsController extends GenericEntityController<Ads, Ads, AdsManagerImpl>{
 
-	public final static String ADS_LIST_PAGE = "management/aol/ads/ads-list";
-	public final static String ADS_EDIT_PAGE = "management/aol/ads/edit-list";
-	public final static String ADS_DETAIL_PAGE = "management/aol/ads/detail-list";
+	public final static String ADS_LIST_PAGE = "management/aol/adsMgr/ads-list";
+	public final static String ADS_EDIT_PAGE = "management/aol/adsMgr/ads-edit";
+	public final static String ADS_DETAIL_PAGE = "management/aol/adsMgr/ads-detail";
 	
 	@Autowired
 	private IAdsManager manager;
+	
+	@Autowired
+	private IProductManager productManager;
+	
+	@Autowired
+	private ISecondHandProductManager secondManager;
 	
 	@RequestMapping(value="listPage", method = RequestMethod.GET)
 	public String listPage() {
@@ -62,6 +71,16 @@ public class AdsController extends GenericEntityController<Ads, Ads, AdsManagerI
 			Ads ads = manager.queryByPK(id);
 			model.addAttribute("ads", ads);
 		}
+		
+		
+		List<Product> productList = productManager.queryAll();
+		List<SecondHandProduct> secondList = secondManager.queryAll();
+		
+		Map<String, List> map =  new HashMap<String,List>() ;
+		map.put("product", productList);
+		map.put("second", secondList);
+		
+		model.addAttribute("pro", map);
 		return ADS_EDIT_PAGE;
 	}
 	
@@ -69,6 +88,16 @@ public class AdsController extends GenericEntityController<Ads, Ads, AdsManagerI
 	public String detailPage(Integer id,Model model) {
 		Ads ads = manager.queryByPK(id);
 		model.addAttribute("ads", ads);
+		
+		List<Product> productList = productManager.queryAll();
+		List<SecondHandProduct> secondList = secondManager.queryAll();
+		
+		Map<String, List> map =  new HashMap<String,List>() ;
+		map.put("product", productList);
+		map.put("second", secondList);
+		
+		model.addAttribute("pro", map);
+		
 		return ADS_DETAIL_PAGE;
 	}
 	
@@ -81,8 +110,8 @@ public class AdsController extends GenericEntityController<Ads, Ads, AdsManagerI
 		
 		Ads ads = new Ads();
 		ads.setTitle(paramMap.get("title"));
-		ads.setIsList(paramMap.get("isList") != null ? Integer.parseInt(paramMap.get("isList")) : null);
-		ads.setType(paramMap.get("type") != null ? Integer.parseInt(paramMap.get("type")) : null);
+		ads.setIsList(StringUtils.isNotBlank(paramMap.get("isList")) ? Integer.parseInt(paramMap.get("isList")) : null);
+		ads.setType(StringUtils.isNotBlank(paramMap.get("type"))? Integer.parseInt(paramMap.get("type")) : null);
 		
 		Page<Ads> page = manager.findAll(ads, pp.getStart(), pp.getLength());
 		return successed(new DataTableReturnObject(page.getTotalElements(), page.getTotalElements(), pp.getSEcho(), page.getContent()));
@@ -93,7 +122,7 @@ public class AdsController extends GenericEntityController<Ads, Ads, AdsManagerI
 	 * @param ads
 	 * @return
 	 */
-	@RequestMapping(value="istList", method = RequestMethod.POST)
+	@RequestMapping(value="publish", method = RequestMethod.POST)
 	@ResponseBody
 	public MsgJsonReturn isList(Ads ads) {
 		
@@ -119,7 +148,8 @@ public class AdsController extends GenericEntityController<Ads, Ads, AdsManagerI
 	@ResponseBody
 	public MsgJsonReturn delete(Integer id) {
 		
-		manager.deleteByPK(id);
+		Ads ads = manager.queryByPK(id);
+		manager.delete(ads);
 		return new MsgJsonReturn(true, "删除成功");
 	}
 	
@@ -134,9 +164,11 @@ public class AdsController extends GenericEntityController<Ads, Ads, AdsManagerI
 		ads.setTitle(title);
 		ads.setProductId(productId);
 		ads.setType(type);
+		ads.setContent("");
+		ads.setIsList(0);
 		
-		manager.save(ads);
 		saveImages(ads,fileRequest,request);
+		manager.save(ads);
 		return new MsgJsonReturn(true,id == null ? "新增成功":"编辑成功");
 	}
 

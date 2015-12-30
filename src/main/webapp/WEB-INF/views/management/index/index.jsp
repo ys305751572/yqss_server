@@ -205,13 +205,13 @@
                        <a href="#" name="firstMenu"><span class="aol aol-system"></span> 基础设置管理<span class="fa arrow"></span></a>
                        <ul class="nav nav-second-level">
                            <li id="menu7_1" onclick="changeMenu(this.id,'基础设置管理&nbsp;>&nbsp;银行列表')">
-                               <a href="${contextPath}/management/ads/listPage" target="mainIFrame">银行列表</a>
+                               <a href="${contextPath}/management/bank/listPage" target="mainIFrame">银行列表</a>
                            </li>
                            <li id="menu7_2" onclick="changeMenu(this.id,'基础设置管理&nbsp;>&nbsp;帮助列表')">
-                               <a href="${contextPath}/management/ads/listPage" target="mainIFrame">帮助列表</a>
+                               <a href="${contextPath}/management/helper/listPage" target="mainIFrame">帮助列表</a>
                            </li>
                            <li id="menu7_3" onclick="changeMenu(this.id,'基础设置管理&nbsp;>&nbsp;视频列表')">
-                               <a href="${contextPath}/management/ads/listPage" target="mainIFrame">视频列表</a>
+                               <a href="${contextPath}/management/video/listPage" target="mainIFrame">视频列表</a>
                            </li>
                        </ul>
                    </li>

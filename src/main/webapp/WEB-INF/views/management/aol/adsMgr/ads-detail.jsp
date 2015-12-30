@@ -104,8 +104,11 @@ function doSubmit() {
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="url">指向商品</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  	<c:forEach items="${map.productList}" var="product">
-											  	  		<c:if test="${product.id eq ads.productId}">${product.name }</c:if>
+											  	  <c:forEach items="${pro.product}" var="product">
+											  	  	  <c:if test="${product.id eq ads.productId}">${product.name}</c:if>
+											  	  	</c:forEach>
+											  	  	<c:forEach items="${pro.second}" var="second">
+											  	  		<c:if test="${second.id eq ads.productId}">${second.title}</c:if>
 											  	  	</c:forEach>
 											  </div>
 											</div>
@@ -115,13 +118,14 @@ function doSubmit() {
 										<td>
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="url">商品图片</label>
+											  <div class="controls" style="margin-left: 80px;">	
+												<img id="picture" src="${ads.imageUrl}" style="height: 200px; width: 300px;display: inherit;" border="0"/>
+											</div>
 										</td>
 									</tr>
 									<tr>
 										<td>
-										<div>	
-											<img id="picture" src="${ads.imageUrl}" style="height: 200px; width: 300px;display: inherit;" border="0"/>
-										</div>
+										
 										</td>
 									</tr>
 								</table>

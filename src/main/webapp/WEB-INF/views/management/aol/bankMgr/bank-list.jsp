@@ -114,16 +114,16 @@ Date.prototype.format = function(format){
 				}
 				
 				// 编辑商品
-				function editAds() {
+				function edit() {
 					if(!dataTableObj.getSelectedRow()){
-						jAlert('请选择要查看的记录','提示');
+						jAlert('请选择要操作的记录','提示');
 						return;
 					} else{
 						window.location.href = "${contextPath}/management/bank/editPage?id="+dataTableObj.getSelectedRow().id;
 					}
 				}
 				
-				function delAds(){
+				function del(){
 					if(!dataTableObj.getSelectedRow()){
 						jAlert('请选择要删除的记录','提示');
 						return;
@@ -151,21 +151,14 @@ Date.prototype.format = function(format){
 			<div class="box span12">			
 				<!-- 操作按钮start -->
 				<div class="breadcrumb">
-					<li><a href="javascript:add();" class="button button-rounded button-flat button-tiny" style="width: 120px;"><i class="icon-6" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;新增广告</a></li>
+					<li><a href="javascript:add();" class="button button-rounded button-flat button-tiny" style="width: 120px;"><i class="icon-6" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;新增银行</a></li>
 					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:edit();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;编辑广告</a></li>
+					<li><a href="javascript:edit();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;编辑银行</a></li>
 					<li style="color: #c5c5c5">|</li>
-					<li><a href="javascript:del();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;删除广告</a></li>
+					<li><a href="javascript:del();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;删除银行</a></li>
 				</div>
 				<!-- 操作按钮end -->
 				<div class="box-content"   style="padding: 0px;border: 0px">
-					<!-- 搜索条件start -->
-					<div class="modal-header" style="float: left;width: 100%; ">
-						<form id="form1" name="form1" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-						</form>
-					</div>
-					<!-- 搜索条件end -->
-
 					<!-- 列表start -->
 					<div id="doctorListDataTable" class="z-informa2"></div> 
 					<!-- 列表end -->

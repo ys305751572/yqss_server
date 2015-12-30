@@ -99,10 +99,10 @@ Date.prototype.format = function(format){
 				});
 				
 				function contentRender(row) {
-					if(row.url.length > 30){
-						return '<a  href="' + row.url + '" target="_blank">' + row.url.substr(0, 30) + "......" + '</a>';
+					if(row.content.length > 30){
+						return row.content.substr(0, 30);
 					} else {
-						return '<a  href="' + row.url + '" target="_blank">' + row.url + '</a>';
+						return row.content;
 					}
 				}
 				
@@ -128,16 +128,23 @@ Date.prototype.format = function(format){
 				
 			    //查看用户信息
 			    function detail(){
-			    	window.location.href = "${contextPath}/management/msg/detail?id="+dataTableObj.getSelectedRow().id;
+			    	if(!dataTableObj.getSelectedRow()){
+						jAlert('请选择要查看的记录','提示');
+						return;
+					}
+			    	window.location.href = "${contextPath}/management/msg/detailPage?id="+dataTableObj.getSelectedRow().id;
 				}
 		</script>
 	</head>
 	<body>
 		<!--detail start-->
 		<div class="row-fluid z-ulnone" id="proList">
-			<div class="box span12">			
+			<div class="box span12">	
+				<!-- 操作按钮start -->
+				<div class="breadcrumb">
+					<li><a href="javascript:detail();" class="button button-rounded button-flat button-tiny" style="width: 120px;"><i class="icon-6" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;查看</a></li>
+				</div>		
 				<!-- 操作按钮end -->
-			
 				<div class="box-content"   style="padding: 0px;border: 0px">
 					<!-- 搜索条件start -->
 					<div class="modal-header" style="float: left;width: 100%; ">

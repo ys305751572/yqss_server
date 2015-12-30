@@ -4,6 +4,7 @@
 <%@page import="com.ckeditor.CKEditorConfig"%>
 <%@ include file="/WEB-INF/views/include.inc.jsp"%>
 <%@ taglib uri="http://ckeditor.com" prefix="ckeditor"%>
+<%@ taglib uri="/tags" prefix="date" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 <head>
@@ -234,7 +235,7 @@ body {
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="url">手机</label>
 											  <div class="controls" style="margin-left: 80px;">
-												  	 ${pb.mobile}
+												  	 ${pb.phone}
 											  </div>
 											</div>
 										</td>
@@ -273,6 +274,16 @@ body {
 											  		<c:if test="${pb.isList eq 2}">
 											  			审核拒绝
 											  		</c:if>
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="url">申请时间</label>
+											  <div class="controls" style="margin-left: 80px;">
+												  	 <date:date value="${pb.createDate }"></date:date>
 											  </div>
 											</div>
 										</td>

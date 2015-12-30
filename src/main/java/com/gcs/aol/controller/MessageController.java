@@ -32,12 +32,12 @@ public class MessageController extends GenericEntityController<Message, Message,
 	@Autowired
 	private IMessageManager manager;
 	
-	@RequestMapping(value="listPage", method = RequestMethod.POST)
+	@RequestMapping(value="listPage", method = RequestMethod.GET)
 	public String listPage() {
 		return MSG_LIST_PAGE;
 	}
 	
-	@RequestMapping(value="detailPage", method = RequestMethod.POST)
+	@RequestMapping(value="detailPage", method = RequestMethod.GET)
 	public String detailPage(Integer id,Model model) {
 		
 		Message msg = manager.queryByPK(id);

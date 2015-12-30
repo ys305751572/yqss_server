@@ -70,14 +70,14 @@ public class GenericManagerImpl<E, D extends IBaseJpaRepository<E>> implements G
 	 */
 	public Page<E> query(E entity, PageParameters pp) {
 //		暂时写死，按照时间排序
-		pp.setSort("createTime");
+		pp.setSort("createDate");
 		pp.setSSortDir_0("desc");
 		Order o = new Order(Direction.DESC, pp.getSort());
 		if ("asc".equals(pp.getSSortDir_0().toLowerCase())) {
 			o = new Order(Direction.ASC, pp.getSort());
 		}
 		Specification<E> spec = buildSpecification(entity);
-		Page<E> page = getEntityDAO().findAll(spec, new PageRequest(pp.getStart(),pp.getLength(),new Sort(o)));
+		Page<E> page = getEntityDAO().findAll(spec, new PageRequest(pp.getStart(),pp.getLength(),Sort.Direction.DESC,"id"));
 		return page;
 	}
 	

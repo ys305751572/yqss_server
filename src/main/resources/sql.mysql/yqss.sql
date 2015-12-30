@@ -28,6 +28,8 @@ CREATE TABLE `ads` (
   `image_url` varchar(500) DEFAULT '' COMMENT '图片url',
   `link_url` varchar(100) DEFAULT '' COMMENT '链接地址',
   `type` int(2) DEFAULT '1' COMMENT '广告类型 1:首页 2:商城 3:二手商品',
+  `is_list`int(2) default 0 comment '是否同发布0:未发布 1:已发布 2:下架',
+  `create_date` bigint default 0 comment '发布时间'
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
@@ -42,7 +44,7 @@ DROP TABLE IF EXISTS `bank_type`;
 CREATE TABLE `bank_type` (
   `id` int(32) NOT NULL AUTO_INCREMENT,
   `bank_name` varchar(30) NOT NULL COMMENT '银行名称',
-  `create_user` int(32) NOT NULL COMMENT '操作用户',
+  `create_user` int(32) COMMENT '操作用户',
   `create_date` bigint(20) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
@@ -63,7 +65,7 @@ CREATE TABLE `borrow_info` (
   `period` int(2) DEFAULT '0' COMMENT '期数',
   `type` int(32) DEFAULT '0' COMMENT '借款原因 ',
   `username` varchar(50) DEFAULT '' COMMENT '姓名',
-  `id_cartd` varchar(30) DEFAULT '' COMMENT '身份证',
+  `id_card` varchar(30) DEFAULT '' COMMENT '身份证',
   `phone` varchar(15) DEFAULT '' COMMENT '手机',
   `school_name` varchar(50) DEFAULT '' COMMENT '学校',
   `address` varchar(500) DEFAULT '' COMMENT '收货地址',
@@ -93,12 +95,13 @@ CREATE TABLE `buy_borrow_info` (
   `period` int(2) DEFAULT '0' COMMENT '剩余期数',
   `residue_money` double DEFAULT NULL COMMENT '剩余钱数',
   `username` varchar(50) DEFAULT '' COMMENT '姓名',
-  `id_cartd` varchar(30) DEFAULT '' COMMENT '身份证',
+  `id_card` varchar(30) DEFAULT '' COMMENT '身份证',
   `phone` varchar(15) DEFAULT '' COMMENT '手机',
   `school_name` varchar(50) DEFAULT '' COMMENT '学校',
   `address` varchar(500) DEFAULT '' COMMENT '收货地址',
   `stage` int(32) DEFAULT '0' COMMENT '分期ID',
   `next_date` varchar(30) DEFAULT '' COMMENT '下次还款时间',
+  `is_list`int(2) default 0 comment '是否同意 0:未处理 1:同意 2:拒绝'
   `create_date` bigint(20) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
@@ -148,7 +151,7 @@ CREATE TABLE `helper` (
   `type` varchar(20) NOT NULL DEFAULT '' COMMENT '问题类型',
   `question` varchar(100) DEFAULT '' COMMENT '问题',
   `answer` varchar(500) DEFAULT '' COMMENT '答案',
-  `sys_user_id` int(32) NOT NULL,
+  `sys_user_id` int(32) ,
   `create_date` bigint(20) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
@@ -454,7 +457,8 @@ CREATE TABLE `users_info` (
   `id` int(32) NOT NULL AUTO_INCREMENT,
   `user_id` int(32) NOT NULL COMMENT '用户ID',
   `mobile` varchar(20) NOT NULL DEFAULT '' COMMENT '手机号',
-  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '姓名',
+  `nickname` varchar(30) DEFAULT '' comment '昵称',
   `gender` int(2) NOT NULL DEFAULT '1' COMMENT '性别 0:不限 1:男 2:女',
   `head_url` varchar(200) DEFAULT '' COMMENT '头像url',
   `id_card` varchar(30) DEFAULT '' COMMENT '身份证',

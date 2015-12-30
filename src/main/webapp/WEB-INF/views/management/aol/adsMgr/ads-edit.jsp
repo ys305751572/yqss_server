@@ -44,8 +44,15 @@
 </style>
 		
 <script type="text/javascript">
+
 $(function(){
 	$("form").validation({icon:true});
+	
+	$("#add_img").uploadPreview({
+	 Img : "picture",
+	 Width : "120",
+	 Height : "120"
+	})
 });
 
 
@@ -72,12 +79,28 @@ function doSubmit() {
 			"id" : $("#id").val(),
 			"title" : $("#title").val(),
 			"type" : $("#type").val(),
-			"productId" : $("#product").val(),
+			"productId" : $("#productId").val(),
 		},
 		success : function(data) {
 			window.location.href = "${contextPath}/management/ads/listPage";
 		}
 	});
+}
+
+function typeChange() {
+	var type = $("#type").val();
+	if(type == 1){
+		$("#productId option[name=second]").removeAttr("disabled");
+		$("#productId option[name=product]").removeAttr("disabled");
+	}
+	if(type == 2) {
+		$("#productId option[name=second]").attr("disabled","disabled");
+		$("#productId option[name=product]").removeAttr("disabled");
+	}
+	if(type == 3) {
+		$("#productId option[name=product]").attr("disabled","disabled");
+		$("#productId option[name=second]").removeAttr("disabled");
+	}
 }
 </script>
 </head>
@@ -118,7 +141,7 @@ function doSubmit() {
 											<div class="control-group">
 											<label class="control-label"  style="width:60px;" for="type">广告位置</label>
 											<div class="controls" style="margin-left: 80px;">
-												<select id="type" name="type"  style="width: 120px;">
+												<select id="type" name="type"  style="width: 120px;" onchange="typeChange()">
 													<option <c:if test="${ads.type eq 1 or empty ads.type}">selected="selected" </c:if> value="1">首页</option>
 													<option <c:if test="${ads.type eq 2}">selected="selected" </c:if> value="2">商城</option>
 													<option <c:if test="${ads.type eq 3}">selected="selected" </c:if> value="3">二手商品</option>
@@ -131,12 +154,15 @@ function doSubmit() {
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="url">指向商品</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <select id="type" name="type"  style="width: 120px;">
-											  	  	<c:forEach items="${map.productList}" var="product">
-											  	  		<option <c:if test="${product.id eq ads.productId}">selected="selected" </c:if> value="${product.id }">${product.name }</option>
+											  	  <select id="productId" name="productId"  style="width: 120px;">
+											  	  	<c:forEach items="${pro.product}" var="product">
+											  	  		<option name="product" <c:if test="${product.id eq ads.productId}">selected="selected" </c:if> value="${product.id }">${product.name}</option>
+											  	  	</c:forEach>
+											  	  	<c:forEach items="${pro.second}" var="second">
+											  	  		<option name="second" <c:if test="${second.id eq ads.productId}">selected="selected" </c:if> value="${second.id }">${second.title}</option>
 											  	  	</c:forEach>
 												</select>
-											  </div>
+											  </div> 
 											</div>
 										</td>
 									</tr>
@@ -144,16 +170,12 @@ function doSubmit() {
 										<td>
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="url">商品图片</label>
-										</td>
-									</tr>
-									<tr>
-										<td>
-										<div>	
-											<img id="picture" src="${ads.imageUrl}" style="height: 200px; width: 300px;display: inherit;" border="0"/>
-											<input type="file" style="height: 20px; width: 220px"
-												name="add_img" id="add_img" /> <input
-												type="hidden" id="hpicture" name="picture" value="" />
-										</div>
+											  <div class="controls" style="margin-left: 80px;">	
+												<img id="picture" src="${ads.imageUrl}" style="height: 200px; width: 300px;display: inherit;" border="0"/>
+												<input type="file" style="height: 20px; width: 220px"
+													name="add_img" id="add_img" /> <input
+													type="hidden" id="hpicture" name="picture" value="" />
+											  </div>
 										</td>
 									</tr>
 									<tr>

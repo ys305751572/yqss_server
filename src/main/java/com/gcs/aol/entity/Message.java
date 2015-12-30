@@ -21,8 +21,8 @@ public class Message extends IdAbstartEntity{
 	private String content;
 	
 	@OneToOne
-	@JoinColumn(name="user_id")
-	private Users user;
+	@JoinColumn(name="user_id", referencedColumnName="user_id")
+	private Users user = new Users();
 	
 	@Column(name="is_list")
 	private Integer isList;

@@ -66,7 +66,7 @@ Date.prototype.format = function(format){
 				var delId = "";
 				
 				var columns = [ {'text':'广告标题','dataIndex':'title','width':'70px'},
-							    {'text':'指向产品','dataIndex':'product','render': productRender,'width':'60px'},
+							    {'text':'指向产品ID','dataIndex':'productId','width':'60px'},
 							    {'text':'广告类型','dataIndex':'type','render': typeRender,'width':'60px'},
 							    {'text':'是否发布','dataIndex':'isList','render': isListRender,'width':'70'},
 							    {'text':'发布时间','dataIndex':'createDate','width':'50px','render': timeRender}
@@ -98,10 +98,6 @@ Date.prototype.format = function(format){
 				    });
 					
 				});
-				
-				function productRender(row) {
-					return row.productType.name;
-				}
 
 				function typeRender(row) {
 					var type = row.type;
@@ -154,7 +150,7 @@ Date.prototype.format = function(format){
 				// 编辑商品
 				function editAds() {
 					if(!dataTableObj.getSelectedRow()){
-						jAlert('请选择要查看的广告','提示');
+						jAlert('请选择要操作的广告','提示');
 						return;
 					} else{
 						window.location.href = "${contextPath}/management/ads/editPage?id="+dataTableObj.getSelectedRow().id;
@@ -184,13 +180,17 @@ Date.prototype.format = function(format){
 				
 			    //查看用户信息
 			    function detailAds(){
-			    	window.location.href = "${contextPath}/management/ads/detail?id="+dataTableObj.getSelectedRow().id;
+			    	if(!dataTableObj.getSelectedRow()){
+						jAlert('请选择要操作的记录','提示');
+						return;
+					} 
+			    	window.location.href = "${contextPath}/management/ads/detailPage?id="+dataTableObj.getSelectedRow().id;
 				}
 			    
 			    // 商品发布
 			    function publish() {
 			    	if(!dataTableObj.getSelectedRow()){
-						jAlert('请选择要删除的记录','提示');
+						jAlert('请选择要操作的记录','提示');
 						return;
 					} else {
 						var id = dataTableObj.getSelectedRow().id;
@@ -217,7 +217,7 @@ Date.prototype.format = function(format){
 			    // 下架
 			    function unPublish() {
 			    	if(!dataTableObj.getSelectedRow()){
-						jAlert('请选择要删除的记录','提示');
+						jAlert('请选择要操作的记录','提示');
 						return;
 					} else {
 						var id = dataTableObj.getSelectedRow().id;
@@ -253,6 +253,8 @@ Date.prototype.format = function(format){
 					<li style="color: #c5c5c5">|</li>
 					<li><a href="javascript:editAds();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;编辑广告</a></li>
 					<li style="color: #c5c5c5">|</li>
+					<li><a href="javascript:detailAds();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;广告详情</a></li>
+					<li style="color: #c5c5c5">|</li>
 					<li><a href="javascript:delAds();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;删除广告</a></li>
 					<li style="color: #c5c5c5">|</li>
 					<li><a href="javascript:publish();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-13" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;发布</a></li>
@@ -271,7 +273,7 @@ Date.prototype.format = function(format){
 									<td>
 									<select id="isList" name="isList"  style="width: 60px;">
 										<option value="" <c:if test="${isList ==''}">selected="selected" </c:if>>全部</option>
-										<option <c:if test="${isList=='1'}">selected="selected" </c:if> value="0">未发布</option>
+										<option <c:if test="${isList=='0'}">selected="selected" </c:if> value="0">未发布</option>
 										<option <c:if test="${isList=='1'}">selected="selected" </c:if> value="1">已发布</option>
 										<option <c:if test="${isList=='2'}">selected="selected" </c:if> value="2">已下架</option>
 									</select>

@@ -2,6 +2,8 @@ package com.gcs.aol.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.gcs.sysmgr.entity.IdAbstartEntity;
@@ -12,8 +14,9 @@ public class ProductBorrow extends IdAbstartEntity{
 
 	private static final long serialVersionUID = 8542774779402763105L;
 
-	@Column(name="user_id")
-	private Integer userId;
+	@OneToOne
+	@JoinColumn(name="user_id", referencedColumnName="user_id")
+	private Users user = new Users();
 	
 	@Column(name="product_id")
 	private Integer productId;
@@ -48,6 +51,17 @@ public class ProductBorrow extends IdAbstartEntity{
 	@Column(name="is_list")
 	private Integer isList;
 	
+	@Column(name="create_date")
+	private Long createDate;
+	
+	public Long getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Long createDate) {
+		this.createDate = createDate;
+	}
+
 	public Integer getIsList() {
 		return isList;
 	}
@@ -55,13 +69,13 @@ public class ProductBorrow extends IdAbstartEntity{
 	public void setIsList(Integer isList) {
 		this.isList = isList;
 	}
-
-	public Integer getUserId() {
-		return userId;
+	
+	public Users getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
 	public Integer getProductId() {

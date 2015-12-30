@@ -55,7 +55,7 @@ function doSubmit() {
 		return false;
 	}		
 	
-	$("form").submmit();
+	$("form").submit();
 }
 </script>
 </head>

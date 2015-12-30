@@ -49,8 +49,8 @@ public class ProductBorrowManagerImpl extends GenericManagerImpl<ProductBorrow, 
 			public Predicate toPredicate(Root<ProductBorrow> root, CriteriaQuery<?> arg1, CriteriaBuilder cb) {
 				List<Predicate> list = new ArrayList<Predicate>();
 				
-				if(pb.getUserId() != null) {
-					list.add(cb.equal(root.get("userId").as(Integer.class), pb.getUserId()));
+				if(pb.getUser().getUserId() != null) {
+					list.add(cb.equal(root.get("userId").as(Integer.class), pb.getUser().getUserId()));
 				}
 				if(retimeQ != null) {
 					list.add(cb.ge(root.get("createDate").as(Long.class), retimeQ));

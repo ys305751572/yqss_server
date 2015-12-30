@@ -46,6 +46,12 @@
 <script type="text/javascript">
 $(function(){
 	$("form").validation({icon:true});
+	
+	$("#add_img").uploadPreview({
+	 Img : "picture",
+	 Width : "120",
+	 Height : "120"
+	})
 });
 
 
@@ -133,16 +139,17 @@ function doSubmit() {
 										<td>
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="iamgeUrl">视频图片</label>
+											  <div class="controls" style="margin-left: 80px;">
+												<img id="picture" src="${video.imageUrl}" style="height: 200px; width: 300px;display: inherit;" border="0"/>
+												<input type="file" style="height: 20px; width: 220px"
+													name="add_img" id="add_img" /> <input
+													type="hidden" id="hpicture" name="picture" value="" />
+											  </div>
 										</td>
 									</tr>
 									<tr>
 										<td>
-										<div>
-											<img id="picture" src="${video.imageUrl}" style="height: 200px; width: 300px;display: inherit;" border="0"/>
-											<input type="file" style="height: 20px; width: 220px"
-												name="add_img" id="add_img" /> <input
-												type="hidden" id="hpicture" name="picture" value="" />
-										</div>
+										
 										</td>
 									</tr>
 									<tr>

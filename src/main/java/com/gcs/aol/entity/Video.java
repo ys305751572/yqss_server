@@ -33,7 +33,7 @@ public class Video extends IdAbstartEntity{
 	private String imageUrl;
 	
 	@Column(name="create_date")
-	private Long createDate;
+	private Long createDate = System.currentTimeMillis();
 
 	public String getTitle() {
 		return title;
