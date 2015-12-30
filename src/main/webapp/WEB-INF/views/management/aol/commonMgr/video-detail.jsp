@@ -46,12 +46,6 @@
 <script type="text/javascript">
 $(function(){
 	$("form").validation({icon:true});
-	
-	$("#add_img").uploadPreview({
-	 Img : "picture",
-	 Width : "120",
-	 Height : "120"
-	})
 });
 
 
@@ -60,6 +54,7 @@ function doSubmit() {
 	if($("#productForm").valid(this) == false) {
 		return false;
 	}		
+	
 	var array = new Array();
 	
 	$.ajaxFileUpload({
@@ -72,7 +67,7 @@ function doSubmit() {
 		param : {
 			"id" : $("#id").val(),
 			"title" : $("#title").val(),
-			"content" : $("#content1").val(),
+			"content" : $("#content").val(),
 			"url" : $("#url").val()
 		},
 		success : function(data) {
@@ -91,7 +86,7 @@ function doSubmit() {
 					<!--box span12 start-->
 					<div class="box span12" style="height: auto;">
 						<div class="box-header well z-h2">
-							<h2><i class="icon-film"></i> 新增/编辑视频</h2>
+							<h2><i class="icon-film"></i> 视频详情</h2>
 							<jsp:include page="/WEB-INF/views/backDiv.jsp" flush="true">
 								<jsp:param name="url" value="${contextPath}/management/video/listPage"/>
 							</jsp:include>
@@ -109,7 +104,7 @@ function doSubmit() {
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="title">视频标题</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="title" name="title" value="${video.title}" style="width:600px;" placeholder="请填写视频标题" maxlength="1000" check-type="required" required-message="请输入视频标题"/>
+											  	 ${video.title }
 											  </div>
 											</div>
 										</td>
@@ -119,7 +114,7 @@ function doSubmit() {
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="content">视频介绍</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="content1" name="content1" value="${video.content}" style="width:600px;" placeholder="请填写视频介绍" maxlength="1000" check-type="required" required-message="请输入视频介绍"/>
+											  	  ${video.content }
 											  </div>
 											</div>
 										</td>
@@ -129,7 +124,7 @@ function doSubmit() {
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="url">视频地址</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="url" name="url" value="${video.url}" style="width:600px;" placeholder="请填写视频地址" maxlength="1000" check-type="required" required-message="请输入视频地址"/>
+											  	  ${video.url}
 											  </div>
 											</div>
 										</td>
@@ -138,27 +133,13 @@ function doSubmit() {
 										<td>
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="iamgeUrl">视频图片</label>
-											  <div class="controls" style="margin-left: 80px;">
-												<img id="picture" src="${video.imageUrl}" style="height: 200px; width: 300px;display: inherit;" border="0"/>
-												<input type="file" style="height: 20px; width: 220px"
-													name="add_img" id="add_img" /> <input
-													type="hidden" id="hpicture" name="picture" value="" />
-											  </div>
 										</td>
 									</tr>
 									<tr>
 										<td>
-										
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="control-group">
-												<div class="controls" style="margin-left: 20px;">
-													<input type="hidden" id="saveORsend" name="saveORsend" value=""/>
-													<button id="btnSendBottom" name="btnSendBottom" type="button" onclick="doSubmit();" class="btn btn-primary">保存</button>
-												</div>
-											</div>
+										<div>
+											<img id="picture" src="${video.imageUrl}" style="height: 200px; width: 300px;display: inherit;" border="0"/>
+										</div>
 										</td>
 									</tr>
 								</table>

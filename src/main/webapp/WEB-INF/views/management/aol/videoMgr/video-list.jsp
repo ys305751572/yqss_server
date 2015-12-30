@@ -183,50 +183,6 @@ Date.prototype.format = function(format){
 				</div>
 				<!-- 操作按钮end -->
 				<div class="box-content"   style="padding: 0px;border: 0px">
-					<!-- 搜索条件start -->
-					<div class="modal-header" style="float: left;width: 100%; ">
-						<form id="form1" name="form1" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
-								<tr>
-									<td>状态：</td>
-									<td>
-									<select id="isList" name="isList"  style="width: 60px;">
-										<option value="" <c:if test="${isList ==''}">selected="selected" </c:if>>全部</option>
-										<option <c:if test="${isList=='1'}">selected="selected" </c:if> value="0">未发布</option>
-										<option <c:if test="${isList=='1'}">selected="selected" </c:if> value="1">已发布</option>
-										<option <c:if test="${isList=='2'}">selected="selected" </c:if> value="2">已下架</option>
-									</select>
-									</td>
-									<td width="20px">&nbsp;</td>
-								</tr>
-							</table>
-							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
-								<tr>
-									<td>位置：</td>
-									<td>
-									<select id="type" name="type"  style="width: 60px;">
-										<option value="" <c:if test="${type ==''}">selected="selected" </c:if>>全部</option>
-										<option <c:if test="${type=='1'}">selected="selected" </c:if> value="1">首页</option>
-										<option <c:if test="${type=='2'}">selected="selected" </c:if> value="2">商城</option>
-										<option <c:if test="${type=='3'}">selected="selected" </c:if> value="3">二手商品</option>
-									</select>
-									</td>
-									<td width="20px">&nbsp;</td>
-								</tr>
-							</table>
-							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
-								<tr>
-									<td>广告标题：</td>
-									<td><input id="title" name="title" type="text" value="" style="width: 120px; height: 15px;" /></td>
-									<td width="10px">&nbsp;</td>
-									<td height="40px" align="right">
-										<button id="btnSendTop" name="btnSendTop"  style="width:50px;cursor:pointer;"type="button" class="btn btn-primary" onclick="searchBtnClick()"></i>搜索</button>
-									</td>
-								</tr>
-							</table>
-						</form>
-						
-					</div>
 					<!-- 搜索条件end -->
 
 					<!-- 列表start -->
