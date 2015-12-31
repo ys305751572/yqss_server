@@ -3,7 +3,7 @@ package com.gcs.aol.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.gcs.sysmgr.entity.IdAbstartEntity;
@@ -20,7 +20,7 @@ public class Message extends IdAbstartEntity{
 	@Column(name="content")
 	private String content;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="user_id", referencedColumnName="user_id")
 	private Users user = new Users();
 	

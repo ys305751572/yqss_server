@@ -518,7 +518,7 @@ create table `commons` (
 	PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-insert into `commons` (`QQ`,`mobile`,`rate`) values ('','','');
+insert into `commons` (`QQ`,`mobile`,`rate`) values ('','',0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
