@@ -21,6 +21,9 @@ public class Commons extends IdAbstartEntity{
 	@Column(name="rate")
 	private Double rate;
 
+	@Column(name="overdue")
+	private Double overdue;
+	
 	public String getQq() {
 		return qq;
 	}

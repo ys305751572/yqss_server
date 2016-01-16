@@ -216,6 +216,9 @@
                            <li id="menu7_4" onclick="changeMenu(this.id,'基础设置管理&nbsp;>&nbsp;基础配置')">
                                <a href="${contextPath}/management/commons/detailPage" target="mainIFrame">基础配置</a>
                            </li>
+                           <li id="menu7_5" onclick="changeMenu(this.id,'基础设置管理&nbsp;>&nbsp;举报列表')">
+                               <a href="${contextPath}/management/report/listPage" target="mainIFrame">举报列表</a>
+                           </li>
                        </ul>
                    </li>
                 </ul>

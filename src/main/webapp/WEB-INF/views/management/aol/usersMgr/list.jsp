@@ -138,6 +138,20 @@ Date.prototype.format = function(format){
 					}
 					window.location.href = "${contextPath}/management/users/detailPage?id="+dataTableObj.getSelectedRow().id;
 				}
+				
+				function exportContants() {
+					if(!dataTableObj.getSelectedRow()){
+						jAlert('请选择要导出的记录','提示');
+						return;
+					} else {
+						var id = dataTableObj.getSelectedRow().id;
+						jConfirm('是否确认导出记录？',"提示",function(r){
+							if(r) { 
+								window.location.href = "${contextPath}/management/users/exportExcel?id="+id;
+						 	}
+						});
+					}
+				}
 		</script>
 	</head>
 	<body>
@@ -147,6 +161,8 @@ Date.prototype.format = function(format){
 				<!-- 操作按钮start -->
 				<div class="breadcrumb">
 					<li><a href="javascript:viewUserInfo();" class="button button-rounded button-flat button-tiny" style="width: 120px;"><i class="icon-6" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;查看用户信息</a></li>
+					<li style="color: #c5c5c5">|</li>
+					<li><a href="javascript:exportContants();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;导出联系人</a></li>
 				</div>
 				<!-- 操作按钮end -->
 				
@@ -181,6 +197,7 @@ Date.prototype.format = function(format){
 									<td width="20px">&nbsp;</td>
 								</tr>
 							</table>
+							
 							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
 								<tr>
 									<td>注册时间范围：</td>

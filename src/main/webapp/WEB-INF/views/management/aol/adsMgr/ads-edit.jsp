@@ -66,7 +66,7 @@ function doSubmit() {
 	$("input[type='file']").each(function(){
 		array.push($(this).attr("id"));
 	});
-	console.log(array);
+	console.log($("#content").val());
 	
 	$.ajaxFileUpload({
 		url : "${contextPath}/management/ads/edit",
@@ -78,6 +78,7 @@ function doSubmit() {
 		param : {
 			"id" : $("#id").val(),
 			"title" : $("#title").val(),
+			"content":$("#content1").val(),
 			"type" : $("#type").val(),
 			"productId" : $("#productId").val(),
 		},
@@ -132,6 +133,16 @@ function typeChange() {
 											  <label class="control-label" style="width:60px;" for="title">广告标题</label>
 											  <div class="controls" style="margin-left: 80px;">
 											  	  <input type="text" id="title" name="title" value="${ads.title}" style="width:600px;" placeholder="请填写广告标题" maxlength="1000" check-type="required" required-message="请输入广告标题"/>
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="title">广告内容</label>
+											  <div class="controls" style="margin-left: 80px;">
+											  	  <input type="text" id="content1" name="content1" value="${ads.content}" style="width:600px;" placeholder="请填写广告内容" maxlength="1000"/>
 											  </div>
 											</div>
 										</td>

@@ -9,4 +9,5 @@ public interface IBorrowManager extends GenericManager<Borrow>{
 
 	public Page<Borrow> findAll(Borrow borrow,String regTimeQ,String regTimeZ,Integer currentPage,Integer pageSize);
 	
+	public Integer count(Integer userId) ; 
 }

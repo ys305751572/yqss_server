@@ -54,6 +54,17 @@ public class ProductBorrow extends IdAbstartEntity{
 	@Column(name="create_date")
 	private Long createDate;
 	
+	@Column(name="next_date")
+	private String nextDate;
+	
+	public String getNextDate() {
+		return nextDate;
+	}
+
+	public void setNextDate(String nextDate) {
+		this.nextDate = nextDate;
+	}
+
 	public Long getCreateDate() {
 		return createDate;
 	}

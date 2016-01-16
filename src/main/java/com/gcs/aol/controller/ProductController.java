@@ -24,9 +24,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.gcs.aol.entity.Product;
 import com.gcs.aol.entity.ProductImage;
+import com.gcs.aol.entity.ProductStage;
 import com.gcs.aol.entity.ProductType;
 import com.gcs.aol.service.IProductImageManager;
 import com.gcs.aol.service.IProductManager;
+import com.gcs.aol.service.IProductStageManager;
 import com.gcs.aol.service.IProductTypeManager;
 import com.gcs.aol.service.impl.ProductManagerImpl;
 import com.gcs.aol.utils.CommonUtils;
@@ -56,6 +58,9 @@ public class ProductController extends GenericEntityController<Product, Product,
 	@Autowired
 	private IProductTypeManager typeManager;
 	
+	@Autowired
+	private IProductStageManager stageManager;
+	
 	@RequestMapping(value = "listPage", method = RequestMethod.GET)
 	public String listPage() {
 		return PRODUCT_LIST_PAGE;
@@ -68,11 +73,29 @@ public class ProductController extends GenericEntityController<Product, Product,
 			Product product = manager.queryByPK(id);
 			product.setPrice(product.getPrice());
 			model.addAttribute("product", product); 
+			
+			List<ProductStage> stageList = product.getStageList();
+			String stage = "";
+			if(stageList == null || stageList.size() <= 0) {
+				stage = "0";
+			}
+			else {
+				for (ProductStage productStage : stageList) {
+					stage = stage + productStage.getStage() + ",";
+				}
+				stage = stage.substring(0, stage.length() - 1);
+			}
+			Map<String,String> stageMap = new HashMap<String,String>();
+			stageMap.put("stage", stage);
+			model.addAttribute("stage", stageMap);
 		}
 		// 商品类型
 		Map<String,List<ProductType>> map = new HashMap<String,List<ProductType>>();
 		List<ProductType> typeList = typeManager.queryAll();
 		map.put("list", typeList);
+		
+		
+		
 		model.addAttribute("map", map);
 		return PRODUCT_EDIT_PAGE;
 	}
@@ -82,6 +105,22 @@ public class ProductController extends GenericEntityController<Product, Product,
 		
 		Product product = manager.queryByPK(id);
 		model.addAttribute("product", product);
+		
+		List<ProductStage> stageList = product.getStageList();
+		String stage = "";
+		if(stageList == null || stageList.size() <= 0) {
+			stage = "0";
+		}
+		else {
+			for (ProductStage productStage : stageList) {
+				stage = stage + productStage.getStage() + ",";
+			}
+			stage = stage.substring(0, stage.length() - 1);
+		}
+		Map<String,String> stageMap = new HashMap<String,String>();
+		stageMap.put("stage", stage);
+		model.addAttribute("stage", stageMap);
+		
 		return PRODUCT_DETAIL_PAGE;
 	}
 	
@@ -99,7 +138,8 @@ public class ProductController extends GenericEntityController<Product, Product,
 	public MsgJsonReturn deleteProduct(Integer id) {
 		
 		try{
-			manager.deleteByPK(id);
+			Product product = manager.queryByPK(id);
+			manager.delete(product);
 		}catch (Exception e) {
 			e.printStackTrace();
 			return new MsgJsonReturn(false,"删除失败");
@@ -137,7 +177,7 @@ public class ProductController extends GenericEntityController<Product, Product,
 	 */
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	@ResponseBody
-	public MsgJsonReturn update(Integer id,String name,Double price,String url,Integer productType, MultipartHttpServletRequest fileRequest, HttpServletRequest request,HttpServletResponse resp) {
+	public MsgJsonReturn update(Integer id,String name,Double price,String url,Integer productType,String stage, MultipartHttpServletRequest fileRequest, HttpServletRequest request,HttpServletResponse resp) {
 		
 		Product product = new Product();
 		if(id != null && StringUtils.isNotBlank(id.toString())) {
@@ -153,11 +193,33 @@ public class ProductController extends GenericEntityController<Product, Product,
 		
 		// 保存商品信息 
 		manager.save(product);
+		
+		saveProductStage(product.getId(),stage);
 		// 保存商品图片
 		saveProductImage(product.getId(),fileRequest,request);
 		return new MsgJsonReturn(true, "编辑成功");
 	}
 	
+	private void saveProductStage(Integer productId,String stage) {
+		
+		List<ProductStage> list = stageManager.queryByProperty("productId", productId);
+		for (ProductStage productStage : list) {
+			stageManager.delete(productStage);
+		}
+		
+		if(StringUtils.isNotBlank(stage)) {
+			String[] stagess = stage.split(",");
+			for (String st : stagess) {
+				if(StringUtils.isNotBlank(st) && !"0".equals(st)) {
+					ProductStage ps =  new ProductStage();
+					ps.setProductId(productId);
+					ps.setStage(Integer.parseInt(st));
+					stageManager.save(ps);
+				}
+			}
+		}
+	}
+
 	/**
 	 * 
      * @Title: saveProductImage

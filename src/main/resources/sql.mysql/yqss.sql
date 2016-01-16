@@ -118,6 +118,7 @@ CREATE TABLE `buy_repay_record` (
   `id` int(32) NOT NULL AUTO_INCREMENT,
   `borrow_info_id` int(32) NOT NULL COMMENT '还款记录',
   `money` double(10,2) NOT NULL DEFAULT '0.00' COMMENT '还款额度',
+  `sn` varchar(32) default '' comment '订单号',
   `create_date` bigint(20) DEFAULT NULL COMMENT '创建时间/还款时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
@@ -322,6 +323,7 @@ CREATE TABLE `repay_record` (
   `id` int(32) NOT NULL AUTO_INCREMENT,
   `borrow_info_id` int(32) NOT NULL COMMENT '还款记录',
   `money` double(10,2) NOT NULL DEFAULT '0.00' COMMENT '还款额度',
+  `sn` varchar(32) default '' comment '订单号',
   `create_date` bigint(20) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
@@ -514,11 +516,44 @@ create table `commons` (
 	`QQ` varchar(30) default '' comment 'QQ',
 	`mobile` varchar(30) default '' comment '手机',
 	`rate` double default 0 comment '利率',
-	
+	`overdue` double default 0 comment '逾期利息',
 	PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 insert into `commons` (`QQ`,`mobile`,`rate`) values ('','',0);
+
+DROP TABLE IF EXISTS `contants`;
+
+create table `contants` (
+	`id` int(32) AUTO_INCREMENT,
+	`user_id` int(32) default 0 comment '用户ID',
+	`contants_name` varchar(50) default '' comment '通讯录名字',
+	`mobile` varchar(30) default '' comment '通讯录手机',
+	
+	PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `oauth`;
+
+create table `oauth` (
+     `id` int(32) auto_increment,
+     `open_id` varchar(100) not null comment '第三方登录凭证',
+     `user_id` int(32) default null comment '用户ID',
+     `create_date` bigint(20) comment '创建时间',
+     PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `report`;
+
+create table `report` (
+	`id` int(32) auto_increment,
+	`user_id` int(32) not null comment '举报用户ID',
+	`sh_id` int(32) not null comment '二手商品iD',
+	`content` varchar(32) default '' comment '举报内容',
+	`create_date` bigint comment '创建时间',
+	PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

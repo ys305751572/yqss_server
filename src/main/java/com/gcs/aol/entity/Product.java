@@ -1,6 +1,7 @@
 package com.gcs.aol.entity;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -49,6 +50,18 @@ public class Product extends IdAbstartEntity{
 	@JoinColumn(name = "product_id")
 	private List<ProductImage> picList;
 	
+	@OneToMany(cascade = CascadeType.REMOVE)
+	@JoinColumn(name="product_id")
+	private List<ProductStage> stageList = new ArrayList<ProductStage>();
+	
+	public List<ProductStage> getStageList() {
+		return stageList;
+	}
+
+	public void setStageList(List<ProductStage> stageList) {
+		this.stageList = stageList;
+	}
+
 	public List<ProductImage> getPicList() {
 		return picList;
 	}

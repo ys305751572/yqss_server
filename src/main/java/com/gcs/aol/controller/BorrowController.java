@@ -20,6 +20,7 @@ import com.gcs.aol.service.IBorrowManager;
 import com.gcs.aol.service.IMessageManager;
 import com.gcs.aol.service.IUsersManager;
 import com.gcs.aol.service.impl.BorrowManagerImpl;
+import com.gcs.aol.utils.YqssUtils;
 import com.gcs.sysmgr.controller.GenericEntityController;
 import com.gcs.sysmgr.entity.MsgJsonReturn;
 import com.gcs.sysmgr.vo.PageParameters;
@@ -78,8 +79,14 @@ public class BorrowController extends GenericEntityController<Borrow, Borrow, Bo
 	public MsgJsonReturn agree(Borrow borrow) {
 	
 		Borrow _b = manager.queryByPK(borrow.getId()); 
-		_b.setIsList(1);
+//		Integer userId = _b.getUser().getUserId();
 		
+//		long count = manager.getCountByProperty("borrow_info", "user_id", userId);
+//		if(count > 0) {
+//			return new MsgJsonReturn(false,"改用户已经有过一次");
+//		}
+		_b.setIsList(1);
+		_b.setRepayDate(YqssUtils.borrowResidueDate(_b.getMaxDay()));
 		manager.save(_b);
 		
 		Message msg = new Message();

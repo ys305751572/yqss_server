@@ -336,6 +336,30 @@ public class GenericManagerImpl<E, D extends IBaseJpaRepository<E>> implements G
 		return l;
 	}
 
+	public long getCountByProperty(String table,String property,Object value) {
+		EntityManager em = entityManagerFactory.createEntityManager();
+		String countSql = "select count(*) as count from "+table+"  where " + property + "=" + value;
+		Query query = em.createNativeQuery(countSql);
+		Long l = Long.valueOf(query.getSingleResult().toString());
+		em.close();
+		return l;
+	}
+	
+	public List<E> queryListByProperty(String table,String property,Object value) {
+		EntityManager em = entityManagerFactory.createEntityManager();
+		String countSql = "select * from "+ table+" where " + property + " = " + value;
+		List<E> list = null;
+		try{
+			Query query = em.createNativeQuery(countSql);
+			list = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return list;
+	}
+	
 	public long count() {
 		return getEntityDAO().count();
 	}

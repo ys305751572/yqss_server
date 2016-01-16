@@ -119,6 +119,16 @@ function doSubmit() {
 									<tr>
 										<td>
 											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="overdue">逾期利息</label>
+											  <div class="controls" style="margin-left: 80px;">
+											  	  <input type="text" id="overdue" name="overdue" value="${common.overdue}" style="width:600px;" placeholder="请填写逾期利息金额" maxlength="1000" check-type="required" required-message="请输入逾期利息金额"/>
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
 												<div class="controls" style="margin-left: 20px;">
 													<input type="hidden" id="saveORsend" name="saveORsend" value=""/>
 													<button id="btnSendBottom" name="btnSendBottom" type="button" onclick="doSubmit();" class="btn btn-primary">保存</button>

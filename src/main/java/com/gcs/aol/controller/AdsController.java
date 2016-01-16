@@ -155,7 +155,7 @@ public class AdsController extends GenericEntityController<Ads, Ads, AdsManagerI
 	
 	@RequestMapping(value="edit", method = RequestMethod.POST)
 	@ResponseBody
-	public MsgJsonReturn edit(Integer id,String title,String productId,Integer type, MultipartHttpServletRequest fileRequest,HttpServletRequest request) {
+	public MsgJsonReturn edit(Integer id,String title,String productId,Integer type,String content ,MultipartHttpServletRequest fileRequest,HttpServletRequest request) {
 		
 		Ads ads = new Ads();
 		if(id != null) {
@@ -164,7 +164,7 @@ public class AdsController extends GenericEntityController<Ads, Ads, AdsManagerI
 		ads.setTitle(title);
 		ads.setProductId(productId);
 		ads.setType(type);
-		ads.setContent("");
+		ads.setContent(content);
 		ads.setIsList(0);
 		
 		saveImages(ads,fileRequest,request);

@@ -101,7 +101,6 @@ function doSubmit() {
 	$("input[type='file']").each(function(){
 		array.push($(this).attr("id"));
 	});
-	console.log(array);
 	
 	$.ajaxFileUpload({
 		url : "${contextPath}/management/product/update",
@@ -116,6 +115,7 @@ function doSubmit() {
 			"price" : $("#price").val(),
 			"productType" : $("#productType").val(),
 			"url" : $("#url").val(),
+			"stage":$("#stage").val(),
 		},
 		success : function(data) {
 			window.location.href = "${contextPath}/management/product/listPage";
@@ -185,6 +185,16 @@ function doSubmit() {
 											  <label class="control-label" style="width:60px;" for="url">商品链接</label>
 											  <div class="controls" style="margin-left: 80px;">
 											  	  <input type="text" id="url" name="url" value="${product.url}" style="width:600px;"  placeholder="请填写商品链接地址" maxlength="1000" check-type="required url" required-message="请输入链接地址" />
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="url">商品分期</label>
+											  <div class="controls" style="margin-left: 80px;">
+											  	  <input type="text" id="stage" name="stage" value="${stage.stage}" style="width:600px;"  placeholder="请填写商品分期数，分期数用逗号分割" maxlength="1000" check-type="installment"/>
 											  </div>
 											</div>
 										</td>

@@ -1,5 +1,6 @@
 package com.gcs.aol.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gcs.aol.constant.Constant;
+import com.gcs.aol.entity.Message;
 import com.gcs.aol.entity.ProductBorrow;
+import com.gcs.aol.entity.Users;
+import com.gcs.aol.service.IMessageManager;
 import com.gcs.aol.service.IProductBorrowManger;
+import com.gcs.aol.service.IUsersManager;
 import com.gcs.aol.service.impl.ProductBorrowManagerImpl;
+import com.gcs.aol.utils.YqssUtils;
 import com.gcs.sysmgr.controller.GenericEntityController;
 import com.gcs.sysmgr.entity.MsgJsonReturn;
 import com.gcs.sysmgr.vo.PageParameters;
@@ -32,6 +39,12 @@ public class ProductBorrowController extends GenericEntityController<ProductBorr
 	
 	@Autowired
 	private IProductBorrowManger manager;
+	
+	@Autowired
+	private IUsersManager userManager;
+	
+	@Autowired
+	private IMessageManager messageManager;
 	
 	@RequestMapping(value="listPage", method = RequestMethod.GET)
 	public String listPage() {
@@ -69,8 +82,19 @@ public class ProductBorrowController extends GenericEntityController<ProductBorr
 		
 		ProductBorrow _pb = manager.queryByPK(id);
 		_pb.setIsList(1);
+		_pb.setNextDate(YqssUtils.nextResidueDay(new Date(_pb.getCreateDate())));
 		
 		manager.save(_pb);
+		
+		Message msg = new Message();
+		msg.setCreateDate(System.currentTimeMillis());
+		msg.setTitle(Constant.MSG_TITLE_AGREE);
+		msg.setContent(Constant.MSG_CONTENT_AGREE);
+		msg.setIsList(1);
+		Users user = userManager.queryUniqueBy("userId", _pb.getUser().getUserId());
+		msg.setUser(user);
+		messageManager.save(msg);
+		
 		return new MsgJsonReturn(true,"操作成功");
 	}
 	
@@ -82,6 +106,16 @@ public class ProductBorrowController extends GenericEntityController<ProductBorr
 		_pb.setIsList(1);
 		
 		manager.save(_pb);
+		
+		Message msg = new Message();
+		msg.setCreateDate(System.currentTimeMillis());
+		msg.setTitle(Constant.MSG_TITLE_REFUSE);
+		msg.setContent(Constant.MSG_CONTENT_REFUSE);
+		msg.setIsList(1);
+		Users user = userManager.queryUniqueBy("userId", _pb.getUser().getUserId());
+		msg.setUser(user);
+		messageManager.save(msg);
+		
 		return new MsgJsonReturn(true,"操作成功");
 	}
 }

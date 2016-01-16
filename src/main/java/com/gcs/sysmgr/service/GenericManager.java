@@ -178,5 +178,9 @@ public interface GenericManager<T> {
 	 */
 	public TableReturnJson scroll(final int firstindex, final int maxresult, final String sql);
 	
+	public long getCountByProperty(String table,String property,Object value);
+	
 	public long count();
+	
+	public List<T> queryListByProperty(String table,String property,Object value);
 }

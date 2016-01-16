@@ -62,4 +62,11 @@ public class BorrowManagerImpl extends GenericManagerImpl<Borrow, BorrowDAO> imp
 			}
 		};
 	}
+
+	@Override
+	public Integer count(Integer userId) {
+		
+		
+		return null;
+	}
 }

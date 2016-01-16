@@ -133,7 +133,7 @@ public class LoginRealm extends AuthorizingRealm {
 				}
 			}
 		}
-		
+		 
 		if(isOK){
 			ShiroUser shiroUser = new ShiroUser(user.getUserId(), user.getAccount(), user);
 			// 这里可以缓存认证

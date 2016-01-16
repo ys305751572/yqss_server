@@ -38,73 +38,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-	<script type="text/javascript">
-		$(document).ready(function(){
-			Morris.Bar({
-		        element: 'org-homepage-chart',
-		        data: [{
-		            y: '高压偏高',
-		            a: ${highToUpCount}
-		        }, {
-		            y: '高压偏低',
-		            a: ${highToDownCount}
-		        }, {
-		            y: '低压偏高',
-		            a: ${lowToUpCount}
-		        }, {
-		            y: '低压偏低',
-		            a: ${lowToDownCount}
-		        }, {
-		            y: '血糖偏高',
-		            a: ${sugarToUpCount}
-		        }, {
-		            y: '血糖偏低',
-		            a: ${sugarToDownCount}
-		        }],
-		        xkey: ['y'],
-		        ykeys: ['a'],
-		        labels: ['记录数'],
-		        hideHover: 'auto',
-		        resize: true
-		    }).on('click', function(i, row){
-			      //i当前区域，即y属性
-			      //row为行
-			      if(row.y=='高压偏高'){
-			      	window.location.href  = '${contextPath}/management/devices/querymeasurelist?starttime=${starttime}&xtstate=3&measureType=1 ';
-			      }
-			      if(row.y=='高压偏低'){
-			      	window.location.href  = '${contextPath}/management/devices/querymeasurelist?starttime=${starttime}&xtstate=4&measureType=1 ';
-			      }
-			      if(row.y=='低压偏高'){
-			      	window.location.href  = '${contextPath}/management/devices/querymeasurelist?starttime=${starttime}&xtstate=5&measureType=1 ';
-			      }
-			      if(row.y=='低压偏低'){
-			      	window.location.href  = '${contextPath}/management/devices/querymeasurelist?starttime=${starttime}&xtstate=6&measureType=1 ';
-			      }
-			      if(row.y=='血糖偏高'){
-			      	window.location.href  = '${contextPath}/management/devices/querymeasurelist?starttime=${starttime}&xtstate=2&measureType=2 ';
-			      }
-			      if(row.y=='血糖偏低'){
-			      	window.location.href  = '${contextPath}/management/devices/querymeasurelist?starttime=${starttime}&xtstate=1&measureType=2 ';
-			      }
-			     
-				});
-		});
-	
-	</script>
 </head>
 
 <body>
 
   
         <div>
-            <div class="row"><!--
+            <div class="row"><!---->
                 <div class="col-lg-12">
                     <h1 class="page-header">欢迎来到首页</h1>
                 </div>
-                --><!-- /.col-lg-12 -->
+                <!-- /.col-lg-12 -->
             </div>
-            <!-- /.row -->
+            <!-- 
             <div class="row">
                 <div class="col-lg-3 col-md-6" style="width: 25%">
                     <div class="panel panel-primary">
@@ -199,7 +145,8 @@
                 	</c:when>
                 </c:choose>
             </div>
-            <!-- /.row -->
+             -->
+            <!-- /.row
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -210,19 +157,12 @@
                             <div id="org-homepage-chart"></div>
                         </div>
                     </div>
-                    
-                    
-                    <!-- /.panel -->
                 </div>
-                <!-- /.col-lg-8 -->
             </div>
+             -->
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
-
-   
-
-
     <!-- jQuery Version 1.11.0 -->
     <script src="${contextPath}/resources/orgHomePage/js/jquery-1.11.0.js"></script>
 
