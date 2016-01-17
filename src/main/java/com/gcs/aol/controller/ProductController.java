@@ -13,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,6 +71,7 @@ public class ProductController extends GenericEntityController<Product, Product,
 		if(id != null) {
 			Product product = manager.queryByPK(id);
 			product.setPrice(product.getPrice());
+			product.setContent(product.getContent() != null ? product.getContent().replaceAll("\"", "\'").trim():"");
 			model.addAttribute("product", product); 
 			
 			List<ProductStage> stageList = product.getStageList();
@@ -177,7 +177,7 @@ public class ProductController extends GenericEntityController<Product, Product,
 	 */
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	@ResponseBody
-	public MsgJsonReturn update(Integer id,String name,Double price,String url,Integer productType,String stage, MultipartHttpServletRequest fileRequest, HttpServletRequest request,HttpServletResponse resp) {
+	public MsgJsonReturn update(Integer id,String name,Double price,String url,Integer productType,String stage,String content, MultipartHttpServletRequest fileRequest, HttpServletRequest request,HttpServletResponse resp) {
 		
 		Product product = new Product();
 		if(id != null && StringUtils.isNotBlank(id.toString())) {
@@ -186,6 +186,7 @@ public class ProductController extends GenericEntityController<Product, Product,
 		product.setName(name);
 		product.setUrl(url);
 		product.setPrice(price);
+		product.setContent(content);
 		
 		ProductType pt = new ProductType();
 		pt.setId(productType);

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date"%>
 <%@ include file="/WEB-INF/views/include.inc.jsp"%>
+<%@page import="com.ckeditor.CKEditorConfig"%>
+<%@ taglib uri="http://ckeditor.com" prefix = "ckeditor" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 <head>
@@ -16,7 +18,16 @@
 
 <script type="text/javascript" src="${contextPath}/resources/upload/js/uploadPreview.min.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/upload/js/ajaxfileupload.js"></script>
-
+<script type="text/javascript">
+	var basePath = '${contextPath}';
+</script>
+<script type="text/javascript" src="${contextPath}/ckeditor/ckeditor.js"></script>
+<% 
+	CKEditorConfig settings = new CKEditorConfig();
+	settings.addConfigValue("image_previewText"," ");
+	settings.addConfigValue("width","880px");
+	settings.addConfigValue("height","260px");
+%>
 <!-- The styles -->
 <style type="text/css">
 	body {
@@ -48,6 +59,11 @@ $(function(){
 	$("form").validation({icon:true});
 	addPic();
 	
+	var content = "${product}";
+	
+	if(content){
+		CKEDITOR.instances.detail.setData("${product.content}");
+	}
 });
 var index = 1;
 
@@ -92,7 +108,7 @@ function delPicFile(id) {
 } 
 
 function doSubmit() {
-	
+	var content = CKEDITOR.instances.detail.getData();
 	if($("#productForm").valid(this) == false) {
 		return false;
 	}		
@@ -116,6 +132,7 @@ function doSubmit() {
 			"productType" : $("#productType").val(),
 			"url" : $("#url").val(),
 			"stage":$("#stage").val(),
+			"content":content
 		},
 		success : function(data) {
 			window.location.href = "${contextPath}/management/product/listPage";
@@ -195,6 +212,17 @@ function doSubmit() {
 											  <label class="control-label" style="width:60px;" for="url">商品分期</label>
 											  <div class="controls" style="margin-left: 80px;">
 											  	  <input type="text" id="stage" name="stage" value="${stage.stage}" style="width:600px;"  placeholder="请填写商品分期数，分期数用逗号分割" maxlength="1000" check-type="installment"/>
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="detail">商品介绍</label>
+											  <div class="controls" style="margin-left: 80px">
+											  	  <textarea id="detail" name="detail" rows="25"></textarea>
+											  	  <ckeditor:replace replace="detail" basePath="${contextPath}/ckeditor/"  config="<%=settings%>"></ckeditor:replace>
 											  </div>
 											</div>
 										</td>

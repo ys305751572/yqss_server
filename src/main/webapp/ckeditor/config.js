@@ -6,7 +6,7 @@ CKEDITOR.editorConfig = function( config ) {
  config.enterMode = CKEDITOR.ENTER_BR;
  config.shiftEnterMode = CKEDITOR.ENTER_BR;// 
  config.pasteFromWordRemoveStyles = true;
- config.filebrowserImageUploadUrl = basePath+"/article/articleinfo/saveImg";
+ config.filebrowserImageUploadUrl = basePath+"/cKEditorUpload/upload";
  config.removePlugins = 'save';
  config.toolbar = 'Full';
  // Toolbar configuration generated automatically by the editor based on config.toolbarGroups.
