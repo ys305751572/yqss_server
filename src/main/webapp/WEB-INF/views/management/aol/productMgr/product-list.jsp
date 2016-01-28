@@ -69,7 +69,8 @@ Date.prototype.format = function(format){
 							    {'text':'商品价格','dataIndex':'price','width':'60px'},
 							    {'text':'商品类型','dataIndex':'productType','render': typeRender,'width':'60px'},
 							    {'text':'商品链接','dataIndex':'url','render': urlRender,'width':'70'},
-							    {'text':'是否上架','dataIndex':'isList','width':'50px','render': isListRender}
+							    {'text':'是否上架','dataIndex':'isList','width':'50px','render': isListRender},
+							    {'text':'是否置顶','dataIndex':'isTop','width':'50px','render': isTopRender}
 							    ];
 				var arrayObj = [];
 				var dataTableObj ;
@@ -120,6 +121,15 @@ Date.prototype.format = function(format){
 					}
 					else if(row.isList == 0) {
 						return '未发布';
+					}
+				}
+				
+				function isTopRender(row) {
+					if(row.isTop == 1) {
+						return '未置顶';
+					}
+					else if(row.isTop == 2) {
+						return '已置顶';
 					}
 				}
 				
@@ -174,7 +184,7 @@ Date.prototype.format = function(format){
 			    // 商品发布
 			    function publish() {
 			    	if(!dataTableObj.getSelectedRow()){
-						jAlert('请选择要删除的记录','提示');
+						jAlert('请选择要操作的记录','提示');
 						return;
 					} else {
 						var id = dataTableObj.getSelectedRow().id;
@@ -201,7 +211,7 @@ Date.prototype.format = function(format){
 			    // 下架
 			    function unPublish() {
 			    	if(!dataTableObj.getSelectedRow()){
-						jAlert('请选择要删除的记录','提示');
+						jAlert('请选择要操作的记录','提示');
 						return;
 					} else {
 						var id = dataTableObj.getSelectedRow().id;
@@ -225,6 +235,59 @@ Date.prototype.format = function(format){
 					}
 			    }
 
+			    // 置顶
+			    function top1() {
+			    	if(!dataTableObj.getSelectedRow()){
+						jAlert('请选择要操作的记录','提示');
+						return;
+					} else {
+						var id = dataTableObj.getSelectedRow().id;
+						if(dataTableObj.getSelectedRow().isTop == 2) {
+							jAlert('已置顶的商品无法再次置顶','提示');
+							return;
+						}
+						
+						jConfirm('是否确认置顶该商品？',"提示",function(r){
+							if(r) { 
+								$.post("${contextPath}/management/product/top",{"id":id,"isTop":'2'},function(result){
+									if(result.success){
+										window.location.href = "${contextPath}/management/product/listPage";
+									}
+									else {
+										jAlert(result.msg,'提示');
+									}
+								});
+						 	}
+						});
+					}
+			    }
+			    
+			    // 取消置顶
+			    function untop() {
+			    	if(!dataTableObj.getSelectedRow()){
+						jAlert('请选择要操作的记录','提示');
+						return;
+					} else {
+						var id = dataTableObj.getSelectedRow().id;
+						if(dataTableObj.getSelectedRow().isTop == 1) {
+							jAlert('已取消置顶的商品无法再次取消','提示');
+							return;
+						}
+						
+						jConfirm('是否确认取消置顶该商品？',"提示",function(r){
+							if(r) { 
+								$.post("${contextPath}/management/product/top",{"id":id,"isList":'1'},function(result){
+									if(result.success){
+										window.location.href = "${contextPath}/management/product/listPage";
+									}
+									else {
+										jAlert(result.msg,'提示');
+									}
+								});
+						 	}
+						});
+					}
+			    }
 		</script>
 	</head>
 	<body>
@@ -242,7 +305,10 @@ Date.prototype.format = function(format){
 					<li><a href="javascript:publish();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-13" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;发布</a></li>
 					<li style="color: #c5c5c5">|</li>
 					<li><a href="javascript:unPublish();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-12" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;下架</a></li>
-					
+					<li style="color: #c5c5c5">|</li>
+					<li><a href="javascript:top1();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-13" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;置顶</a></li>
+					<li style="color: #c5c5c5">|</li>
+					<li><a href="javascript:untop();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-12" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;取消置顶</a></li>
 				</div>
 				<!-- 操作按钮end -->
 			
@@ -252,7 +318,7 @@ Date.prototype.format = function(format){
 						<form id="form1" name="form1" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
 								<tr>
-									<td>医师姓名：</td>
+									<td>产品名称：</td>
 									<td><input id="name" name="name" type="text" value="" style="width: 120px; height: 15px;" /></td>
 									<td width="10px">&nbsp;</td>
 									<td height="40px" align="right">

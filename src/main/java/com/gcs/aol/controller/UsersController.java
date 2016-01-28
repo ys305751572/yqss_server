@@ -110,12 +110,20 @@ public class UsersController extends GenericEntityController<Users, Users, Users
 
 		Users user = new Users();
 		user.setUserId(id);
-		List<Contants> list = contantsManager.queryByProperty("user", user);
-		
+		List<Contants> list = contantsManager.queryByProperty("userId", id);
 		List<ContantsExcel> excelList = new ArrayList<ContantsExcel>();
+		
+		
+		String _username = null;
+		if(list != null && list.size() > 0) {
+			Users _users = manager.queryByPK(id);
+			if(_users != null ) {
+				_username = _users.getName();
+			}
+		}
 		for (Contants contants : list) {
 			ContantsExcel ce = new ContantsExcel();
-			ce.setUsername(contants.getUser().getName());
+			ce.setUsername(StringUtils.isNotBlank(_username)? _username : "");
 			ce.setContantName(contants.getContantName());
 			ce.setMobile(contants.getMobile());
 			excelList.add(ce);

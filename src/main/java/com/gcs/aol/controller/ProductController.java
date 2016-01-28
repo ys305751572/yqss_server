@@ -270,6 +270,26 @@ public class ProductController extends GenericEntityController<Product, Product,
 		return new MsgJsonReturn(true, product.getIsList() == 1 ? "发布成功":"下架成功");
 	}
 	
+	/**
+	 * 
+     * @Title: top
+     * @Description: 商品置顶 ,取消置顶
+     * @param @param product
+     * @param @return    参数
+     * @return MsgJsonReturn    返回类型
+     * @throws
+	 */
+	@RequestMapping(value = "top", method = RequestMethod.POST)
+	@ResponseBody
+	public MsgJsonReturn top(Product product) {
+		
+		Product _p = manager.queryByPK(product.getId());
+		_p.setIsTop(product.getIsTop());
+		
+		manager.save(_p);
+		return new MsgJsonReturn(true, product.getIsTop() == 2 ? "置顶成功":"取消置顶成功");
+	}
+	
 	
 	/**
 	 * 

@@ -106,7 +106,7 @@ function doSubmit() {
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="answer">答案</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="answer" name="answer" value="${helper.answer}" style="width:600px;" placeholder="请填写帮助答案" maxlength="1000" check-type="required" required-message="请输入帮助答案"/>
+											  	<textarea id="answer" rows="5" name="answer"  style="width:600px;height: 300px;" placeholder="请填写帮助答案" maxlength="1000" check-type="required" required-message="请输入帮助答案">${helper.answer }</textarea>
 											  </div>
 											</div>
 										</td>

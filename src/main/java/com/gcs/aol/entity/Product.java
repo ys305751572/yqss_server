@@ -36,6 +36,9 @@ public class Product extends IdAbstartEntity{
 	@Column(name="url")
 	private String url;
 	
+	@Column(name="is_top")
+	private Integer isTop = 1;
+	
 	@Column(name="is_list")
 	private Integer isList = 0;
 	
@@ -54,6 +57,14 @@ public class Product extends IdAbstartEntity{
 	@JoinColumn(name="product_id")
 	private List<ProductStage> stageList = new ArrayList<ProductStage>();
 	
+	public Integer getIsTop() {
+		return isTop;
+	}
+
+	public void setIsTop(Integer isTop) {
+		this.isTop = isTop;
+	}
+
 	public List<ProductStage> getStageList() {
 		return stageList;
 	}

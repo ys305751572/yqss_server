@@ -57,6 +57,17 @@ public class ProductBorrow extends IdAbstartEntity{
 	@Column(name="next_date")
 	private String nextDate;
 	
+	@Column(name="stage")
+	private Integer stage;
+	
+	public Integer getStage() {
+		return stage;
+	}
+
+	public void setStage(Integer stage) {
+		this.stage = stage;
+	}
+
 	public String getNextDate() {
 		return nextDate;
 	}

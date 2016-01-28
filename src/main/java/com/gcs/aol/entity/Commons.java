@@ -47,4 +47,12 @@ public class Commons extends IdAbstartEntity{
 	public void setRate(Double rate) {
 		this.rate = rate;
 	}
+
+	public Double getOverdue() {
+		return overdue;
+	}
+
+	public void setOverdue(Double overdue) {
+		this.overdue = overdue;
+	}
 }

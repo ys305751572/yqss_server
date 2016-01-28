@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>爱奥乐健康云平台</title>
+<title>财蜜后台管理平台</title>
 <link href="${contextPath}/resources/aol/css/login.css" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" href="">
 <!-- form验证 -->

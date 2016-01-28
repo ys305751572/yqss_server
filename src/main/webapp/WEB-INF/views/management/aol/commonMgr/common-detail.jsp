@@ -101,6 +101,16 @@
 									<tr>
 										<td>
 											<div class="control-group">
+											  <label class="control-label" style="width:60px;" for="url">利率</label>
+											  <div class="controls" style="margin-left: 80px;">
+											  	  ${common.overdue }
+											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
 												<div class="controls" style="margin-left: 20px;">
 													<input type="hidden" id="saveORsend" name="saveORsend" value=""/>
 													<button id="btnSendBottom" name="btnSendBottom" type="button" onclick="doSubmit();" class="btn btn-primary">编辑</button>

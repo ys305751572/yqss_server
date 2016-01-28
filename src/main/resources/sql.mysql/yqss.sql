@@ -238,6 +238,7 @@ CREATE TABLE `product` (
   `product_type` int(32) NOT NULL COMMENT '商品所属类型',
   `url` varchar(500) DEFAULT '' COMMENT '商品链接',
   `is_list` int(2) DEFAULT '1' COMMENT '是否上架 1:上架 2:下架',
+  `is_top` int(2) default '1' comment '是否置顶 1未置顶 2.已置顶', 
   `create_date` bigint(20) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
@@ -554,6 +555,26 @@ create table `report` (
 	PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `borrowre_levance_info`;
+
+create table `borrowre_levance_info`(
+	`id` int(32) auto_increment,
+	`type` int(2) not null comment '类型 1:借贷 2:购买',
+	`user_id` int(32) not null comment '用户ID',
+	`borrow_id` int(32) not null comment '借贷/购买ID',
+	`parent_name` varchar(200) default '' comment '父母名字',
+	`parent_mobile` varchar(50) default '' comment '父母电话',
+	`parent_address` varchar(500) default '' comment '父母地址',
+	`friend_name` varchar(200) default '' comment '朋友名字',
+	`friend_mobile` varchar(50) default '' comment '朋友电话',
+	`friend_qq` varchar(20) default '' comment '朋友QQ',
+	`friend_address` varchar(500) default '' comment '朋友地址',
+	`classmate_name` varchar(200) default '' comment '室友名字',
+	`classmate_mobile` varchar(50) default '' comment '室友电话',
+	`classmate_qq` varchar(20) default '' comment '室友QQ',
+	`classmate_address` varchar(500) default '' comment '室友地址',
+	PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

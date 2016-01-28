@@ -5,7 +5,7 @@
 <html lang="en">
 <head> 
 	<meta charset="utf-8" />
-	<title>爱奥乐健康云平台</title>
+	<title>财蜜后台管理平台</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link href="${contextPath}/resources/aol/css/bootstrap.min.css" rel="stylesheet">

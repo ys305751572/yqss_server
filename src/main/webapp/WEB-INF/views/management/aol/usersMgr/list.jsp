@@ -144,7 +144,7 @@ Date.prototype.format = function(format){
 						jAlert('请选择要导出的记录','提示');
 						return;
 					} else {
-						var id = dataTableObj.getSelectedRow().id;
+						var id = dataTableObj.getSelectedRow().userId;
 						jConfirm('是否确认导出记录？',"提示",function(r){
 							if(r) { 
 								window.location.href = "${contextPath}/management/users/exportExcel?id="+id;

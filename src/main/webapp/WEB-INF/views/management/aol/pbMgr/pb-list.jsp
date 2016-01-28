@@ -66,10 +66,10 @@ Date.prototype.format = function(format){
 				var delId = "";
 				
 				var columns = [ {'text':'借款用户','dataIndex':'user','render':userRender,'width':'70px'},
-							    {'text':'借款额度','dataIndex':'limitMoney','width':'60px'},
-							    {'text':'最大期限','dataIndex':'maxDays','width':'60px'},
+							    {'text':'购买期数','dataIndex':'stage','width':'60px'},
+							    {'text':'剩余期数','dataIndex':'period','width':'60px'},
 							    {'text':'用户名称','dataIndex':'username','width':'60px'},
-							    {'text':'身份证','dataIndex':'username','width':'60px'},
+							    {'text':'身份证','dataIndex':'idCard','width':'60px'},
 							    {'text':'创建时间','dataIndex':'createDate','render': timeRender,'width':'70'}
 							    ];
 				var arrayObj = [];
@@ -179,7 +179,7 @@ Date.prototype.format = function(format){
 			<div class="box span12">			
 				<!-- 操作按钮start -->
 				<div class="breadcrumb">
-					<li><a href="javascript:detail();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;查看商品</a></li>
+					<li><a href="javascript:detail();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;查看</a></li>
 					<li style="color: #c5c5c5">|</li>
 					<li><a href="javascript:agree();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;同意</a></li>
 					<li style="color: #c5c5c5">|</li>

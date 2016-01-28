@@ -129,7 +129,7 @@ function doSubmit() {
 											<div class="control-group">
 											  <label class="control-label" style="width:60px;" for="url">视频地址</label>
 											  <div class="controls" style="margin-left: 80px;">
-											  	  <input type="text" id="url" name="url" value="${video.url}" style="width:600px;" placeholder="请填写视频地址" maxlength="1000" check-type="required" required-message="请输入视频地址"/>
+											  	  <input type="text" id="url" name="url" value="${video.url}" style="width:600px;" placeholder="请填写视频地址" maxlength="1000" required-message="请输入视频地址"/>
 											  </div>
 											</div>
 										</td>
