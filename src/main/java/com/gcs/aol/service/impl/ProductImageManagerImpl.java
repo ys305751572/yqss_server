@@ -1,13 +1,7 @@
 package com.gcs.aol.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.gcs.aol.dao.ProductImageDAO;
@@ -23,31 +17,8 @@ public class ProductImageManagerImpl extends GenericManagerImpl<ProductImage, Pr
 	
 	@Override
 	public List<ProductImage> findAllByProductId(Integer productId) {
-		
-		ProductImage image = new ProductImage();
-		image.setProductId(productId);
-		Specification<ProductImage> spec = buildSpecification(image);
-		List<ProductImage> list = dao.findAll(spec);
-		return list;
+		return queryByProperty("productId", productId);
 	}
-	
-	@Override
-	public Specification<ProductImage> buildSpecification(final ProductImage image) {
-		return new Specification<ProductImage>() {
-			@Override
-			public Predicate toPredicate(Root<ProductImage> root, CriteriaQuery<?> arg1, CriteriaBuilder cb) {
-				List<Predicate> list = new ArrayList<Predicate>();
-				
-				if(image.getProductId() != null) {
-					list.add(cb.equal(root.get("productId").as(Integer.class), image.getProductId()));
-				}
-				Predicate[] p = new Predicate[list.size()];
-				return cb.and(list.toArray(p));
-			}
-		};
-	}
-
-
 
 	@Override
 	public void insertProductImage(ProductImage image) {

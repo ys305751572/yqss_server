@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -49,12 +50,10 @@ public class Product extends IdAbstartEntity{
 	@JoinColumn(name="product_type")
 	private ProductType productType;
 	
-	@OneToMany(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "product_id")
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "product",fetch = FetchType.LAZY,orphanRemoval = true)
 	private List<ProductImage> picList;
 	
-	@OneToMany(cascade = CascadeType.REMOVE)
-	@JoinColumn(name="product_id")
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "product",fetch = FetchType.LAZY)
 	private List<ProductStage> stageList = new ArrayList<ProductStage>();
 	
 	public Integer getIsTop() {

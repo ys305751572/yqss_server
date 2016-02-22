@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -135,11 +136,12 @@ public class ProductController extends GenericEntityController<Product, Product,
 	 */
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	@ResponseBody
+	@Transactional
 	public MsgJsonReturn deleteProduct(Integer id) {
 		
 		try{
 			Product product = manager.queryByPK(id);
-			manager.delete(product);
+			manager.deleteProduct(product);
 		}catch (Exception e) {
 			e.printStackTrace();
 			return new MsgJsonReturn(false,"删除失败");
@@ -164,6 +166,11 @@ public class ProductController extends GenericEntityController<Product, Product,
 		product.setProductType(type);
 		
 		Page<Product> page = manager.findAll(product, pp.getStart(), pp.getLength());
+		for (Product product2 : page.getContent()) {
+			product2.setPicList(null);
+			product2.setStageList(null);
+		}
+		
 		return successed(new DataTableReturnObject(page.getTotalElements(), page.getTotalElements(), pp.getSEcho(), page.getContent()));
 	}
 	
@@ -203,7 +210,7 @@ public class ProductController extends GenericEntityController<Product, Product,
 	
 	private void saveProductStage(Integer productId,String stage) {
 		
-		List<ProductStage> list = stageManager.queryByProperty("productId", productId);
+		List<ProductStage> list = stageManager.findStagesByProductId(productId);
 		for (ProductStage productStage : list) {
 			stageManager.delete(productStage);
 		}
@@ -213,7 +220,10 @@ public class ProductController extends GenericEntityController<Product, Product,
 			for (String st : stagess) {
 				if(StringUtils.isNotBlank(st) && !"0".equals(st)) {
 					ProductStage ps =  new ProductStage();
-					ps.setProductId(productId);
+					
+					Product p = new Product();
+					p.setId(productId);
+					ps.setProduct(p);
 					ps.setStage(Integer.parseInt(st));
 					stageManager.save(ps);
 				}
@@ -241,7 +251,10 @@ public class ProductController extends GenericEntityController<Product, Product,
 			if(attach != null) {
 				ProductImage image = new ProductImage();
 				image.setImageUrl(attach.getBak1()); // 完整路径
-				image.setProductId(productId);
+				
+				Product p = new Product();
+				p.setId(productId);
+				image.setProduct(p);
 				imageList.add(image);
 			}
 		}

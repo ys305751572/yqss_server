@@ -12,8 +12,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.gcs.aol.dao.ProductDAO;
 import com.gcs.aol.entity.Product;
+import com.gcs.aol.entity.ProductImage;
+import com.gcs.aol.service.IProductImageManager;
 import com.gcs.aol.service.IProductManager;
 import com.gcs.sysmgr.service.impl.GenericManagerImpl;
 
@@ -22,6 +26,9 @@ public class ProductManagerImpl extends GenericManagerImpl<Product,ProductDAO> i
 
 	@Autowired
 	private ProductDAO dao;
+	
+	@Autowired
+	private IProductImageManager imageManager;
 	
 	@Override
 	public void isList(Product product) {
@@ -52,5 +59,15 @@ public class ProductManagerImpl extends GenericManagerImpl<Product,ProductDAO> i
 				return cb.and(list.toArray(array));
 			}
 		};
+	}
+
+	@Override
+	public void deleteProduct(Product product) {
+		
+		delete(product);
+//		List<ProductImage> list = product.getPicList();
+//		for (ProductImage productImage : list) {
+//			imageManager.delete(productImage);
+//		}
 	}
 }

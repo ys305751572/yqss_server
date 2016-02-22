@@ -2,6 +2,9 @@ package com.gcs.aol.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.gcs.sysmgr.entity.IdAbstartEntity;
@@ -20,8 +23,9 @@ public class ProductImage extends IdAbstartEntity{
 
 	private static final long serialVersionUID = -1861598837623329337L;
 
-	@Column(name="product_id")
-	private Integer productId;
+	@ManyToOne(optional = true,fetch=FetchType.LAZY)
+	@JoinColumn(name="product_id")
+	private Product product;
 	
 	@Column(name="image_url")
 	private String imageUrl;
@@ -38,12 +42,12 @@ public class ProductImage extends IdAbstartEntity{
 	@Column(name="create_date")
 	private Long createDate;
 
-	public Integer getProductId() {
-		return productId;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProductId(Integer productId) {
-		this.productId = productId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public String getImageUrl() {

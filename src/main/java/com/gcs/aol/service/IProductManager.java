@@ -10,4 +10,6 @@ public interface IProductManager extends GenericManager<Product>{
 	public void isList(Product product);
 	
 	public Page<Product> findAll(Product product,Integer currentPage,Integer pageSize);
+	
+	public void deleteProduct(Product product);
 }
