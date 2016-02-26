@@ -43,7 +43,7 @@ public class ProductStageManagerImpl extends GenericManagerImpl<ProductStage, Pr
 			public Predicate toPredicate(Root<ProductStage> root, CriteriaQuery<?> arg1, CriteriaBuilder cb) {
 				List<Predicate> list = new ArrayList<Predicate>();
 				if(entity != null && entity.getProduct().getId() != null) {
-					list.add(cb.equal(root.get("id").as(Integer.class), entity.getProduct().getId()));
+					list.add(cb.equal(root.get(root.getModel().getSingularAttribute("product", Product.class)), entity.getProduct().getId()));
 				}
 				Predicate[] p = new Predicate[list.size()];
 				return cb.and(list.toArray(p));

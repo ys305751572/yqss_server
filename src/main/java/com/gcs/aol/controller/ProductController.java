@@ -318,7 +318,8 @@ public class ProductController extends GenericEntityController<Product, Product,
 	public MsgJsonReturn deleteImage(Integer id) {
 		
 		try{
-			imageManager.deleteByPK(id);
+			ProductImage image = imageManager.queryByPK(id);
+			imageManager.deleteByPK(image);
 		} catch (Exception e) {
 			e.printStackTrace();
 			new MsgJsonReturn(false, "删除失败");
