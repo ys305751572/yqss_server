@@ -2,6 +2,7 @@ package com.gcs.aol.controller;
 
 import java.util.HashMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -66,7 +67,7 @@ public class BorrowController extends GenericEntityController<Borrow, Borrow, Bo
 		
 		Borrow b = new Borrow();
 		b.getUser().setUserId(paramMap.get("userId") != null ? Integer.parseInt(paramMap.get("userId")) : null);
-		
+		b.setIsList(StringUtils.isNotBlank(paramMap.get("isList")) ? Integer.parseInt(paramMap.get("isList")) : null);
 		String regTimeQ = paramMap.get("regTimeQ");
 		String regTimeZ = paramMap.get("regTimeZ");
 		Page<Borrow> page = manager.findAll(b,regTimeQ,regTimeZ,pp.getStart(), pp.getLength());

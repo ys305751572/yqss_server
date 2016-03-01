@@ -136,7 +136,8 @@ Date.prototype.format = function(format){
 				function searchBtnClick(){
 					var arrayObj = [
 						{"name":"regTimeQ","value":$("#regTimeQ").val()},
-						{"name":"regTimeZ","value":$("#regTimeZ").val()}
+						{"name":"regTimeZ","value":$("#regTimeZ").val()},
+						{"name":"isList","value":$("#isList").val()}
 					];
 					dataTableObj.search(arrayObj);
 				}
@@ -230,6 +231,21 @@ Date.prototype.format = function(format){
 										<input type="text" name="regTimeQ"  id="regTimeQ"  readonly   class="form_datetime"  required="required"  style="width: 90px"/>
 										~
 										<input type="text" name="regTimeZ"  id="regTimeZ"   readonly  class="form_datetime"  required="required"  style="width: 90px"/>
+									</td>
+									<td width="20px">&nbsp;</td>
+									
+								</tr>
+							</table>
+							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
+								<tr>
+									<td>审核状态：</td>
+									<td>
+									<select id="isList" name="isList"  style="width: 60px;">
+										<option value="" <c:if test="${isList ==''}">selected="selected" </c:if>>全部</option>
+										<option <c:if test="${isList=='0'}">selected="selected" </c:if> value="0">未处理</option>
+										<option <c:if test="${isList=='1'}">selected="selected" </c:if> value="1">同意</option>
+										<option <c:if test="${isList=='2'}">selected="selected" </c:if> value="2">拒绝</option>
+									</select>
 									</td>
 									<td width="20px">&nbsp;</td>
 									<td height="40px" align="right">
