@@ -223,7 +223,13 @@ public class GenericManagerImpl<E, D extends IBaseJpaRepository<E>> implements G
 			public Predicate toPredicate(Root<E> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				List<Predicate> list = new ArrayList<Predicate>();
 				if (value != null) {
-					list.add(cb.equal(root.get(propertyName), value));
+					if(propertyName.contains(".")) {
+						String[] names = propertyName.split(".");
+						list.add(cb.equal(root.get(names[0]).get(names[1]), value));
+					}
+					else {
+						list.add(cb.equal(root.get(propertyName), value));
+					}
 				}
 				Predicate[] p = new Predicate[list.size()];
 				return cb.and(list.toArray(p));
