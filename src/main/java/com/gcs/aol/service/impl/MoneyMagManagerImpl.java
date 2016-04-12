@@ -9,4 +9,5 @@ import com.gcs.sysmgr.service.impl.GenericManagerImpl;
 @Service
 public class MoneyMagManagerImpl extends GenericManagerImpl<MoneyMag, MoneyMagDAO> implements IMoneyMagManager{
 
+	private MoneyMagDAO dao;
 }

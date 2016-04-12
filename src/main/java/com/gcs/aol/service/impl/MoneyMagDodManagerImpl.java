@@ -20,7 +20,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 	private IMoneyMagTRManager manager;
 	
 	@Override
-	public MoneyMagDod findFixPeriodDetail() {
+	public MoneyMagDod findDueOnDemandDetail() {
 		MoneyMagDod entity = this.queryByProperty("type", 2).get(0);
 		// 根据理财产品ID查询已转入金额总和
 		Double totalMoney = manager.countMoneyByDodId(entity.getId());
@@ -30,7 +30,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 	}
 
 	@Override
-	public List<MoneyMagDod> findDueOnDemandList() {
+	public List<MoneyMagDod> findFixPeriodList() {
 		List<MoneyMagDod> list = this.queryByProperty("type", 1);
 		
 		for (MoneyMagDod moneyMagDod : list) {
@@ -42,7 +42,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 	}
 
 	@Override
-	public MoneyMagDod findDueOnDemandDetail(Integer id) {
+	public MoneyMagDod findFixPeriodDetail(Integer id) {
 		MoneyMagDod entity = dao.findOne(id);
 		// 根据理财产品ID查询已转入金额总和
 		Double totalMoney = manager.countMoneyByDodId(entity.getId());

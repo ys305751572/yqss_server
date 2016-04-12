@@ -57,11 +57,24 @@ DROP TABLE IF EXISTS `tb_moneymanager_trading_record`;
 CREATE TABLE `tb_moneymanager_trading_record` (
   `id` INT(32) NOT NULL AUTO_INCREMENT,
   `user_id` INT(32) NOT NULL COMMENT '用户ID',
+  `dod_id` int(32) NOT NULL comment '理财产品ID',
   `money` DOUBLE DEFAULT 0 COMMENT '转入金额',
   `pay_way` VARCHAR(50) DEFAULT '' COMMENT '支付方式 WEIXIN:微信,ALIPAY:支付宝',
   `create_date` BIGINT,
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `tb_moneymanager_common`;
 
+CREATE TABLE `tb_moneymanager_common` (
+  `id` INT(32) NOT NULL AUTO_INCREMENT,
+  `content` varchar(2000) default '' comment '内容',
+  `type` int(2) default 0 comment '类型 1:关于理财 2.协议',
+  `create_date` BIGINT,
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+insert into `tb_moneymanager_common` (`content`,`type`) values 
+('关于理财介绍',2),
+('购入协议',2);
 

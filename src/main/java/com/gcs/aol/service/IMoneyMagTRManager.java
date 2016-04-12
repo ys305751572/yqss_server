@@ -10,4 +10,6 @@ public interface IMoneyMagTRManager extends GenericManager<MoneyMagTR>{
 	public List<MoneyMagTR> findByDodId(Integer dodId);
 	
 	public Double countMoneyByDodId(Integer dodId);
+	
+	public void createMoneyMagTR(Integer userId,Integer dodId,Double money);
 }

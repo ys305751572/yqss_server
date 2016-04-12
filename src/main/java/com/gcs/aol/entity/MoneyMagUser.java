@@ -21,6 +21,9 @@ import com.gcs.sysmgr.entity.IdAbstartEntity;
 @Table(name = "tb_moneymanager_user")
 public class MoneyMagUser extends IdAbstartEntity{
 
+	
+	private static final long serialVersionUID = 2291631635371767466L;
+
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private Users user;

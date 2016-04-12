@@ -7,4 +7,10 @@ public class Constant {
 	
 	public final static String MSG_CONTENT_REFUSE = "很抱歉，您的借款未审核通过，感谢您的选择，请留言财蜜其他的产品和服务";
 	public final static String MSG_CONTENT_AGREE = "恭喜，您的借款已审核通过，感谢您的选择";
+	
+	/** 当前登录用户 */
+	public final static String CURRENT_LOGIN_USER = "current_login_user";
+	
+	/** 用户认证信息  */
+	public final static String CERTIFICATION_INFO = "certification_info";
 }

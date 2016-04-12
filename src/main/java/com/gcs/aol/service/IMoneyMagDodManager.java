@@ -7,10 +7,10 @@ import com.gcs.sysmgr.service.GenericManager;
 
 public interface IMoneyMagDodManager extends GenericManager<MoneyMagDod>{
 
-	public MoneyMagDod findFixPeriodDetail();
+	public MoneyMagDod findDueOnDemandDetail();
 	
-	public List<MoneyMagDod> findDueOnDemandList();
+	public List<MoneyMagDod> findFixPeriodList();
 	
-	public MoneyMagDod findDueOnDemandDetail(Integer id);
+	public MoneyMagDod findFixPeriodDetail(Integer id);
 	
 }
