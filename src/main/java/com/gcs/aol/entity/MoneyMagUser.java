@@ -35,7 +35,7 @@ public class MoneyMagUser extends IdAbstartEntity{
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "name")
+	@Column(name = "trading_password")
 	private String tradingPassword;
 	
 	@Column(name = "id_card")
