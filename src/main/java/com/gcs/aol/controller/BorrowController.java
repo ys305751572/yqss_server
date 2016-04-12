@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gcs.aol.constant.Constant;
 import com.gcs.aol.entity.Borrow;
+import com.gcs.aol.entity.BorrowRepayRecord;
 import com.gcs.aol.entity.Message;
 import com.gcs.aol.entity.Users;
 import com.gcs.aol.service.IBorrowManager;
+import com.gcs.aol.service.IBorrowRepayRecordManager;
 import com.gcs.aol.service.IMessageManager;
 import com.gcs.aol.service.IUsersManager;
 import com.gcs.aol.service.impl.BorrowManagerImpl;
@@ -35,6 +37,7 @@ public class BorrowController extends GenericEntityController<Borrow, Borrow, Bo
 
 	public final static String BORROW_LIST_PAGE = "management/aol/borrowMgr/borrow-list";
 	public final static String BORROW_DETAIL_PAGE = "management/aol/borrowMgr/borrow-detail";
+	public final static String BORROW_RECORD_LIST_PAGE = "management/aol/borrowMgr/borrow-record-list";
 	
 	@Autowired
 	private IBorrowManager manager;
@@ -44,6 +47,9 @@ public class BorrowController extends GenericEntityController<Borrow, Borrow, Bo
 	
 	@Autowired
 	private IUsersManager userManager;
+	
+	@Autowired
+	private IBorrowRepayRecordManager borrowRepayRecordManager;
 	
 	@RequestMapping(value="listPage", method = RequestMethod.GET)
 	public String listPage() {
@@ -121,5 +127,22 @@ public class BorrowController extends GenericEntityController<Borrow, Borrow, Bo
 		
 		manager.save(_b);
 		return new MsgJsonReturn(true, "操作成功");
+	}
+	
+	@RequestMapping(value = "record/index")
+	public String recordIndex(Integer borrowInfoId,Model model){
+		
+		model.addAttribute("borrowInfoId", borrowInfoId);
+		return BORROW_RECORD_LIST_PAGE;
+	} 
+	
+	@RequestMapping(value = "record/list")
+	public JSONResponse findRecordPageByBorrowInfoId(@RequestBody JSONParam[] params) {
+		HashMap<String, String> paramMap = (HashMap<String, String>) convertToMap(params);
+		String sortStr = paramMap.get("bbSortName");
+		PageParameters pp = PageUtil.getParameter(paramMap, sortStr);
+		
+		Page<BorrowRepayRecord> page = borrowRepayRecordManager.findPage(Integer.parseInt(paramMap.get("borrowInfoId")),pp.getStart(), pp.getLength());
+		return successed(new DataTableReturnObject(page.getTotalElements(), page.getTotalElements(), pp.getSEcho(), page.getContent()));
 	}
 }
