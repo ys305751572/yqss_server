@@ -230,6 +230,9 @@
                            <li id="menu8_2" onclick="changeMenu(this.id,'理财管理&nbsp;>&nbsp;理财产品设置')">
                                <a href="${contextPath}/management/dod/index" target="mainIFrame">理财产品详细信息列表</a>
                            </li>
+                           <li id="menu8_3" onclick="changeMenu(this.id,'理财管理&nbsp;>&nbsp;购买记录列表')">
+                               <a href="${contextPath}/management/tr/index" target="mainIFrame">购买记录列表</a>
+                           </li>
                        </ul>
                    </li>
                 </ul>

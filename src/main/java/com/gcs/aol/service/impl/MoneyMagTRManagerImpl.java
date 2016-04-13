@@ -1,8 +1,19 @@
 package com.gcs.aol.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.gcs.aol.dao.MoneyMagTRDAO;
@@ -50,6 +61,27 @@ public class MoneyMagTRManagerImpl extends GenericManagerImpl<MoneyMagTR, MoneyM
 		tr.setDod(dod);
 		
 		this.save(tr);
+	}
+
+	@Override
+	public Page<MoneyMagTR> list(final String mobile,final String name,final Integer id, int currentPgae, int pagesize) {
+		Specification<MoneyMagTR> spec = new Specification<MoneyMagTR>() {
+			@Override
+			public Predicate toPredicate(Root<MoneyMagTR> root, CriteriaQuery<?> arg1, CriteriaBuilder cb) {
+				List<Predicate> list = new ArrayList<Predicate>();
+				if(StringUtils.isNotBlank(name)) {
+					list.add(cb.like(root.get("user").get("name").as(String.class), "%" + name + "%"));
+				}
+				if(StringUtils.isNotBlank(mobile)) {
+					list.add(cb.like(root.get("user").get("mobile").as(String.class), "%" + mobile + "%"));
+				}
+				if(id != null) {
+					list.add(cb.equal(root.get("dod").get("id").as(Integer.class), id));
+				}
+				return cb.and(list.toArray(new Predicate[list.size()]));
+			}
+		};
+		return dao.findAll(spec, new PageRequest(currentPgae, pagesize, Sort.Direction.DESC, "id"));
 	}
 
 }
