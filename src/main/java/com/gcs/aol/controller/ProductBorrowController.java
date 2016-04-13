@@ -2,6 +2,7 @@ package com.gcs.aol.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,11 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gcs.aol.constant.Constant;
+import com.gcs.aol.entity.BorrowRepayRecord;
 import com.gcs.aol.entity.Message;
 import com.gcs.aol.entity.ProductBorrow;
+import com.gcs.aol.entity.ProductBorrowRepayRecord;
 import com.gcs.aol.entity.Users;
 import com.gcs.aol.service.IMessageManager;
 import com.gcs.aol.service.IProductBorrowManger;
+import com.gcs.aol.service.IProductBorrowRepayRecordManager;
 import com.gcs.aol.service.IUsersManager;
 import com.gcs.aol.service.impl.ProductBorrowManagerImpl;
 import com.gcs.aol.utils.YqssUtils;
@@ -36,6 +40,7 @@ public class ProductBorrowController extends GenericEntityController<ProductBorr
 
 	public final static String PB_LIST_PAGE = "management/aol/pbMgr/pb-list";
 	public final static String PB_DETAIL_PAGE = "management/aol/pbMgr/pb-detail";
+	public final static String BORROW_RECORD_LIST_PAGE = "management/aol/pbMgr/pb-record-list";
 	
 	@Autowired
 	private IProductBorrowManger manager;
@@ -45,6 +50,9 @@ public class ProductBorrowController extends GenericEntityController<ProductBorr
 	
 	@Autowired
 	private IMessageManager messageManager;
+	
+	@Autowired
+	private IProductBorrowRepayRecordManager productBorrowRepayRecordManager;
 	
 	@RequestMapping(value="listPage", method = RequestMethod.GET)
 	public String listPage() {
@@ -117,5 +125,25 @@ public class ProductBorrowController extends GenericEntityController<ProductBorr
 		messageManager.save(msg);
 		
 		return new MsgJsonReturn(true,"操作成功");
+	}
+	
+	@RequestMapping(value = "record/index")
+	public String recordIndex(Integer borrowInfoId,Model model){
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("borrowInfoId", borrowInfoId);
+		model.addAttribute("map", map);
+		return BORROW_RECORD_LIST_PAGE;
+	} 
+	
+	@RequestMapping(value = "record/list")
+	@ResponseBody
+	public JSONResponse findRecordPageByBorrowInfoId(@RequestBody JSONParam[] params) {
+		HashMap<String, String> paramMap = (HashMap<String, String>) convertToMap(params);
+		String sortStr = paramMap.get("bbSortName");
+		PageParameters pp = PageUtil.getParameter(paramMap, sortStr);
+		
+		Page<ProductBorrowRepayRecord> page = productBorrowRepayRecordManager.findPage(Integer.parseInt(paramMap.get("borrowInfoId")),pp.getStart(), pp.getLength());
+		return successed(new DataTableReturnObject(page.getTotalElements(), page.getTotalElements(), pp.getSEcho(), page.getContent()));
 	}
 }

@@ -15,36 +15,37 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.gcs.aol.dao.BorrowRepayRecordDAO;
-import com.gcs.aol.entity.BorrowRepayRecord;
-import com.gcs.aol.service.IBorrowRepayRecordManager;
+import com.gcs.aol.dao.ProductBorrowRepayRecordDAO;
+import com.gcs.aol.entity.ProductBorrowRepayRecord;
+import com.gcs.aol.service.IProductBorrowRepayRecordManager;
 import com.gcs.sysmgr.service.impl.GenericManagerImpl;
 
 @Service
-public class BorrowRepayRecordManagerImpl extends GenericManagerImpl<BorrowRepayRecord, BorrowRepayRecordDAO> implements IBorrowRepayRecordManager{
+public class ProductBorrowRepayRecordManagerImpl extends GenericManagerImpl<ProductBorrowRepayRecord, ProductBorrowRepayRecordDAO> implements IProductBorrowRepayRecordManager{
 
 	@Autowired
-	private BorrowRepayRecordDAO dao;
+	private ProductBorrowRepayRecordDAO dao;
 	
 	@Override
-	public List<BorrowRepayRecord> findByBorrowInfoId(Integer id) {
-		return this.queryByProperty("borrowInfoId", id);
+	public List<ProductBorrowRepayRecord> findByBorrowInfoId(Integer borrowInfoId) {
+		return this.queryByProperty("borrowInfoId", borrowInfoId);
 	}
 
 	@Override
-	public Page<BorrowRepayRecord> findPage(final Integer borrowInfoId,Integer currentPage,Integer pageSize) {
-		Specification<BorrowRepayRecord> spec = new Specification<BorrowRepayRecord>() {
+	public Page<ProductBorrowRepayRecord> findPage(final Integer borrowInfoId, Integer currentPage, Integer pageSize) {
+		Specification<ProductBorrowRepayRecord> spec = new Specification<ProductBorrowRepayRecord>() {
 
 			@Override
-			public Predicate toPredicate(Root<BorrowRepayRecord> root, CriteriaQuery<?> arg1, CriteriaBuilder cb) {
+			public Predicate toPredicate(Root<ProductBorrowRepayRecord> root, CriteriaQuery<?> arg1, CriteriaBuilder cb) {
 				List<Predicate> list = new ArrayList<Predicate>();
 				
 				if(borrowInfoId != null) {
-					list.add(cb.equal(root.get("borrowInfoId").as(Integer.class), borrowInfoId));
+					list.add(cb.equal(root.get("borrow_info_id").as(Integer.class), borrowInfoId));
 				}
 				return cb.and(list.toArray(new Predicate[list.size()]));
 			}
 		};
 		return dao.findAll(spec, new PageRequest(currentPage, pageSize, Sort.Direction.DESC, "id"));
 	}
+
 }

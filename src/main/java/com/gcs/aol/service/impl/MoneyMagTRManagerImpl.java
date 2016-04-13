@@ -2,6 +2,7 @@ package com.gcs.aol.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gcs.aol.dao.MoneyMagTRDAO;
@@ -14,6 +15,7 @@ import com.gcs.sysmgr.service.impl.GenericManagerImpl;
 @Service
 public class MoneyMagTRManagerImpl extends GenericManagerImpl<MoneyMagTR, MoneyMagTRDAO> implements IMoneyMagTRManager{
 
+	@Autowired
 	public MoneyMagTRDAO dao;
 	
 	@Override

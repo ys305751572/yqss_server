@@ -224,7 +224,7 @@ public class GenericManagerImpl<E, D extends IBaseJpaRepository<E>> implements G
 				List<Predicate> list = new ArrayList<Predicate>();
 				if (value != null) {
 					if(propertyName.contains(".")) {
-						String[] names = propertyName.split(".");
+						String[] names = propertyName.split("\\.");
 						list.add(cb.equal(root.get(names[0]).get(names[1]), value));
 					}
 					else {

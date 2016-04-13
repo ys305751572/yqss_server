@@ -64,25 +64,24 @@ Date.prototype.format = function(format){
 					}
 				});
 				var delId = "";
-				var columns = [ 
-							    {'text':'还款金额','dataIndex':'money','render': moneyRender,'width':'60px'},
-							    {'text':'申请时间','dataIndex':'createDate','render': timeRender,'width':'70'}
+				
+				var columns = [ {'text':'理财名称','dataIndex':'name','width':'70px'},
+				                {'text':'理财介绍','dataIndex':'introduce','width':'70px'},
+				                {'text':'年华收益','dataIndex':'yearYield','width':'70px'},
+				                {'text':'期限','dataIndex':'timelimit','width':'70px'}
 							    ];
 				var arrayObj = [];
 				var dataTableObj ;
 				$(function() {
-					arrayObj = [{name : "borrowInfoId", value : $("#borrowInfoId").val()}];
-					console.log("arrayObj:" + arrayObj);
-					
 					dataTableObj  = new czTools.dataTable({"columns":columns,"render":"doctorListDataTable",
-												"url":"${contextPath}/management/borrow/record/list",
-												"searchArr":arrayObj,
+												"url":"${contextPath}/management/moneymgr/list",
+												"para":arrayObj,
 												"autoIframeHeight":false,
 												"showIndex":true,
 												"fnComplete":function(){
 													 window.parent.resetIframeHeight(dataTableObj.oTable[0].clientHeight+400);
 												}});
-					//searchBtnClick();
+					searchBtnClick();
 					
 					$('.form_datetime').datetimepicker({
 				        language:  'zh-CN',
@@ -99,63 +98,44 @@ Date.prototype.format = function(format){
 					
 				});
 				
-				function moneyRender(row) {
-					return row.money;
-				}
-				
-				function isListRender(row) {
-					if(row.isList == 0){
-						return "审核中";
-					}
-					else if(row.isList == 1) {
-						return "同意";
-					}
-					else if(row.isList == 2) {
-						return "拒绝";
-					}
-				}
-				
-				function dayRender(row) {
-					return row.maxDay;
-				}
-				
-				function userRender(row) {
-					return row.user.name;
-				}
-
-				function timeRender(row){
+				function timeRender(row) {
 					var regtime = "";
 					if(row.createDate){
-						regtime = new Date(row.createDate).format("yyyy-MM-dd hh:mm:ss");
+						regtime = new Date(row.createDate).format("yyyy-MM-dd hh:mm:ss")
 					}
 					return regtime;
 				}
 				
 				function searchBtnClick(){
-					var arrayObj = [
-						{"name":"regTimeQ","value":$("#regTimeQ").val()},
-						{"name":"regTimeZ","value":$("#regTimeZ").val()},
-						{"name":"isList","value":$("#isList").val()}
-					];
 					dataTableObj.search(arrayObj);
 				}
-				// 同意借贷
-				function agree(){
+				
+				// 新增医师
+				function add() {
+					window.location.href = "${contextPath}/management/bank/editPage";
+				}
+				
+				// 编辑商品
+				function edit() {
 					if(!dataTableObj.getSelectedRow()){
 						jAlert('请选择要操作的记录','提示');
 						return;
+					} else{
+						window.location.href = "${contextPath}/management/moneymgr/add?id="+dataTableObj.getSelectedRow().id;
+					}
+				}
+				
+				function del(){
+					if(!dataTableObj.getSelectedRow()){
+						jAlert('请选择要删除的记录','提示');
+						return;
 					} else {
 						var id = dataTableObj.getSelectedRow().id;
-						if(dataTableObj.getSelectedRow().isList == 1) {
-							jAlert('已同意的借贷无法再次同意','提示');
-							return;
-						}
-						jConfirm('是否确认同意此次借贷？',"提示",function(r){
+						jConfirm('是否确认删除记录？',"提示",function(r){
 							if(r) { 
-								$.post("${contextPath}/management/borrow/agree",{"id":id},function(result){
+								$.post("${contextPath}/management/bank/delete",{"id":id},function(result){
 									if(result.success){
-										jAlert(result.msg,'提示');
-										window.location.href = "${contextPath}/management/borrow/listPage";
+										window.location.href = "${contextPath}/management/bank/listPage";
 									}
 									else {
 										jAlert(result.msg,'提示');
@@ -164,42 +144,6 @@ Date.prototype.format = function(format){
 						 	}
 						});
 					}
-				}
-				
-				// 拒绝借贷
-				function refuse(){
-					if(!dataTableObj.getSelectedRow()){
-						jAlert('请选择要操作的记录','提示');
-						return;
-					} else {
-						var id = dataTableObj.getSelectedRow().id;
-						if(dataTableObj.getSelectedRow().isList == 2) {
-							jAlert('已拒绝的借贷无法再次拒绝','提示');
-							return;
-						}
-						jConfirm('是否确认拒绝此次借贷？',"提示",function(r){
-							if(r) { 
-								$.post("${contextPath}/management/borrow/refuse",{"id":id},function(result){
-									if(result.success){
-										jAlert(result.msg,'提示');
-										window.location.href = "${contextPath}/management/borrow/listPage";
-									}
-									else {
-										jAlert(result.msg,'提示');
-									}
-								});
-						 	}
-						});
-					}
-				}
-				
-			    //查看用户信息
-			    function detail(){
-			    	if(!dataTableObj.getSelectedRow()){
-						jAlert('请选择要操作的记录','提示');
-						return;
-					}
-			    	window.location.href = "${contextPath}/management/borrow/detailPage?id="+dataTableObj.getSelectedRow().id;
 				}
 		</script>
 	</head>
@@ -208,12 +152,11 @@ Date.prototype.format = function(format){
 		<div class="row-fluid z-ulnone" id="proList">
 			<div class="box span12">			
 				<!-- 操作按钮start -->
+				<div class="breadcrumb">
+					<li><a href="javascript:edit();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;编辑</a></li>
+				</div>
 				<!-- 操作按钮end -->
-				<input type="hidden" id="borrowInfoId" name="borrowInfoId" value="${map.borrowInfoId}">
 				<div class="box-content"   style="padding: 0px;border: 0px">
-					<!-- 搜索条件start -->
-					<!-- 搜索条件end -->
-
 					<!-- 列表start -->
 					<div id="doctorListDataTable" class="z-informa2"></div> 
 					<!-- 列表end -->

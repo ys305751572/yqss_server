@@ -221,6 +221,17 @@
                            </li>
                        </ul>
                    </li>
+                    <li id="menu8">
+                       <a href="#" name="firstMenu"><span class="aol aol-system"></span>理财管理<span class="fa arrow"></span></a>
+                       <ul class="nav nav-second-level">
+                           <li id="menu8_1" onclick="changeMenu(this.id,'理财管理&nbsp;>&nbsp;理财产品基本设置')">
+                               <a href="${contextPath}/management/moneymgr/index" target="mainIFrame">理财产品列表</a>
+                           </li>
+                           <li id="menu8_2" onclick="changeMenu(this.id,'理财管理&nbsp;>&nbsp;理财产品设置')">
+                               <a href="${contextPath}/management/dod/index" target="mainIFrame">理财产品详细信息列表</a>
+                           </li>
+                       </ul>
+                   </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

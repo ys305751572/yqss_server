@@ -16,7 +16,7 @@ var czTools = (function(window) {
 		this.showIndex = options.showIndex?true:false;
 		this.oTable = null;//dataTable对象
 		this.columns = options.columns;//列对象
-		this.searchArr = [];//搜索对象
+		this.searchArr = options.searchArr || [];//搜索对象
 		this.tableMove = {THMove:false,currX:0,lastX:0};//列拖动的必须元素
 		this.autoIframeHeight = options.autoIframeHeight?true:false;//
 		this.store;
@@ -228,6 +228,7 @@ var czTools = (function(window) {
 		this.refresh = function(){
 			t.oTable.fnDraw();
 		}
+	
 		this.fnServerData = function(sSource, aoData, fnCallback) {
 			/***实现排序***/
 			var eEcho = 0;//显示的次数

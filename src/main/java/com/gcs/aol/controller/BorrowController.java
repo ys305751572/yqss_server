@@ -1,6 +1,7 @@
 package com.gcs.aol.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,11 +133,14 @@ public class BorrowController extends GenericEntityController<Borrow, Borrow, Bo
 	@RequestMapping(value = "record/index")
 	public String recordIndex(Integer borrowInfoId,Model model){
 		
-		model.addAttribute("borrowInfoId", borrowInfoId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("borrowInfoId", borrowInfoId);
+		model.addAttribute("map", map);
 		return BORROW_RECORD_LIST_PAGE;
 	} 
 	
 	@RequestMapping(value = "record/list")
+	@ResponseBody
 	public JSONResponse findRecordPageByBorrowInfoId(@RequestBody JSONParam[] params) {
 		HashMap<String, String> paramMap = (HashMap<String, String>) convertToMap(params);
 		String sortStr = paramMap.get("bbSortName");

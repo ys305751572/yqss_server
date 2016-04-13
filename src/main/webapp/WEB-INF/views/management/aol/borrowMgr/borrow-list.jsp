@@ -203,6 +203,15 @@ Date.prototype.format = function(format){
 					}
 			    	window.location.href = "${contextPath}/management/borrow/detailPage?id="+dataTableObj.getSelectedRow().id;
 				}
+			    
+			    //查看还款记录
+			    function record(){
+			    	if(!dataTableObj.getSelectedRow()){
+						jAlert('请选择要操作的记录','提示');
+						return;
+					}
+			    	window.location.href = "${contextPath}/management/borrow/record/index?borrowInfoId="+dataTableObj.getSelectedRow().id;
+				}
 		</script>
 	</head>
 	<body>
@@ -216,6 +225,8 @@ Date.prototype.format = function(format){
 					<li><a href="javascript:agree();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;同意</a></li>
 					<li style="color: #c5c5c5">|</li>
 					<li><a href="javascript:refuse();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;拒绝</a></li>
+					<li style="color: #c5c5c5">|</li>
+					<li><a href="javascript:record();" class="button button-rounded button-flat button-tiny" style="width: 100px;"><i class="icon-2" style="width: 20px; height: 20px; line-height: 20px;"></i>&nbsp;查看还款记录</a></li>
 					
 				</div>
 				<!-- 操作按钮end -->
