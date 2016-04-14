@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="yqss_server2:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="yqss_server2.war">
+      <element id="artifact" artifact-name="yqss_server2:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -6,9 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,6 +37,9 @@ import com.gcs.utils.DataTableReturnObject;
 import com.gcs.utils.JSONParam;
 import com.gcs.utils.JSONResponse;
 import com.gcs.utils.PageUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/management/product/")

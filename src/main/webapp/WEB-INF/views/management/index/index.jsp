@@ -233,6 +233,9 @@
                            <li id="menu8_3" onclick="changeMenu(this.id,'理财管理&nbsp;>&nbsp;购买记录列表')">
                                <a href="${contextPath}/management/tr/index" target="mainIFrame">购买记录列表</a>
                            </li>
+                           <li id="menu8_4" onclick="changeMenu(this.id,'理财管理&nbsp;>&nbsp;用户认证信息列表')">
+                               <a href="${contextPath}/management/muser/index" target="mainIFrame">用户认证信息列表</a>
+                           </li>
                        </ul>
                    </li>
                 </ul>

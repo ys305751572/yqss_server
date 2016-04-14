@@ -12,7 +12,7 @@ import com.gcs.sysmgr.entity.IdAbstartEntity;
 /**
  * 
  * @ClassName: MoneyMagUser
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: 
  * @author yesong
  * @date 2016年4月11日
  *
@@ -25,12 +25,8 @@ public class MoneyMagUser extends IdAbstartEntity{
 	private static final long serialVersionUID = 2291631635371767466L;
 
 	@OneToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id",referencedColumnName="user_id")
 	private Users user;
-	
-	@ManyToOne
-	@JoinColumn(name = "dod_id")
-	private MoneyMagDod dod;
 	
 	@Column(name = "name")
 	private String name;
@@ -53,14 +49,6 @@ public class MoneyMagUser extends IdAbstartEntity{
 
 	public void setUser(Users user) {
 		this.user = user;
-	}
-
-	public MoneyMagDod getDod() {
-		return dod;
-	}
-
-	public void setDod(MoneyMagDod dod) {
-		this.dod = dod;
 	}
 
 	public String getName() {

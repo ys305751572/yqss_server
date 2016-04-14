@@ -28,6 +28,17 @@
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 	</bean>
 	
+	<bean name="wxMpConfigStorage" class="me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage">
+		<property name="appId" value="wx9ad5b2b1262ac6a2" />
+		<property name="secret" value="fe68a821107c34bf9863348831e26755" />
+		<property name="token" value="cjo4j2y88slep1x5s5izpicfaxzmieor" />
+		<property name="aesKey" value="S5z0TXtebTZFUnTzHzW2BgpVohd2liQG0IXGP21JoGg" />
+	</bean>
+
+	<bean name="wxMpService" class="me.chanjar.weixin.mp.api.WxMpServiceImpl">
+		<property name="wxMpConfigStorage" ref="wxMpConfigStorage"></property>
+	</bean>
+
 	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
 	<!-- 加入定制化包路径 -->
 	<context:component-scan base-package="com.gcs">
@@ -118,11 +129,9 @@
 
 	<!-- 用于持有ApplicationContext,可以使用SpringContextHolder.getBean('xxxx')的静态方法得到spring bean对象 -->
 	<bean class="com.gcs.sysmgr.listener.SpringContextHolder" lazy-init="false" />
-
 	<!-- production环境 -->
 	<beans profile="production">
 		<context:property-placeholder ignore-unresolvable="true" location="classpath*:/jdbc.properties" />
-
 		<!-- 数据源配置, 使用DBCP数据库连接池 -->
 		<bean id="dataSource"
 			class="org.apache.commons.dbcp.BasicDataSource"

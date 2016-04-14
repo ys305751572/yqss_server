@@ -37,6 +37,7 @@
 				/styles/** = anon
 				/upload/** = anon
 				/DemoTest/**=anon
+				/weixin/**=anon
 				/resources/** = anon
 				/login/timeout = anon
 				/login/loginHome = anon
