@@ -13,7 +13,7 @@ import com.gcs.sysmgr.entity.IdAbstartEntity;
  * 
  * @ClassName: MoneyMagUser
  * @Description: TODO(这里用一句话描述这个类的作用)
- * @author Administrator
+ * @author yesong
  * @date 2016年4月11日
  *
  */
@@ -102,6 +102,4 @@ public class MoneyMagUser extends IdAbstartEntity{
 	public void setCreateDate(Long createDate) {
 		this.createDate = createDate;
 	}
-	
-	
 }

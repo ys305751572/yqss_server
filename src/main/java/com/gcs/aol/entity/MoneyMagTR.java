@@ -70,5 +70,4 @@ public class MoneyMagTR extends IdAbstartEntity{
 	public void setCreateDate(Long createDate) {
 		this.createDate = createDate;
 	}
-
 }
