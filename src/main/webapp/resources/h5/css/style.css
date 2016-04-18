@@ -1,0 +1,279 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	/*min-width: 300px;*/
+}
+.header{
+	width: 100%;
+}
+.header img{
+	width: 100%;
+}
+.section{
+	width: 96%;
+	margin-top: 15px;
+	margin-left: auto;
+	margin-right: auto;
+	background: #fff;
+	padding: 15px;
+	box-shadow: -1px 1px 1px 1px #e6e6e6,
+				1px 1px 1px 1px #e6e6e6;
+}
+.topbar{
+	display: flex;
+	border-bottom: 1px solid #f7f7f7;
+	padding-bottom: 15px;
+}
+.topbar_left{
+	flex: 1
+}
+.topbar_right{
+	flex: 1;
+	text-align: right;
+	color: #72e3d0;
+	font-size: 1.2rem;
+}
+.topbar_right span{
+
+}
+.topbar_left_tips{
+	padding: 4px 8px;
+	border: 1px solid #ffb80c;
+	border-radius: 20px;
+	color: #ffb80c;
+	margin-right: 10px;
+	font-size: 1rem;
+}
+.topbar_left_tips a{
+	text-decoration: none;
+	color: #ffb80c;
+}
+.topbar_left_tips2{
+	padding: 4px 8px;
+	border: 1px solid #5edbec;
+	border-radius: 20px;
+	color: #5edbec;
+	margin-right: 10px;
+	font-size: 1rem;
+}
+.topbar_left_tips2 a{
+	text-decoration: none;
+	color: #5edbec;
+}
+.topbar_left_tips1{
+	color: #a5a5a5;
+	font-size: 0.8rem;
+}
+.flex{
+	display: flex;
+	background: url(../image/Line%20Copy.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	margin-top: 20px;
+}
+.flex li{
+	list-style-type: none;
+	line-height: 2rem;
+}
+.flex_box{
+	width: 50%;
+	color: #9f9f9f;
+	font-size: 1.2rem;
+}
+.main{
+	padding-top: 30px;
+	font-size: 1rem;
+	color: #999;
+	line-height: 2rem;
+	overflow: auto;
+}
+.header_tip{
+	width: 100%;
+	background: url(../image/Rectangle%201543.png);
+	text-align: center;
+	padding:50px 0px; 
+	color: #fff;
+	z-index: -1
+}
+.header_tip1{
+	font-size: 3rem;
+}
+.header_tip2{
+	font-size: 1rem;
+	color: rgba(255,255,255,0.7);
+}
+.header_tip3{
+	font-size: 1.6rem;
+	color: rgba(255,255,255,0.7);
+}
+.content{
+	background: #fff;
+	padding:15px;
+}
+.content_tip{
+	color: #ffc12b;
+	font-size: 1rem;
+	position: relative;
+	top: 8px;
+}
+.aui-progress_box{
+	width: 80%;
+	color: #ffc12b;
+	font-size: 1rem;
+}
+.aui-progress{
+	height: 1.2rem;
+}
+.aui-progress_content{
+	display: flex;
+	padding: 15px 0px;
+
+}
+.aui-progress_count{
+	display: block;
+	font-size: 1.2rem;
+	text-align: right;
+	width: 20%;
+	color: #ffc12b;
+}
+.bottom_tip{
+	display: flex;
+}
+.bottom_tip_left{
+	font-size: 1.2rem;
+	color: #76e4d2;
+	width: 50%;
+	vertical-align: middle;
+}
+.bottom_tip_left img{
+	height: 1rem;
+	vertical-align: middle;
+	position: relative;top: -1px;
+}
+.bottom_tip_right{
+	font-size: 1.2rem;
+	width: 50%;
+	color: #6f6f6f;
+	text-align: right;
+}
+.menu{
+	width: 100%;
+	background: #fff;
+	padding: 15px 30px;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 15px;
+}
+.menu_tip{
+	text-align: center;
+	font-size: 1.2rem;
+	color: #e25854;
+}
+.menu_tip a{
+	text-decoration: none;
+	color: #e25854;
+}
+.menu_tip img{
+	padding-bottom: 6px;
+}
+.products{
+	width: 100%;
+	padding: 15px;
+	background: #fff;
+	margin-top: 15px;
+	font-size: 1.2rem;
+	color: #a4a4a5;
+}
+.caption_intro{
+	color:#636365; 
+	font-weight: 500;
+	padding-bottom: 6px;
+}
+.caption_tip{
+	color: #ffb80c;
+	font-size: 1.6rem;
+}
+.products li{
+	font-size: 1.2rem;
+	line-height: 1.8rem;
+}
+
+.products_img{
+	padding-top:15px;
+}
+.products_img img{
+	width: 100%;
+}
+.about{
+	margin-top: 15px;
+	background: #fff;
+	width: 100%;
+}
+.about a{
+	text-decoration: none;
+	color: #777777;
+}
+.about_us{
+	font-size: 1.4rem;
+	padding: 10px 15px;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+.about_us_tip{
+	display: block;
+	color: #666666;
+}
+.about_us_tip a{
+	text-decoration: none;
+	color: #666666;
+}
+.about_us_img{
+	display: block;
+	text-align: right;
+}
+.footer_btn{
+	padding: 60px 10px;
+}
+.btn_buy{
+	width: 90%;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	border: 1px solid #dd403b;
+	color: #dd403b;
+	font-size: 1.4rem;
+	background: #f7f7f7; 
+}
+.btn_buy:active{
+	background: #dad6d6;
+	color: #cd3f3b;
+}
+.back{
+	text-align: center;
+	position: relative;
+	height: 36px;
+	line-height: 36px;
+	width: 100%;
+	color: #fff;
+}
+.back img{
+	position: absolute;
+	left: 4%;
+	top: 50%;
+	width: 4%;
+	transform: translate(-50%,-50%);
+}
+.header_tip_box{
+	display: flex;
+	background: url(../image/Rectangle%201708.png) center no-repeat;
+	background-size: 1px 30%; 
+	z-index: 1;
+}
+.number{
+	color: #e15550;
+}
+.footer_btn a{
+	text-decoration: none;
+}
