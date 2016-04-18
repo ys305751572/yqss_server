@@ -78,19 +78,19 @@ public class MoneyMagController extends GenericEntityController<MoneyMag, MoneyM
 	}
 	
 	/**
-	 * 活气宝详情
+	 * 活期宝详情
 	 * @return
 	 */
 	@RequestMapping(value = "/hq/detail")
 	@ResponseBody
 	public Result hQDetail() {
-		
+
 		MoneyMagDod dod = moneyMagDodManager.findDueOnDemandDetail();
 		return Result.success(dod);
 	}
-	
+
 	/**
-	 * 定期列表
+	 * 定期宝列表
 	 * @return
 	 */
 	@RequestMapping(value = "/dq/list")
