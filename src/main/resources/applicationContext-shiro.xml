@@ -37,6 +37,7 @@
 				/styles/** = anon
 				/upload/** = anon
 				/DemoTest/**=anon
+				/moneymag/** = anon
 				/weixin/**=anon
 				/resources/** = anon
 				/login/timeout = anon
