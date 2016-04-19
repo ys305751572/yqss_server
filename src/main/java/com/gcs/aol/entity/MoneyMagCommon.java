@@ -5,6 +5,10 @@ import javax.persistence.Table;
 
 import com.gcs.sysmgr.entity.IdAbstartEntity;
 
+/**
+ *
+ * 关于/协议 详情
+ */
 @Entity
 @Table(name = "tb_moneymanager_common")
 public class MoneyMagCommon extends IdAbstartEntity{

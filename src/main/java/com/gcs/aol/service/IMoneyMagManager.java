@@ -8,4 +8,6 @@ import com.gcs.sysmgr.service.GenericManager;
 public interface IMoneyMagManager extends GenericManager<MoneyMag>{
 
 	public Page<MoneyMag> list(Integer currentPage,Integer pagesize);
+
+	public MoneyMag findByUserId(Integer userId);
 }

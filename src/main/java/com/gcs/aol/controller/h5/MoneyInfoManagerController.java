@@ -19,6 +19,7 @@ import java.util.Map;
 
 /**
  * Created by lili on 2016/4/18 0018.
+ *
  */
 @RequestMapping(value = "/moneymag")
 @Controller

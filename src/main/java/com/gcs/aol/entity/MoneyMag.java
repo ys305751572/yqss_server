@@ -6,6 +6,9 @@ import javax.persistence.Table;
 
 import com.gcs.sysmgr.entity.IdAbstartEntity;
 
+/**
+ * 理财活期/定期基本配置
+ */
 @Entity
 @Table(name = "tb_moneymanager")
 public class MoneyMag extends IdAbstartEntity{
@@ -61,7 +64,6 @@ public class MoneyMag extends IdAbstartEntity{
 	public void setYearYield(String yearYield) {
 		this.yearYield = yearYield;
 	}
-
 
 	public String getTimelimit() {
 		return timelimit;

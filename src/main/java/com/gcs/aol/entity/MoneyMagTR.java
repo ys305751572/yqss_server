@@ -8,6 +8,9 @@ import javax.persistence.Table;
 
 import com.gcs.sysmgr.entity.IdAbstartEntity;
 
+/**
+ * 理财购买记录表
+ */
 @Entity
 @Table(name = "tb_moneymanager_trading_record")
 public class MoneyMagTR extends IdAbstartEntity{

@@ -64,20 +64,7 @@ public class GenericManagerImpl<E, D extends IBaseJpaRepository<E>> implements G
 		return this.entityDAO;
 	}
 
-	/****
-	 * 查询分页实现
-	 * 
-	 * @param entity
-	 *            实体类
-	 * @param start
-	 *            开始数
-	 * @param length
-	 *            长度
-	 * @param sort
-	 *            排序
-	 * @param order
-	 * @return
-	 */
+
 	public Page<E> query(E entity, PageParameters pp) {
 		// 暂时写死，按照时间排序
 		pp.setSort("createDate");
@@ -271,7 +258,7 @@ public class GenericManagerImpl<E, D extends IBaseJpaRepository<E>> implements G
 	}
 
 	public E save(E object) {
-		return getEntityDAO().saveAndFlush(object);
+		return getEntityDAO().save(object);
 	}
 
 	public E update(E object) {

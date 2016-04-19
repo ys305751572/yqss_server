@@ -37,4 +37,10 @@ public class MoneyMagManagerImpl extends GenericManagerImpl<MoneyMag, MoneyMagDA
 		};
 		return dao.findAll(spec, new PageRequest(currentPage, pagesize, Sort.Direction.DESC, "id"));
 	}
+
+	@Override
+	public MoneyMag findByUserId(Integer userId) {
+		List<MoneyMag> list = this.queryByProperty("user.id", userId);
+		return list != null && !list.isEmpty() ? list.get(0) : null;
+	}
 }

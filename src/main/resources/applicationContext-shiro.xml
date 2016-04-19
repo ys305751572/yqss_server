@@ -35,6 +35,7 @@
 			<value>
 				/Captcha.jpg = anon
 				/styles/** = anon
+				/resources/** = anon
 				/upload/** = anon
 				/DemoTest/**=anon
 				/moneymag/** = anon
