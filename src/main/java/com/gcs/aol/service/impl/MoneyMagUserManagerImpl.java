@@ -29,7 +29,7 @@ public class MoneyMagUserManagerImpl extends GenericManagerImpl<MoneyMagUser, Mo
 	
 	@Override
 	public MoneyMagUser findByUserId(Integer userId) {
-		List<MoneyMagUser> list = this.queryByProperty("user.id", userId);
+		List<MoneyMagUser> list = this.queryByProperty("user.userId", userId);
 		return list != null && !list.isEmpty() ? list.get(0) : null;
 	}
 

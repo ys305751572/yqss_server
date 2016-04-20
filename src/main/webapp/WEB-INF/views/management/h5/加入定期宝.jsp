@@ -11,30 +11,29 @@
 
     <script src="${contextPath}/resources/js/jquery-1.7.2.min.js"></script>
 
-    <title>加入活期宝</title>
+    <title>加入定期宝</title>
 </head>
 <body>
 <div class="back" style="background: #dd403b;">
     <a href="javascript:history.go(-1)"><img src="${contextPath}/resources/h5/image/Fill 6.png"></a>
-    <span>加入活期宝</span>
+    <span>加入定期宝</span>
 </div>
 <div class="container">
     <div class="form-inline">
-        <div  class="form-group">
-            <label for="hqId" class="form-group-lable">投资金额</label>
+        <div  class="form-group" style="margin-bottom: 0px ;">
+            <label for="input_check1" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;">转入金额</label>
             <span>元</span>
-            <input type="text" id="hqId" placeholder="请输入投资金额"style="text-align: right;" onblur="yqss.fn.doOnBluer();" ></input>
+            <input type="text" id="input_check1" style="text-align: right;"></input>
         </div>
-        <div  class="form-group form-group2">
-            <label for="input_check1">预计每日收益</label>
-            <span style="color: #de433f">元</span>
-            <input type="text" id="input_check1" readonly="readonly" placeholder=""/>
+        <div  class="form-group"style="margin-bottom: 0px ">
+            <label for="input_check2" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;" >期限</label>
+            <span>个月</span>
+            <input type="text"  id="input_check2" style="text-align: right;" value="${dod.month}"></input>
         </div>
-        <div class="danger" id="dialog">
-            <span style="color: red;">请填写投资金额!!!</span>
-        </div>
-        <div class="danger" id="dialog_tips">
-            <span style="color: red;">请输入数字！！！</span>
+        <div  class="form-group">
+            <label for="input_check3" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;">年化收益率</label>
+            <input type="text" id="input_check3" style="text-align: right;" value="${dod.yearYield}">
+            </input>
         </div>
         <div class="btn_box">
             <button type="submit" class="btn-default1" >立即加入</button>
@@ -52,13 +51,21 @@
                     yqss.fn.doSubmit();
                 });
             },
-            doOnBluer : function() {
-                $("#input_check1").val(${tr.earnings});
-            },
 
             doSubmit : function() {
+                var flag = true;
+                var money = $("#input_check1").val();
 
-                window.location.href = "${contextPath}/moneymag/hq/addHQBao?money=" + $("#hqId").val();
+                if (null == money || money == "") {
+                    alert("请输入转入金额");
+                    flag = false;
+                    return;
+                }
+
+                if(flag){
+                    window.location.href = "${contextPath}/moneymag/dq/addDQBao?money=" + $("#input_check1").val();
+                }
+
             }
         }
     }

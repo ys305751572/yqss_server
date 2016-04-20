@@ -10,7 +10,16 @@ public class Constant {
 	
 	/** 当前登录用户 */
 	public final static String CURRENT_LOGIN_USER = "current_login_user";
-	
+
+
+	/** 当前登录用户 */
+	public final static String HQ = "HQ";
+	/** 当前登录用户 */
+	public final static String DQ = "DQ";
+
+	/** 当前登录用户 */
+	public final static String TR = "TR";
+
 	/** 用户认证信息  */
 	public final static String CERTIFICATION_INFO = "certification_info";
 }

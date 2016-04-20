@@ -83,7 +83,9 @@
 
 <script type="application/javascript">
     var yqss = {
-        v: {},
+        v: {
+            user_id:"yqss",
+        },
         fn: {
             init: function () {
                 $("#subInfoBtn").click(function () {

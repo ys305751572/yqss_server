@@ -21,7 +21,7 @@
     <form class="form_inline">
         <div class="password_box">
             <label for="password">交易密码</label>
-            <input type="text" class="form_password" id="password" placeholder="请输入6-10位字母数字密码">
+            <input type="password" class="form_password" id="password" placeholder="请输入6-10位字母数字密码">
         </div>
         <div>
         <span class="tips " style="width: 40%;position: relative;top: 0px;float: right;"><a href="忘记交易密码.html">忘记密码？</a></span>
@@ -29,13 +29,15 @@
     </form>
 
     <div class="btn_box">
-        <button type="submit" class="btn-default1"  onclick="yqss.fn.doSubmit();">确定</button>
+        <button type="button" class="btn-default1"  onclick="yqss.fn.doSubmit();">确定</button>
     </div>
 </div>
 
 <script type="text/javascript">
     var yqss = {
-        v: {},
+        v: {
+            user_id:"yqss",
+        },
         fn: {
             init: function () {
                 $("#subInfoBtn").click(function () {
@@ -59,7 +61,17 @@
                     return;
                 }
                 if(flag) {
-                    window.location.href = "${contextPath}/moneymag/hq/confirmPwd?password=" + $("#password").val();
+                    $.post("${contextPath}/moneymag/hq/confirmPwd?password=" + $("#password").val(),function(result) {
+                        if(result == "SUCCESS") {
+
+                            window.location.href = "${contextPath}/moneymag/hq/toConfirmPage";
+
+
+                        }
+                        else {
+                            alert("密码错误");
+                        }
+                    });
                 }
 
                 return flag;

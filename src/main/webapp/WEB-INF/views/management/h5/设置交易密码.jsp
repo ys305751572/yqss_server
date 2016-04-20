@@ -21,7 +21,7 @@
     <form class="form_inline">
         <div class="password_box">
             <label for="password1">交易密码</label>
-            <input type="text" class="form_password" id="password" placeholder="请输入6-10位字母数字密码">
+            <input type="password" class="form_password" id="password" placeholder="请输入6-10位字母数字密码">
         </div>
         <div class="password_box">
             <label for="password">确认密码</label>
@@ -51,6 +51,12 @@
                 if (null == password || password == "") {
 //                    $sixmac.notify("请输入交易密码", "error");
                     alert("请输入交易密码");
+                    flag = false;
+                    return;
+                }
+                if (password.length < 5 || password.length > 11) {
+//                    $sixmac.notify("请输入5~10位交易密码", "error");
+                    alert("请输入5~10位交易密码");
                     flag = false;
                     return;
                 }

@@ -112,4 +112,5 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		}
 		return "SUCCESS";
 	}
+
 }

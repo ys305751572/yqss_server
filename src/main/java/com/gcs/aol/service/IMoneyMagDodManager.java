@@ -18,4 +18,5 @@ public interface IMoneyMagDodManager extends GenericManager<MoneyMagDod>{
 	public Page<MoneyMagDod> list(MoneyMagDod dod,int currentPage,int pagesize);
 	
 	public String saveDod(MoneyMagDod dod);
+
 }

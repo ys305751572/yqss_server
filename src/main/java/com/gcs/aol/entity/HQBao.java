@@ -21,6 +21,9 @@ public class HQBao extends IdAbstartEntity {
     @Column(name = "income")
     private double earning;
 
+    @Column(name = "userId")
+    private Integer userId;
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -39,5 +42,13 @@ public class HQBao extends IdAbstartEntity {
 
     public void setEarning(double earning) {
         this.earning = earning;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

@@ -18,7 +18,7 @@ public class MoneyMagTR extends IdAbstartEntity{
 	private static final long serialVersionUID = 288973837195710936L;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id",referencedColumnName = "user_id")
 	private Users user;
 	
 	@ManyToOne
@@ -27,6 +27,9 @@ public class MoneyMagTR extends IdAbstartEntity{
 	
 	@Column(name = "money")
 	private Double money;
+
+	@Column(name = "earnings")
+	private Double earnings;
 	
 	@Column(name = "pay_way")
 	private String payWay;
@@ -72,5 +75,13 @@ public class MoneyMagTR extends IdAbstartEntity{
 
 	public void setCreateDate(Long createDate) {
 		this.createDate = createDate;
+	}
+
+	public Double getEarnings() {
+		return earnings;
+	}
+
+	public void setEarnings(Double earnings) {
+		this.earnings = earnings;
 	}
 }
