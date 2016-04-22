@@ -7,7 +7,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link href="${contextPath}/resources/h5/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/h5/css/style.css">
-<title>理财</title>
+	<script type="text/javascript" src="${contextPath}/resources/h5/js/jquery-2.1.4.min.js"></script>
+	<title>理财</title>
 </head>
 <body style="background: #f7f7f7">
 	<div class="back" style="background: #dd403b;">
@@ -15,16 +16,17 @@
         <span>理财</span>
     </div>
 	<header class="header">
-		<a href="关于财蜜理财.jsp"><img src="${contextPath}/resources/h5/image/P6  banner.png"></a>
+		<a href="${contextPath}/moneymag/about"><img src="${contextPath}/resources/h5/image/P6  banner.png"></a>
 	</header>
 	<section class="section">
+		<a href="${contextPath}/moneymag/hq/detail" class="content_box">
 		 <div class="topbar">
 		 	<div class="topbar_left">
-		 		<span class="topbar_left_tips"><a href="活期宝.jsp">活期宝</a></span>
+		 		<span class="topbar_left_tips">${map.hq.name}</span>
 		 		<span class="topbar_left_tips1">当日计息</span>
 		 	</div>
 		 	<div class="topbar_right">
-		 		<span>100%本息保障</span>
+		 		<span>${map.hq.introduce}</span>
 		 	</div>
 		 </div>
 		 <div class="flex">
@@ -37,35 +39,69 @@
 		 	<div class="flex_box">
 		 		<ul>
 		 			<li>期限</li>
-		 			<li style="font-size: 1.5rem;color: #797979;">随存随取</li>
+		 			<li style="font-size: 1.5rem;color: #797979;">${map.hq.timelimit}</li>
 		 		</ul>
 		 	</div>
 		 </div>
+		</a>
 	</section>
 	<section class="section">
+		<a href="${contextPath}/moneymag/dq/list">
 		 <div class="topbar">
 		 	<div class="topbar_left">
-		 		<span class="topbar_left_tips2"><a href="定期宝list.jsp">定期宝</a></span>
+		 		<span class="topbar_left_tips2">${map.dq.name}</span>
 		 		<span class="topbar_left_tips1">当日计息</span>
 		 	</div>
 		 	<div class="topbar_right">
-		 		<span>100%本息保障</span>
+		 		<span>${map.dq.introduce}</span>
 		 	</div>
 		 </div>
 		 <div class="flex">
 		 	<div class="flex_box">
 		 		<ul>
 		 			<li>年化收益率</li>
-		 			<li style="color: #ea433e;font-size: 1.5rem;">8-12%</li>
+		 			<li style="color: #ea433e;font-size: 1.5rem;">${map.dq.yearYield}</li>
 		 		</ul>
 		 	</div>
 		 	<div class="flex_box">
 		 		<ul>
 		 			<li>期限</li>
-		 			<li style="font-size: 1.5rem;color: #797979;">3-12个月</li>
+		 			<li style="font-size: 1.5rem;color: #797979;">${map.dq.timelimit}</li>
 		 		</ul>
 		 	</div>
 		 </div>
+		</a>
 	</section>
 </body>
+
+<script type="text/javascript">
+	var yqss = {
+		v: {},
+		fn: {
+			init: function () {
+				$("topbar_left_tips").click(function() {
+					yqss.fn.doSubmit();
+				});
+				$("topbar_left_tips2").click(function(){
+					yqss.fn.doSubmit2();
+				})
+			},
+
+			doSubmit:function(){
+				window.location.href ="${contextPath}/monevmag/hq/detail";
+			},
+
+			doSubmit2:function(){
+				window.location.href ="${contextPath}/monevmag/dq/detail";
+			}
+		}
+	}
+
+	$(document).ready(function () {
+		yqss.fn.init();
+	});
+</script>
+
+
+
 </html>

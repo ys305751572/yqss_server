@@ -6,12 +6,10 @@ import com.gcs.aol.entity.MoneyMagDod;
 import com.gcs.aol.service.*;
 import com.gcs.aol.service.impl.MoneyMagManagerImpl;
 import com.gcs.sysmgr.controller.GenericEntityController;
-import com.gcs.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +19,7 @@ import java.util.Map;
  * Created by lili on 2016/4/18 0018.
  *
  */
-@RequestMapping(value = "/moneymag")
+@RequestMapping(value = "moneymag")
 @Controller
 public class MoneyInfoManagerController extends GenericEntityController<MoneyMag, MoneyMag, MoneyMagManagerImpl> {
 
@@ -34,17 +32,19 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
     @Autowired
     private IMoneyMagCommonManager moneyMagCommonManager;
 
+    public static final Integer user_id = 7;
+
     /**
      * 关于理财
      * @param type
      * @return
      */
     @RequestMapping(value = "/about")
-    @ResponseBody
-    public Result about(Integer type) {
+    public String about(Integer type,Model model) {
 
         MoneyMagCommon common = moneyMagCommonManager.findByType(type);
-        return Result.success(common);
+        model.addAttribute("common",common);
+        return "management/h5/关于财蜜理财";
     }
 
     /**
@@ -54,6 +54,7 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
     @RequestMapping(value = "/index")
     public String moneymagIndex(Model model) {
 
+        MoneyMag _user = moneyMagManager.findByUserId(user_id);
         Map<String,MoneyMag> map = new HashMap<String,MoneyMag>();
         List<MoneyMag> list = moneyMagManager.queryAll();
         for (MoneyMag moneyMag : list) {
@@ -73,12 +74,20 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
      * @return
      */
     @RequestMapping(value = "/hq/detail")
-    @ResponseBody
-    public Result hQDetail(Model model) {
+    public String hQDetail(Model model) {
 
         MoneyMagDod dod = moneyMagDodManager.findDueOnDemandDetail();
+//        List<MoneyMagDod> list = moneyMagDodManager.queryAll();
+//        for (MoneyMagDod moneyMagDod : list) {
+//            if(moneyMagDod.getType() == 1) {
+//                dod.put("hq", moneyMagDod);
+//            }
+//            else {
+//                dod.put("dq", moneyMagDod);
+//            }
+//        }
         model.addAttribute("dod",dod);
-        return Result.success(dod);
+        return "management/h5/活期宝";
     }
 
     /**
@@ -86,11 +95,11 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
      * @return
      */
     @RequestMapping(value = "/dq/list")
-    @ResponseBody
-    public Result dQList() {
+    public String dQList(Model model) {
 
         List<MoneyMagDod> list = moneyMagDodManager.findFixPeriodList();
-        return Result.success(list);
+        model.addAttribute("list",list);
+        return "management/h5/定期宝list";
     }
 
     /**
@@ -99,9 +108,9 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
      * @return
      */
     @RequestMapping(value = "/dq/detail")
-    @ResponseBody
-    public Result dQDetail(Integer id) {
+    public String dQDetail(Integer id,Model model) {
         MoneyMagDod dod = moneyMagDodManager.findFixPeriodDetail(id);
-        return Result.success(dod, "dod");
+        model.addAttribute("dod",dod);
+        return "management/h5/定期宝";
     }
 }

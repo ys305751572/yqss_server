@@ -41,7 +41,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		// 根据理财产品ID查询已转入金额总和
 		Double totalMoney = manager.countMoneyByDodId(entity.getId());
 		entity.setResidue(NumberUtils.format(entity.getMoneyLimit() - totalMoney));
-		entity.setPercent(NumberUtils.format(totalMoney / entity.getMoneyLimit() * 100));
+		entity.setPercent((int)NumberUtils.format(totalMoney / entity.getMoneyLimit() * 100));
 		return entity;
 	}
 
@@ -52,7 +52,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		for (MoneyMagDod moneyMagDod : list) {
 			Double totalMoney = manager.countMoneyByDodId(moneyMagDod.getId());
 			moneyMagDod.setResidue(NumberUtils.format(moneyMagDod.getMoneyLimit() - totalMoney));
-			moneyMagDod.setPercent(NumberUtils.format(totalMoney / moneyMagDod.getMoneyLimit() * 100));
+			moneyMagDod.setPercent((int)NumberUtils.format(totalMoney / moneyMagDod.getMoneyLimit() * 100));
 		}
 		return list;
 	}
@@ -63,7 +63,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		// 根据理财产品ID查询已转入金额总和
 		Double totalMoney = manager.countMoneyByDodId(entity.getId());
 		entity.setResidue(NumberUtils.format(entity.getMoneyLimit() - totalMoney));
-		entity.setPercent(NumberUtils.format(totalMoney / entity.getMoneyLimit() * 100));
+		entity.setPercent((int)NumberUtils.format(totalMoney / entity.getMoneyLimit() * 100));
 		return entity;
 	}
 

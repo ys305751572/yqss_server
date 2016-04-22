@@ -7,6 +7,8 @@ import javax.persistence.Transient;
 
 import com.gcs.sysmgr.entity.IdAbstartEntity;
 
+import java.util.Calendar;
+
 /**
  * 
  * @ClassName: MoneyMagDod
@@ -42,8 +44,20 @@ public class MoneyMagDod extends IdAbstartEntity{
 	private Double residue;
 	
 	@Transient
-	private Double percent;
-	
+	private Integer percent;
+
+	@Transient
+	private Double residue2;
+
+	public Double getResidue2() {
+		residue2 = moneyLimit - getResidue();
+		return residue2;
+	}
+
+	public void setResidue2(Double residue2) {
+		this.residue2 = residue2;
+	}
+
 	public Double getResidue() {
 		return residue;
 	}
@@ -52,11 +66,11 @@ public class MoneyMagDod extends IdAbstartEntity{
 		this.residue = residue;
 	}
 
-	public Double getPercent() {
+	public Integer getPercent() {
 		return percent;
 	}
 
-	public void setPercent(Double percent) {
+	public void setPercent(Integer percent) {
 		this.percent = percent;
 	}
 
