@@ -1,13 +1,17 @@
 package com.gcs.aol.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.gcs.utils.CommonUtils;
+import com.gcs.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -113,4 +117,19 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		return "SUCCESS";
 	}
 
+	public Result payConfig(Integer dodId, Integer type) {
+
+		Map<String,String> params = new HashMap<String,String>();
+		if(type == 0) {
+			// 支付宝
+			String sn = CommonUtils.generateSn();
+			params.put("sn",sn);
+		}
+		else {
+			// 微信
+
+
+		}
+		return null;
+	}
 }
