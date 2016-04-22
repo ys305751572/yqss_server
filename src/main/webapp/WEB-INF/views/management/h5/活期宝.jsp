@@ -87,7 +87,7 @@
 	</div>
 	</section>
 	<footer class="footer_btn">
-		<a href=""><button class="btn_buy" type="button">我要购买</button></a>
+		<a href="${contextPath}/moneymag/hq/addHQIndex"><button class="btn_buy" type="button">我要购买</button></a>
 	</footer>
 
 

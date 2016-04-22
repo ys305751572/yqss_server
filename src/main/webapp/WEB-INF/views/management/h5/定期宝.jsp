@@ -107,7 +107,7 @@
 		<div class="content_tip">
 			<span>
 				<c:if test="${dod.residue2 lt dod.moneyLimit}">
-					<a href=""><button class="btn_buy" type="button">我要购买</button>
+					<a href="${contextPath}/moneymag/hq/addDQIndex"><button class="btn_buy" type="button">我要购买</button>
 				</c:if>
 				<c:if test="${dod.residue2 ge dod.moneyLimit}">
 					<button class="btn_buy" type="button" disabled="disabled"
