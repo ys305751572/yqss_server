@@ -98,10 +98,12 @@
 		</div>
 	</section>
 	<section class="about">
-	<div class="about_us">
-		<span class="about_us_tip"><a href="${contextPath}/moneymag/about">关于财蜜理财</a></span>
-		<a href="${contextPath}/moneymag/about"><img class="about_us_img" src="${contextPath}/resources/h5/image/Fill%206%20Copy.png"></a>
-	</div>
+		<a href="${contextPath}/moneymag/about">
+			<div class="about_us">
+				<span class="about_us_tip">关于财蜜理财</span>
+				<img class="about_us_img" src="${contextPath}/resources/h5/image/Fill%206%20Copy.png">
+			</div>
+		</a>
 	</section>
 	<footer class="footer_btn">
 		<div class="content_tip">

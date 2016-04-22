@@ -16,7 +16,7 @@
         <span>理财</span>
     </div>
 	<header class="header">
-		<a href="${contextPath}/moneymag/about"><img src="${contextPath}/resources/h5/image/P6  banner.png"></a>
+		<img src="${contextPath}/resources/h5/image/P6  banner.png">
 	</header>
 	<section class="section">
 		<a href="${contextPath}/moneymag/hq/detail" class="content_box">

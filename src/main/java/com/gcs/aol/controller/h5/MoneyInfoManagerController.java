@@ -42,7 +42,7 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
     @RequestMapping(value = "/about")
     public String about(Integer type,Model model) {
 
-        MoneyMagCommon common = moneyMagCommonManager.findByType(type);
+        MoneyMagCommon common = moneyMagCommonManager.findByType(1);
         model.addAttribute("common",common);
         return "management/h5/关于财蜜理财";
     }
@@ -112,4 +112,7 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
         model.addAttribute("dod",dod);
         return "management/h5/定期宝";
     }
+
+
 }
+
