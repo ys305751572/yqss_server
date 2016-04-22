@@ -1,13 +1,17 @@
 package com.gcs.aol.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.gcs.utils.CommonUtils;
+import com.gcs.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,7 +41,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		// 根据理财产品ID查询已转入金额总和
 		Double totalMoney = manager.countMoneyByDodId(entity.getId());
 		entity.setResidue(NumberUtils.format(entity.getMoneyLimit() - totalMoney));
-		entity.setPercent(NumberUtils.format(totalMoney / entity.getMoneyLimit() * 100));
+		entity.setPercent((int)NumberUtils.format(totalMoney / entity.getMoneyLimit() * 100));
 		return entity;
 	}
 
@@ -48,7 +52,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		for (MoneyMagDod moneyMagDod : list) {
 			Double totalMoney = manager.countMoneyByDodId(moneyMagDod.getId());
 			moneyMagDod.setResidue(NumberUtils.format(moneyMagDod.getMoneyLimit() - totalMoney));
-			moneyMagDod.setPercent(NumberUtils.format(totalMoney / moneyMagDod.getMoneyLimit() * 100));
+			moneyMagDod.setPercent((int)NumberUtils.format(totalMoney / moneyMagDod.getMoneyLimit() * 100));
 		}
 		return list;
 	}
@@ -59,7 +63,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		// 根据理财产品ID查询已转入金额总和
 		Double totalMoney = manager.countMoneyByDodId(entity.getId());
 		entity.setResidue(NumberUtils.format(entity.getMoneyLimit() - totalMoney));
-		entity.setPercent(NumberUtils.format(totalMoney / entity.getMoneyLimit() * 100));
+		entity.setPercent((int)NumberUtils.format(totalMoney / entity.getMoneyLimit() * 100));
 		return entity;
 	}
 
@@ -113,4 +117,19 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		return "SUCCESS";
 	}
 
+	public Result payConfig(Integer dodId, Integer type) {
+
+		Map<String,String> params = new HashMap<String,String>();
+		if(type == 0) {
+			// 支付宝
+			String sn = CommonUtils.generateSn();
+			params.put("sn",sn);
+		}
+		else {
+			// 微信
+
+
+		}
+		return null;
+	}
 }

@@ -30,9 +30,11 @@
 	
 	<bean name="wxMpConfigStorage" class="me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage">
 		<property name="appId" value="wx9ad5b2b1262ac6a2" />
-		<property name="secret" value="fe68a821107c34bf9863348831e26755" />
+		<property name="secret" value="41c32288dbd57f1a5b8e619feb557c64" />
 		<property name="token" value="cjo4j2y88slep1x5s5izpicfaxzmieor" />
 		<property name="aesKey" value="S5z0TXtebTZFUnTzHzW2BgpVohd2liQG0IXGP21JoGg" />
+		<property name="partnerId" value="1332014401" />
+		<property name="partnerKey" value="EC78207E3D0FECE34EE86DE9FD24B76C" />
 	</bean>
 
 	<bean name="wxMpService" class="me.chanjar.weixin.mp.api.WxMpServiceImpl">

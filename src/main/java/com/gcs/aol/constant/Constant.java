@@ -1,7 +1,7 @@
 package com.gcs.aol.constant;
 
 public class Constant {
-	
+
 	public final static String MSG_TITLE_REFUSE = "财蜜取消";
 	public final static String MSG_TITLE_AGREE = "财蜜同意";
 	
@@ -22,4 +22,6 @@ public class Constant {
 
 	/** 用户认证信息  */
 	public final static String CERTIFICATION_INFO = "certification_info";
+
+	public final static String WEIXIN_USER = "weixin_user";
 }
