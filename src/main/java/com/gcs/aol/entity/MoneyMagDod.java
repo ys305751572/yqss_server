@@ -40,6 +40,9 @@ public class MoneyMagDod extends IdAbstartEntity{
 	@Column(name = "create_date")
 	private Long createDate;
 
+	@Column(name = "content")
+	private String content;
+
 	@Transient
 	private Double residue;
 	
@@ -49,8 +52,20 @@ public class MoneyMagDod extends IdAbstartEntity{
 	@Transient
 	private Double residue2;
 
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public Double getResidue2() {
-		residue2 = moneyLimit - getResidue();
+		try {
+			residue2 = (getMoneyLimit() == null ? 0 : getMoneyLimit())  - (getResidue() == null ? 0 : getResidue());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return residue2;
 	}
 

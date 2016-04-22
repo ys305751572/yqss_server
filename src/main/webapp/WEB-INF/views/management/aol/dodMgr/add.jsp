@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date"%>
 <%@ include file="/WEB-INF/views/include.inc.jsp"%>
+<%@page import="com.ckeditor.CKEditorConfig"%>
+<%@ taglib uri="http://ckeditor.com" prefix = "ckeditor" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 <head>
@@ -13,9 +15,18 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/jquery-easyui-1.3.3/themes/bootstrap/easyui.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath}/jquery-easyui-1.3.3/themes/icon.css" />
 <script type="text/javascript" src="${contextPath}/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
-
+	<script type="text/javascript">
+		var basePath = '${contextPath}';
+	</script>
 <script type="text/javascript" src="${contextPath}/resources/upload/js/uploadPreview.min.js"></script>
 <script type="text/javascript" src="${contextPath}/resources/upload/js/ajaxfileupload.js"></script>
+	<script type="text/javascript" src="${contextPath}/ckeditor/ckeditor.js"></script>
+	<%
+		CKEditorConfig settings = new CKEditorConfig();
+		settings.addConfigValue("image_previewText"," ");
+		settings.addConfigValue("width","880px");
+		settings.addConfigValue("height","260px");
+	%>
 
 <!-- The styles -->
 <style type="text/css">
@@ -46,11 +57,19 @@
 <script type="text/javascript">
 $(function(){
 	$("form").validation({icon:true});
+
+	var content = "${dod}";
+
+	if(content){
+		CKEDITOR.instances.detail.setData("${dod.content}");
+	}
 });
 
 
 function doSubmit() {
-	
+
+	var content = CKEDITOR.instances.detail.getData();
+
 	if($("#productForm").valid(this) == false) {
 		return false;
 	}
@@ -61,7 +80,8 @@ function doSubmit() {
 		 "type" : $("#type").val(),
 		 "introduce" : $("#introduce").val(),
 		 "yearYield" : $("#yearYield").val(),
-		 "moneyLimit" : $("#moneyLimit").val()
+		 "moneyLimit" : $("#moneyLimit").val(),
+		 "content" : content
 		},function(result) {
 			if(result.success) {
 				window.location.href = "${contextPath}/management/dod/index";
@@ -136,6 +156,17 @@ function doSubmit() {
 											  <div class="controls" style="margin-left: 80px;">
 											  	  <input type="text" id="moneyLimit" name="moneyLimit" value="${dod.moneyLimit}" style="width:600px;" placeholder="请填写年期限" maxlength="1000" check-type="required" required-message="请填写年期限"/>
 											  </div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="control-group">
+												<label class="control-label" style="width:60px;" for="detail">商品介绍</label>
+												<div class="controls" style="margin-left: 80px">
+													<textarea id="detail" name="detail" rows="25"></textarea>
+													<ckeditor:replace replace="detail" basePath="${contextPath}/ckeditor/"  config="<%=settings%>"></ckeditor:replace>
+												</div>
 											</div>
 										</td>
 									</tr>

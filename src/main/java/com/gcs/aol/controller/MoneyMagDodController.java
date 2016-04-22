@@ -36,7 +36,7 @@ public class MoneyMagDodController extends GenericEntityController<MoneyMagDod, 
 	
 	@RequestMapping(value = "/list")
 	@ResponseBody
-	public JSONResponse list(@RequestBody JSONParam[] params) {
+	public JSONResponse list(@RequestBody JSONParam[] params) throws  Exception{
 		
 		HashMap<String, String> paramMap = (HashMap<String, String>) convertToMap(params);
 		String sortStr = paramMap.get("bbSortName");
@@ -54,6 +54,7 @@ public class MoneyMagDodController extends GenericEntityController<MoneyMagDod, 
 	public String add(Integer id,Model model) {
 		if(id != null) {
 			MoneyMagDod dod = moneyMagDodManager.queryByPK(id);
+			dod.setContent(dod.getContent() != null ? dod.getContent().replaceAll("\"", "\'").trim():"");
 			model.addAttribute("dod", dod);
 		}
 		return "management/aol/dodMgr/add";

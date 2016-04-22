@@ -101,6 +101,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 			_d.setResidue(dod.getResidue());
 			_d.setType(dod.getType());
 			_d.setYearYield(dod.getYearYield());
+			_d.setContent(dod.getContent());
 			this.save(_d);
 		}
 		else {
