@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.RequestWrapper;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +30,7 @@ import java.util.Map;
 @RequestMapping(value = "/moneymag")
 public class MoneyBuyManagerController extends GenericEntityController<MoneyMag, MoneyMag, MoneyMagManagerImpl> {
 
-    public static final Integer user_id = 9;
+    public static final Integer user_id = 7;
     public static final Integer dodId = 12;
 
     @Autowired
@@ -70,6 +72,29 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         return "management/h5/加入定期宝";
     }
 
+    @RequestMapping(value = "/hq/onBluer")
+    @ResponseBody
+    public Double onBluer(HttpServletRequest request, Double money, Double earnings,double e){
+
+        //DecimalFormat df = new DecimalFormat(".00");
+
+        MoneyMagDod dod = iMoneyMagDodManager.findDueOnDemandDetail();
+        request.getSession().setAttribute(Constant.HQ, dod);
+        earnings =  (money * dod.getYearYield()) / 365;
+
+
+        MoneyMagTR tr = new MoneyMagTR();
+        tr.setEarnings(earnings);
+        request.getSession().setAttribute(Constant.TR, tr);
+        request.getSession().setAttribute(Constant.HQ, dod);
+
+        BigDecimal bd = new BigDecimal(earnings);
+
+
+        //df.format(earnings);
+        return earnings;
+    }
+
     @RequestMapping(value = "/hq/addHQBao")
     public String addHQBao(HttpServletRequest request, Double money, Double earnings, Model model) {
 
@@ -79,9 +104,6 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         }
 
         MoneyMagDod dod = iMoneyMagDodManager.findDueOnDemandDetail();
-        if (dod == null) {
-            return "management/h5/加入活期宝";
-        }
         request.getSession().setAttribute(Constant.HQ, dod);
 
         earnings = (money * dod.getYearYield()) / 365;

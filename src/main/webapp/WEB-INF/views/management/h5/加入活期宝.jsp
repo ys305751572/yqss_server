@@ -53,7 +53,25 @@
                 });
             },
             doOnBluer : function() {
-                $("#input_check1").val(${tr.earnings});
+                <%--$.post("${contextPath}/moneymag/hq/onBluer?money=" +),function(result) {--%>
+                    <%--console.log("result:" + result.earnings);--%>
+                    <%--$("#input_check1").val(result.earnings);--%>
+                <%--};--%>
+
+                $.ajax({
+                    "url" : "${contextPath}/moneymag/hq/onBluer",
+                    "type" : "post",
+                    "data" : {"money":  $("#hqId").val()},
+                    "dataType" : "json",
+                    "success" : function(result) {
+                        console.log("success:" + result);
+                        $("#input_check1").val(result);
+                    },
+                    "error" : function(result) {
+                        console.log("error:" + result);
+                    }
+                });
+
             },
 
             doSubmit : function() {
