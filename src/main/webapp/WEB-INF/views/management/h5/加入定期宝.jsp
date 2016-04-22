@@ -63,7 +63,7 @@
                 }
 
                 if(flag){
-                    window.location.href = "${contextPath}/moneymag/dq/addDQBao?money=" + $("#input_check1").val();
+                    window.location.href = "${contextPath}/moneymag/dq/addDQBao?money=" + $("#input_check1").val() + '&id=' +${dod.id};
                 }
 
             }

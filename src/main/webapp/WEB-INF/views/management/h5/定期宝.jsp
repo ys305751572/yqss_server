@@ -8,7 +8,7 @@
 <link href="${contextPath}/resources/h5/css/bootstrap.min.css" rel="stylesheet">
 <link href="${contextPath}/resources/h5/css/aui.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/h5/css/style.css">
-<script type="text/javascript" src="${contextPath}/resources/h5/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery-2.1.4.min.js"></script>
 <title>定期宝</title>
 </head>
 <body>
@@ -107,7 +107,7 @@
 		<div class="content_tip">
 			<span>
 				<c:if test="${dod.residue2 lt dod.moneyLimit}">
-					<a href="${contextPath}/moneymag/hq/addDQIndex"><button class="btn_buy" type="button">我要购买</button>
+					<a href="${contextPath}/moneymag/hq/addDQIndex?id=${dod.id}"><button class="btn_buy" type="button">我要购买</button>
 				</c:if>
 				<c:if test="${dod.residue2 ge dod.moneyLimit}">
 					<button class="btn_buy" type="button" disabled="disabled"

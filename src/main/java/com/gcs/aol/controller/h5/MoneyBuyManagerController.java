@@ -31,7 +31,7 @@ import java.util.Map;
 public class MoneyBuyManagerController extends GenericEntityController<MoneyMag, MoneyMag, MoneyMagManagerImpl> {
 
     public static final Integer user_id = 7;
-    public static final Integer dodId = 12;
+    //public static final Integer dodId = 12;
 
     @Autowired
     private IMoneyMagUserManager iMoneyMagUserManager;
@@ -56,7 +56,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
     }
 
     @RequestMapping(value = "/hq/addDQIndex")
-    public String addDQIndex(HttpServletRequest request, Model model) {
+    public String addDQIndex(HttpServletRequest request,Integer id, Model model) {
 
 
         Users user = new Users();
@@ -64,7 +64,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         request.getSession().setAttribute(Constant.CURRENT_LOGIN_USER, user);
 
 //        List<MoneyMagDod> dod1 = iMoneyMagDodManager.findFixPeriodList();
-        MoneyMagDod dod = iMoneyMagDodManager.findFixPeriodDetail(dodId);
+        MoneyMagDod dod = iMoneyMagDodManager.findFixPeriodDetail(id);
         model.addAttribute("dod", dod);
 
         request.getSession().setAttribute(Constant.DQ, dod);
@@ -74,9 +74,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
     @RequestMapping(value = "/hq/onBluer")
     @ResponseBody
-    public Double onBluer(HttpServletRequest request, Double money, Double earnings,double e){
-
-        //DecimalFormat df = new DecimalFormat(".00");
+    public Double onBluer(HttpServletRequest request, Double money, Double earnings,Double e){
 
         MoneyMagDod dod = iMoneyMagDodManager.findDueOnDemandDetail();
         request.getSession().setAttribute(Constant.HQ, dod);
@@ -88,15 +86,18 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         request.getSession().setAttribute(Constant.TR, tr);
         request.getSession().setAttribute(Constant.HQ, dod);
 
-        BigDecimal bd = new BigDecimal(earnings);
-
+        BigDecimal b = new BigDecimal(earnings);
+        e = b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 
         //df.format(earnings);
-        return earnings;
+        return e;
     }
 
     @RequestMapping(value = "/hq/addHQBao")
-    public String addHQBao(HttpServletRequest request, Double money, Double earnings, Model model) {
+    public String addHQBao(HttpServletRequest request, Double money, Double e, Double earnings,Model model) {
+
+        request.getSession().removeAttribute(Constant.HQ);
+        request.getSession().removeAttribute(Constant.DQ);
 
         Users user = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
         if (user == null) {
@@ -106,7 +107,10 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         MoneyMagDod dod = iMoneyMagDodManager.findDueOnDemandDetail();
         request.getSession().setAttribute(Constant.HQ, dod);
 
-        earnings = (money * dod.getYearYield()) / 365;
+        e = (money * dod.getYearYield()) / 365;
+
+        BigDecimal b = new BigDecimal(e);
+        earnings = b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 
         MoneyMagTR tr = new MoneyMagTR();
         tr.setMoney(money);
@@ -129,14 +133,17 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
     }
 
     @RequestMapping(value = "/dq/addDQBao")
-    public String addDQBao(HttpServletRequest request, Double money) {
+    public String addDQBao(HttpServletRequest request, Integer id,Double money) {
+
+        request.getSession().removeAttribute(Constant.HQ);
+        request.getSession().removeAttribute(Constant.DQ);
 
         Users user = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
         if (user == null) {
             return null;
         }
 
-        MoneyMagDod dod = iMoneyMagDodManager.findFixPeriodDetail(dodId);
+        MoneyMagDod dod = iMoneyMagDodManager.findFixPeriodDetail(id);
         request.getSession().setAttribute(Constant.DQ, dod);
 
         MoneyMagTR tr = new MoneyMagTR();
@@ -216,6 +223,8 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         return null;
     }
 
+
+
     @RequestMapping(value = "/hq/findPassword")
     public String findPassword(HttpServletRequest request, String mobile, String code, String password) {
 
@@ -223,8 +232,8 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         if(user == null) {
             return null;
         }*/
+
         MoneyMagUser mUser = (MoneyMagUser) request.getSession().getAttribute(Constant.CERTIFICATION_INFO);
-//        MoneyMagUser _user = iMoneyMagUserManager.findByUserId(user_id);
         mUser.setTradingPassword(password);
 
         Users user = (Users) (iUsersManager.queryByProperty("userId", mUser.getUser().getUserId()).get(0));

@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true" pageEncoding="UTF-8" %>
-<%@ page import="java.util.Date" %>
 <%@ include file="/WEB-INF/views/include.inc.jsp" %>
 <!doctype html>
 <html lang="zh-cn">
@@ -14,7 +13,7 @@
 </head>
 <body>
 <div class="back" style="background: #dd403b;">
-    <a href="javascript:history.go(-1)"><img src="image/Fill 6.png"></a>
+    <a href="javascript:history.go(-1)"><img src="${contextPath}/resources/h5/image/Fill 6.png"></a>
     <span>输入交易密码</span>
 </div>
 <div class="container">
@@ -24,7 +23,7 @@
             <input type="password" class="form_password" id="password" placeholder="请输入6-10位字母数字密码">
         </div>
         <div>
-        <span class="tips " style="width: 40%;position: relative;top: 0px;float: right;"><a href="忘记交易密码.html">忘记密码？</a></span>
+        <span class="tips " style="width: 40%;position: relative;top: 0px;float: right;"><a href="${contextPath}/management/h5/忘记交易密码">忘记密码？</a></span>
         </div>
     </form>
 
