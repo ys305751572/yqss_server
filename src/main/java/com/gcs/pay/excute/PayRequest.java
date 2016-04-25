@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 public class PayRequest {
 
-	public static Map<String,Object> pay(int type,HttpServletRequest request, HttpServletResponse response) {
+	public static Map<String,Object> pay(HttpServletRequest request, HttpServletResponse response) {
 		
 		response.resetBuffer();
 		response.setHeader("ContentType", "text/xml");
@@ -69,19 +69,7 @@ public class PayRequest {
 			
 			
 			String notify_url = null;
-			switch (type) {
-			case 1:
-				notify_url = notify_url_borrow;
-				break;
-			case 2:
-				notify_url = notify_url_pb;
-				break;
-			case 3:
-				notify_url = notify_url_product;
-				break;
-			default:
-				break;
-			}
+			notify_url = notify_url_borrow;
 			prepayReqHandler.setParameter("notify_url",notify_url);
 			prepayReqHandler.setParameter("out_trade_no", out_trade_no);
 			

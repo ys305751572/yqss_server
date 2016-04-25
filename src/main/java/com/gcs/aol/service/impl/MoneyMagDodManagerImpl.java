@@ -9,7 +9,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.gcs.pay.excute.PayRequest;
 import com.gcs.utils.CommonUtils;
 import com.gcs.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,9 +121,9 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		return "SUCCESS";
 	}
 
-	public Result payConfig(Integer dodId, Integer type) {
-
-		Map<String,String> params = new HashMap<String,String>();
+	@Override
+	public Result payConfig(HttpServletRequest request, HttpServletResponse response,Integer dodId, Integer type) {
+		Map<String,Object> params = new HashMap<String,Object>();
 		if(type == 0) {
 			// 支付宝
 			String sn = CommonUtils.generateSn();
@@ -128,9 +131,14 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		}
 		else {
 			// 微信
-
-
+			int totelFee = 1;
+			String prepayid = null;
+			String sn = CommonUtils.generateSn();
+			request.setAttribute("fee",totelFee);
+			request.setAttribute("sn",sn);
+			request.setAttribute("prepayid",prepayid);
+			params = PayRequest.pay(request,response);
 		}
-		return null;
+		return Result.success(params,"payConfig");
 	}
 }
