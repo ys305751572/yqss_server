@@ -30,8 +30,25 @@
             <span style="color: #de433f">元</span>
             <input type="text" id="input_check1" readonly="readonly" placeholder="" value="${tr.earnings}"/>
         </div>
+        <div class="radio">
+            <input type="radio" name="radio2" id="radio3" value="option1">
+            <label for="radio3">
+                同意<a href="${contextPath}/moneymag/about" style="color: #e9827f;text-decoration: none;">《xxx协议》</a>
+            </label>
+        </div>
         <div class="btn_box">
             <button type="submit" class="btn-default1" >立即加入</button>
+        </div>
+        <div class="aui-dialog aui-hidden" id="dialog">
+            <span class="aui-dialog-tip">请选择支付方式</span>
+            <div class="aui-dialog-body">
+                <div class="aui-dialog-pay1">
+                    <a href="#"><img src="image/p6-7-1支付宝.png" style="width: 30%;"></a>
+                </div>
+                <div class="aui-dialog-pay2">
+                    <a href="#"><img src="image/p6-7-1微信.png" style="width: 30%;"></a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -47,6 +64,19 @@
                 });
             },
             doSubmit : function() {
+                var flag=true;
+                var radio = $("#radio3").val();
+                if(radio == null || radio ==""){
+                    alert("还未同意该协议");
+                    flag = false;
+                    return;
+                }
+                /*$api.append($api.dom("body"),'<div class="aui-mask"></div>');
+                $api.removeCls($api.dom(".aui-dialog.aui-hidden"),"aui-hidden");
+                api.sendEvent({
+                    name: 'dialogEvent',
+                    extra: {type:'show'}
+                });*/
                 window.location.href = "${contextPath}/moneymag/hq/confirmJoinHQ";
             }
         }

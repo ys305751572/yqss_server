@@ -4,6 +4,7 @@
 package com.gcs.utils;
 
 import org.apache.commons.lang3.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -185,5 +186,15 @@ public class CommonUtils {
 
 	public static String getSessionId() {
 		return null;
+	}
+
+	// 判断map里的参数是否有为空
+	public static Boolean existEmpty(Map<String,Object> params,String ... key) {
+		for (int i = 0; i < key.length; i++) {
+			if(StringUtils.isEmpty((String) params.get(key[i]))){
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -1,26 +1,30 @@
 package com.gcs.aol.controller.h5;
 
+import co.emay.channel.SmsSend;
 import com.gcs.aol.constant.Constant;
+import com.gcs.aol.constant.ErrorCode;
 import com.gcs.aol.entity.*;
-import com.gcs.aol.service.*;
-import com.gcs.aol.service.h5.DQBaoService;
-import com.gcs.aol.service.h5.HQBaoService;
+import com.gcs.aol.service.IMoneyMagDodManager;
+import com.gcs.aol.service.IMoneyMagTRManager;
+import com.gcs.aol.service.IMoneyMagUserManager;
+import com.gcs.aol.service.IUsersManager;
 import com.gcs.aol.service.impl.MoneyMagManagerImpl;
-import com.gcs.aol.service.impl.MoneyMagTRManagerImpl;
+import com.gcs.cache.CacheService;
 import com.gcs.sysmgr.controller.GenericEntityController;
-import org.apache.poi.ss.formula.functions.T;
+import com.gcs.utils.CommonUtils;
+import com.gcs.utils.Result;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.ws.RequestWrapper;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,8 +34,19 @@ import java.util.Map;
 @RequestMapping(value = "/moneymag")
 public class MoneyBuyManagerController extends GenericEntityController<MoneyMag, MoneyMag, MoneyMagManagerImpl> {
 
-    public static final Integer user_id = 7;
-    //public static final Integer dodId = 12;
+    private static Map<String,String> codeMap = new HashMap<String,String>();
+
+
+    static {
+        if(codeMap == null || codeMap.isEmpty()) {
+            codeMap =  new HashMap<String,String>();
+        }
+    }
+
+    public static final Integer user_id = 6;
+
+//    @Resource(name = "cacheTempCodeServiceImpl")
+//    private CacheService<String> cacheService;
 
     @Autowired
     private IMoneyMagUserManager iMoneyMagUserManager;
@@ -44,6 +59,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
     @Autowired
     private IMoneyMagTRManager iMoneyMagTRManager;
+
 
     @RequestMapping(value = "/hq/addHQIndex")
     public String addHQIndex(HttpServletRequest request) {
@@ -71,6 +87,9 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
         return "management/h5/加入定期宝";
     }
+
+    @RequestMapping(value = "/hq/index")
+    public String index(){return "management/h5/忘记交易密码";}
 
     @RequestMapping(value = "/hq/onBluer")
     @ResponseBody
@@ -166,24 +185,28 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
     }
 
     @RequestMapping(value = "/hq/certification")
-    public String certification(HttpServletRequest request, String name, String idCard, String bankCard) {
+    public String certification(HttpServletRequest request,String name, String idCard, String bankCard) {
 
-       /* Users user = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
-        if(user == null) {
+        Users users = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
+        if(users == null) {
             return null;
-        }*/
+        }
+
         MoneyMagUser mUser = new MoneyMagUser();
         mUser.setBankCard(bankCard);
         mUser.setIdCard(idCard);
         mUser.setName(name);
 
-        Users user = new Users();
-        user.setUserId(user_id);
+//        Users user = new Users();
+//        user.setUserId(user_id);
+
+        Users user = iUsersManager.queryByPK(users.getUserId());
         mUser.setUser(user);
+
+        iMoneyMagUserManager.save(mUser);
 
         request.getSession().setAttribute(Constant.CERTIFICATION_INFO, mUser);
 
-        // 跳转到输入密码页面
         return "management/h5/设置交易密码";
     }
 
@@ -226,18 +249,19 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
 
     @RequestMapping(value = "/hq/findPassword")
-    public String findPassword(HttpServletRequest request, String mobile, String code, String password) {
+    public String findPassword(HttpServletRequest request,String password) {
 
-        /*Users user = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
+        Users user = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
         if(user == null) {
             return null;
-        }*/
+        }
 
-        MoneyMagUser mUser = (MoneyMagUser) request.getSession().getAttribute(Constant.CERTIFICATION_INFO);
+
+        MoneyMagUser mUser = iMoneyMagUserManager.findByUserId(user.getUserId());
         mUser.setTradingPassword(password);
 
-        Users user = (Users) (iUsersManager.queryByProperty("userId", mUser.getUser().getUserId()).get(0));
-        mUser.setUser(user);
+        Users _user = (Users) (iUsersManager.queryByProperty("userId", mUser.getUser().getUserId()).get(0));
+        mUser.setUser(_user);
 
         iMoneyMagUserManager.save(mUser);
         // 跳转到输入密码页面
@@ -288,5 +312,48 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         request.getSession().removeAttribute(Constant.DQ);
 
         return null;
+    }
+
+    @RequestMapping(value = "/sendCode")
+    @ResponseBody
+    public Result sendCode(String mobile) {
+
+        if(StringUtils.isBlank(mobile) ) {
+            return Result.failure("参数错误");
+        }
+
+        try {
+            // 生成验证码
+            String code = CommonUtils.getCode(6);
+            // 成功
+            if (SmsSend.send(mobile, code)) {
+                codeMap.put(mobile,code);
+                return Result.success();
+            }
+            // 失败
+            else {
+                return Result.failure(ErrorCode.ERROR_09);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.failure();
+        }
+    }
+
+    @RequestMapping(value = "/hq/confirmCode")
+    public String confirmCode(HttpServletRequest request,String mobile,String requestCode) {
+
+        Users user = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
+        if(user == null) {
+            return null;
+        }
+
+        String code = codeMap.get(mobile);
+
+        if(StringUtils.isBlank(requestCode) || !requestCode.equals(code)) {
+            return ErrorCode.ERROR_10;
+        }
+
+        return "management/h5/设置交易密码";
     }
 }

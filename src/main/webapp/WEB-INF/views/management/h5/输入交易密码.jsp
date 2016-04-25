@@ -23,7 +23,7 @@
             <input type="password" class="form_password" id="password" placeholder="请输入6-10位字母数字密码">
         </div>
         <div>
-        <span class="tips " style="width: 40%;position: relative;top: 0px;float: right;"><a href="${contextPath}/management/h5/忘记交易密码">忘记密码？</a></span>
+        <span class="tips " style="width: 40%;position: relative;top: 0px;float: right;"><a href="${contextPath}/moneymag/hq/index">忘记密码？</a></span>
         </div>
     </form>
 

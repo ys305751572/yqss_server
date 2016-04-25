@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="back" style="background: #dd403b;">
-    <a href="javascript:history.go(-1)"><img src="image/Fill 6.png"></a>
+    <a href="javascript:history.go(-1)"><img src="${contextPath}/resources/h5/image/Fill 6.png"></a>
     <span>设置交易密码</span>
 </div>
 <div class="container">

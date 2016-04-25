@@ -60,7 +60,7 @@
 </head>
 <body>
 <div class="back" style="background: #dd403b;">
-    <a href="javascript:history.go(-1)"><img src="image/Fill 6.png"></a>
+    <a href="javascript:history.go(-1)"><img src="${contextPath}/resources/h5/image/Fill 6.png"></a>
     <span>实名认证</span>
 </div>
 <div class="container">
@@ -84,7 +84,7 @@
 <script type="application/javascript">
     var yqss = {
         v: {
-            user_id:"yqss",
+
         },
         fn: {
             init: function () {
@@ -99,42 +99,56 @@
                 var idCard = $("#idCard").val();
                 var bankCard = $("#bankCard").val();
                 var tips = $("#dialog_tips").val();
-                var dialog = $("#dialog").val()
+                var dialog = $("#dialog").val();
+                var myname = /^[\u4e00-\u9fa5]+$/;
                 if (null == name || name == "") {
-                    $sixmac.notify("请输入姓名", "error");
+                    //$sixmac.notify("请输入姓名", "error");
+                    alert("请输入姓名");
                     flag = false;
                     return;
                 }
+
+                if (!myname.test(name)) {
+                    //$sixmac.notify("请输入中文姓名", "error");
+                    alert("请输入中文姓名");
+                    flag = false;
+                    return;
+                }
+
                 if (idCard == "") {
-                    $sixmac.notify("请输入身份证号", "error");
+                    //$sixmac.notify("请输入身份证号", "error");
+                    alert("请输入身份证号");
                     flag = false;
                     return;
                 }
                 if (isNaN(idCard)) {
-                    $sixmac.notify("请输入数字身份证号", "error");
+                    alert("请输入数字身份证号");
+                    //$sixmac.notify("请输入数字身份证号", "error");
                     flag = false;
                     return;
                 }
 
                 if (bankCard == "") {
-                    $sixmac.notify("请输入银行卡号", "error");
+                    alert("请输入银行卡号");
+                    //$sixmac.notify("请输入银行卡号", "error");
                     flag = false;
                     return;
                 }
-                if (isNaN(idCard)) {
-                    $sixmac.notify("请输入数字银行卡号", "error");
+                if (isNaN(bankCard)) {
+                    alert("请输入数字银行卡号");
+                    //$sixmac.notify("请输入数字银行卡号", "error");
                     flag = false;
                     return;
                 }
                 if(flag) {
                     $("#dialog").show();
-                }
+                    }
 
                 return flag;
             },
 
             do: function () {
-                window.location.href = "${contextPath}/moneymag/hq/certification?name=" + $("#name").val() + '&idCard=' + $("#idCard").val() + '&bankCard=' + $("#bankCard").val();
+                window.location.href = "${contextPath}/moneymag/hq/certification?name="  + $("#name").val() + '&idCard=' + $("#idCard").val() + '&bankCard=' + $("#bankCard").val();
             }
 
         }

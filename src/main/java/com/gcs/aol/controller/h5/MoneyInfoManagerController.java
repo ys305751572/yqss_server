@@ -32,7 +32,7 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
     @Autowired
     private IMoneyMagCommonManager moneyMagCommonManager;
 
-    public static final Integer user_id = 7;
+    public static final Integer user_id = 6;
 
     /**
      * 关于理财
