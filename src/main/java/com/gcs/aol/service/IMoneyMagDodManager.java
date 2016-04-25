@@ -1,6 +1,7 @@
 package com.gcs.aol.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.gcs.utils.Result;
 import org.springframework.data.domain.Page;
@@ -29,5 +30,5 @@ public interface IMoneyMagDodManager extends GenericManager<MoneyMagDod>{
 	 * @param type 支付类型 0:支付宝 1.微信
      * @return
      */
-	public Result payConfig(HttpServletRequest request, HttpServletResponse response, Integer dodId, Integer type);
+	public String payConfig(HttpServletRequest request, HttpServletResponse response, Integer dodId, Integer type);
 }

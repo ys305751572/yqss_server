@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.gcs.pay.excute.PayRequest;
 import com.gcs.utils.CommonUtils;
 import com.gcs.utils.Result;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -122,7 +124,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 	}
 
 	@Override
-	public Result payConfig(HttpServletRequest request, HttpServletResponse response,Integer dodId, Integer type) {
+	public String payConfig(HttpServletRequest request, HttpServletResponse response,Integer dodId, Integer type) {
 		Map<String,Object> params = new HashMap<String,Object>();
 		if(type == 0) {
 			// 支付宝
@@ -132,13 +134,14 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		else {
 			// 微信
 			int totelFee = 1;
-			String prepayid = null;
+			String prepayid = null; //预支付款ID
 			String sn = CommonUtils.generateSn();
 			request.setAttribute("fee",totelFee);
 			request.setAttribute("sn",sn);
 			request.setAttribute("prepayid",prepayid);
 			params = PayRequest.pay(request,response);
 		}
-		return Result.success(params,"payConfig");
+		String paramJson = new GsonBuilder().create().toJson(params);
+		return paramJson;
 	}
 }

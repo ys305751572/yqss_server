@@ -1,8 +1,10 @@
 package com.gcs.aol.controller.h5;
 
+import com.gcs.aol.constant.Constant;
 import com.gcs.aol.entity.MoneyMag;
 import com.gcs.aol.entity.MoneyMagCommon;
 import com.gcs.aol.entity.MoneyMagDod;
+import com.gcs.aol.entity.Users;
 import com.gcs.aol.service.*;
 import com.gcs.aol.service.impl.MoneyMagManagerImpl;
 import com.gcs.sysmgr.controller.GenericEntityController;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +55,11 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
      * @return
      */
     @RequestMapping(value = "/index")
-    public String moneymagIndex(Integer userId,Model model) {
+    public String moneymagIndex(HttpServletRequest request,Integer userId, Model model) {
+
+        Users user = new Users();
+        user.setUserId(userId);
+        request.getSession().setAttribute(Constant.CURRENT_LOGIN_USER, user);
 
         Map<String,MoneyMag> map = new HashMap<String,MoneyMag>();
         List<MoneyMag> list = moneyMagManager.queryAll();

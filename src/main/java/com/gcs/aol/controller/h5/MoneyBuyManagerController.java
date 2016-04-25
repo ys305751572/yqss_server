@@ -4,10 +4,7 @@ import co.emay.channel.SmsSend;
 import com.gcs.aol.constant.Constant;
 import com.gcs.aol.constant.ErrorCode;
 import com.gcs.aol.entity.*;
-import com.gcs.aol.service.IMoneyMagDodManager;
-import com.gcs.aol.service.IMoneyMagTRManager;
-import com.gcs.aol.service.IMoneyMagUserManager;
-import com.gcs.aol.service.IUsersManager;
+import com.gcs.aol.service.*;
 import com.gcs.aol.service.impl.MoneyMagManagerImpl;
 import com.gcs.cache.CacheService;
 import com.gcs.sysmgr.controller.GenericEntityController;
@@ -45,8 +42,8 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
     public static final Integer user_id = 6;
 
-//    @Resource(name = "cacheTempCodeServiceImpl")
-//    private CacheService<String> cacheService;
+    @Autowired
+    private IMoneyMagCommonManager moneyMagCommonManager;
 
     @Autowired
     private IMoneyMagUserManager iMoneyMagUserManager;
@@ -64,22 +61,12 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
     @RequestMapping(value = "/hq/addHQIndex")
     public String addHQIndex(HttpServletRequest request) {
 
-        Users user = new Users();
-        user.setUserId(user_id);
-        request.getSession().setAttribute(Constant.CURRENT_LOGIN_USER, user);
-
         return "management/h5/加入活期宝";
     }
 
     @RequestMapping(value = "/hq/addDQIndex")
     public String addDQIndex(HttpServletRequest request,Integer id, Model model) {
 
-
-        Users user = new Users();
-        user.setUserId(user_id);
-        request.getSession().setAttribute(Constant.CURRENT_LOGIN_USER, user);
-
-//        List<MoneyMagDod> dod1 = iMoneyMagDodManager.findFixPeriodList();
         MoneyMagDod dod = iMoneyMagDodManager.findFixPeriodDetail(id);
         model.addAttribute("dod", dod);
 
@@ -273,6 +260,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
      * @return
      */
     @RequestMapping(value = "/hq/confirmJoinHQ")
+    @ResponseBody
     public String confirmJoinHQ(HttpServletRequest request) {
 
         MoneyMagTR tr = (MoneyMagTR) request.getSession().getAttribute(Constant.TR);
@@ -290,7 +278,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         request.getSession().removeAttribute(Constant.TR);
         request.getSession().removeAttribute(Constant.HQ);
 
-        return null;
+        return "SUCCESS";
     }
 
     @RequestMapping(value = "/hq/confirmJoinDQ")
@@ -355,5 +343,14 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         }
 
         return "management/h5/设置交易密码";
+    }
+
+    @RequestMapping(value = "/detail")
+    public String detail(Integer type,Model model) {
+
+        MoneyMagCommon common = moneyMagCommonManager.findByType(2);
+        model.addAttribute("common",common);
+
+        return "management/h5/关于协议";
     }
 }

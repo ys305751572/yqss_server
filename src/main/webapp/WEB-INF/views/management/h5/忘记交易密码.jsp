@@ -21,8 +21,10 @@
                 return;
             }
 
-            if(code == ""){
-                alert("请输入验证码");
+            if(code ==""){
+                alert()
+                dialog.style.display="block";
+                dialog.innerHTML="请输入验证码";
                 return;
             }if(flag) {
                 window.location.href = "${contextPath}/moneymag/hq/confirmCode?mobile=" + $("#mobile").val() + '&requestCode=' + $("#code").val();
@@ -39,7 +41,7 @@
     <input type="text" class="check_box" id="mobile" placeholder="请输入手机号码">
     <div class="input_box">
         <input type="text" placeholder="请输入验证码" id="code"></input>
-        <span><button id="codeBtn">获取验证码</button></span>
+        <span><button id="codeBtn" onclick="settime(this)">获取验证码</button></span>
     </div>
     <div class="danger" id="dialog" style="color: red;">
         <span></span>
@@ -48,21 +50,87 @@
         <button type="submit" class="btn-default1" onclick="changeStyle();">下一步</button>
     </div>
 </div>
-<script type="application/javascript">
+<%--<script type="application/javascript">--%>
+    <%--var yqss = {--%>
+        <%--v : {--%>
 
-    $(function() {
-        $("#codeBtn").click(function() {
+        <%--},--%>
+        <%--fn : {--%>
+            <%--init : function() {--%>
+                <%--$(".btn-default1").click(function() {--%>
+                    <%--yqss.fn.doSubmit();--%>
+                <%--});--%>
+            <%--},--%>
+            <%--doSubmit : function(btn) {--%>
+
+                <%--$("#codeBtn").click(function(btn) {--%>
+                    <%--$.ajax({--%>
+                        <%--"url":"${contextPath}/moneymag/sendCode",--%>
+                        <%--"type":"post",--%>
+                        <%--"data": {"mobile":  $("#mobile").val()},--%>
+                        <%--"dataType" : "json",--%>
+                        <%--"success": function(result) {--%>
+                            <%--if(result == Result.success()) {--%>
+                                <%--var countdown = 60;--%>
+                                <%--countdown--;--%>
+                                <%--btn.setAttribute("disabled", true);--%>
+                                <%--btn.value = countdown + "秒后重新发送";--%>
+                                <%--setTimeout(function () {--%>
+                                    <%--settime(btn)--%>
+                                <%--}, 1000)--%>
+                            <%--}--%>
+                        <%--}--%>
+                    <%--})--%>
+        <%--});--%>
+    <%--})--%>
+
+
+<%--</script>--%>
+
+<script type="text/javascript">
+    var countdown = 60;
+    function settime(btn) {
+        var mobile = $('#mobile').val();
+        if (null == mobile || mobile == '') {
+            alert('手机号不能为空');
+        } else {
+            // 发送验证码
             $.ajax({
-                "url":"${contextPath}/moneymag/sendCode",
-                "type":"post",
-                "data": {"mobile":  $("#mobile").val()},
-                "dataType" : "json",
+                type: "post",
+                url: "${contextPath}/moneymag/sendCode",
+                data: {
+                    mobile: mobile
+                },
+                success: function (result) {
+                    if (result.status != 0) {
+                        alert(result.msg);
+                    }
+                }
+            });
+            jian(btn);
+        }
+    }
 
-            })
-        });
-    })
-
-
+    function jian(btn) {
+        var tg = document.getElementById("tg1");
+        if (countdown == 0) {
+            btn.removeAttribute("disabled");
+            btn.value = "点击发送验证码";
+            countdown = 60;
+            btn.className = "btn_sendcode1";
+            tg.className = "register1";
+        } else {
+            countdown--;
+            btn.setAttribute("disabled", true);
+            btn.value = countdown + "秒后重新发送";
+            btn.className = "btn_sendcode2";
+            tg.className = "register2";
+            setTimeout(function () {
+                jian(btn)
+            }, 1000)
+        }
+    }
 </script>
+
 </body>
 </html>

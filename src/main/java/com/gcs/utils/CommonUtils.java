@@ -10,7 +10,9 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
@@ -170,7 +172,7 @@ public class CommonUtils {
 //		System.out.println(mapToXml(map));
 		
 		String reg = "^[0-9]+(,[0-9]+)*$";
-		
+		openUrl("http://localhost:8080/yqss/moneymag/index?userId=7");
 	}
 
 
@@ -197,4 +199,17 @@ public class CommonUtils {
 		}
 		return false;
 	}
+
+	public static void openUrl(String url) {
+		java.net.URI uri;
+		try {
+			uri = new java.net.URI(url);
+			java.awt.Desktop.getDesktop().browse(uri);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

@@ -1,6 +1,7 @@
 package com.gcs.aol.controller.h5;
 
 import com.gcs.aol.constant.Constant;
+import com.gcs.aol.service.IMoneyMagDodManager;
 import com.gcs.utils.Result;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -10,6 +11,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,10 +31,15 @@ public class MoneyPayController {
     @Autowired
     private WxMpService wxMpService;
 
-    public Result payConfig(Integer dodId,Integer type) {
+    @Autowired
+    private IMoneyMagDodManager moneyMagDodManager;
 
+    @RequestMapping(value = "/payConfig")
+    @ResponseBody
+    public Result payConfig(HttpServletRequest request,HttpServletResponse response,Integer dodId,Integer type) {
 
-        return Result.success();
+        String resultJson = moneyMagDodManager.payConfig(request,response,dodId,type);
+        return Result.success(resultJson,"payConfig");
     }
     /*********************************************************************************************
      *  暂留

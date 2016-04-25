@@ -31,9 +31,9 @@
             <input type="text" id="input_check1" readonly="readonly" placeholder="" value="${tr.earnings}"/>
         </div>
         <div class="radio">
-            <input type="radio" name="radio2" id="radio3" value="option1">
+            <input type="checkbox" name="radio2" id="radio3" value="radio3">
             <label for="radio3">
-                同意<a href="${contextPath}/moneymag/about" style="color: #e9827f;text-decoration: none;">《xxx协议》</a>
+                同意<a href="${contextPath}/moneymag/detail" style="color: #e9827f;text-decoration: none;">《xxx协议》</a>
             </label>
         </div>
         <div class="btn_box">
@@ -65,19 +65,29 @@
             },
             doSubmit : function() {
                 var flag=true;
-                var radio = $("#radio3").val();
-                if(radio == null || radio ==""){
+                var isCheck =$('input:checkbox[name="radio2"]:checked').val();
+                console.log(isCheck);
+                if(isCheck == null || isCheck ==""){
                     alert("还未同意该协议");
                     flag = false;
                     return;
                 }
-                /*$api.append($api.dom("body"),'<div class="aui-mask"></div>');
-                $api.removeCls($api.dom(".aui-dialog.aui-hidden"),"aui-hidden");
-                api.sendEvent({
-                    name: 'dialogEvent',
-                    extra: {type:'show'}
-                });*/
-                window.location.href = "${contextPath}/moneymag/hq/confirmJoinHQ";
+                if(flag) {
+                    $.post("${contextPath}/moneymag/hq/confirmJoinHQ",function(result) {
+                        if(result == "SUCCESS") {
+
+                            yqss.fn.show();
+
+                        }
+                        else {
+                            alert("密码错误");
+                        }
+                    });
+                }
+            },
+            show : function() {
+                //展示第三方支付标志
+
             }
         }
     }

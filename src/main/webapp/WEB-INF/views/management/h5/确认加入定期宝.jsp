@@ -34,8 +34,25 @@
             <label for="year_yield">年收益率</label>
             <input type="text" id="year_yield" readonly="readonly" placeholder="" value="${dod2.yearYield}"/>
         </div>
+        <div class="radio">
+            <input type="checkbox" name="radio2" id="radio3" value="radio3">
+            <label for="radio3">
+                同意<a href="${contextPath}/moneymag/detail" style="color: #e9827f;text-decoration: none;">《xxx协议》</a>
+            </label>
+        </div>
         <div class="btn_box">
             <button type="submit" class="btn-default1" >立即加入</button>
+        </div>
+        <div class="aui-dialog aui-hidden" id="dialog">
+            <span class="aui-dialog-tip">请选择支付方式</span>
+            <div class="aui-dialog-body">
+                <div class="aui-dialog-pay1">
+                    <a href="#"><img src="image/p6-7-1支付宝.png" style="width: 30%;"></a>
+                </div>
+                <div class="aui-dialog-pay2">
+                    <a href="#"><img src="image/p6-7-1微信.png" style="width: 30%;"></a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -51,7 +68,30 @@
                 });
             },
             doSubmit : function() {
-                window.location.href = "${contextPath}/moneymag/hq/confirmJoinDQ";
+                var flag=true;
+                var isCheck =$('input:checkbox[name="radio2"]:checked').val();
+                console.log(isCheck);
+                if(isCheck == null || isCheck ==""){
+                    alert("还未同意该协议");
+                    flag = false;
+                    return;
+                }
+                if(flag) {
+                    $.post("${contextPath}/moneymag/hq/confirmJoinDQ",function(result) {
+                        if(result == "SUCCESS") {
+
+                            yqss.fn.show();
+
+                        }
+                        else {
+                            alert("密码错误");
+                        }
+                    });
+                }
+            },
+            show : function() {
+                //展示第三方支付标志
+
             }
         }
     }
