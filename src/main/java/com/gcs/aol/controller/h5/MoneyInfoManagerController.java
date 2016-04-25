@@ -52,7 +52,7 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
      * @return
      */
     @RequestMapping(value = "/index")
-    public String moneymagIndex(Model model) {
+    public String moneymagIndex(Integer userId,Model model) {
 
         Map<String,MoneyMag> map = new HashMap<String,MoneyMag>();
         List<MoneyMag> list = moneyMagManager.queryAll();
