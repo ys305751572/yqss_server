@@ -10,40 +10,9 @@
     <link href="${contextPath}/resources/h5/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="${contextPath}/resources/js/jquery-1.7.2.min.js"></script>
+    <script src="${contextPath}/resources/pay/js.js"></script>
 
     <title>确认加入定期宝</title>
-    <style type="text/css">
-        .checkbox1 {
-            position: relative;
-        }
-        .checkbox1 label {
-            display: block;
-            width: 28px;
-            height: 28px;
-            border-radius: 15px;
-            -webkit-transition: all .5s ease;
-            -moz-transition: all .5s ease;
-            -o-transition: all .5s ease;
-            -ms-transition: all .5s ease;
-            transition: all .5s ease;
-            cursor: pointer;
-            position: absolute;
-            top: -4px;
-            left: 0px;
-            z-index: 1;
-            background: #fff;
-            border: 2px solid #e8e8e8;
-            -webkit-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
-            -moz-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
-
-        }
-        .checkbox1 input[type=checkbox]:checked + label {
-            background: url("../image/Group3.png");
-        }
-        .checkbox1 input{
-            transform: translate(20%,-25%);
-        }
-    </style>
 </head>
 <body>
 <div class="back" style="background: #dd403b;">

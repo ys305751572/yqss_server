@@ -79,9 +79,9 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
     @RequestMapping(value = "/hq/index")
     public String index(){return "management/h5/忘记交易密码";}
 
-    @RequestMapping(value = "/hq/onBluer")
+    @RequestMapping(value = "/hq/onBluerhq")
     @ResponseBody
-    public Result onBluer(HttpServletRequest request, Double money, Double earnings,Double e){
+    public Result onBluerhq(HttpServletRequest request, Double money, Double earnings,Double e){
 
         MoneyMagDod dod = iMoneyMagDodManager.findDueOnDemandDetail();
         request.getSession().setAttribute(Constant.HQ, dod);
@@ -99,6 +99,29 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         //df.format(earnings);
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("earnings",e);
+
+        String result = "";
+
+        if (money > dod.getResidue()) {
+            result = "超出金额";
+        }
+
+        if (money == null) {
+            result = "请输入投资金额";
+        }
+
+        map.put("result",result);
+        return Result.success(map);
+    }
+
+    @RequestMapping(value = "/hq/onBluerdq")
+    @ResponseBody
+    public Result onBluerdq(HttpServletRequest request,Integer id, Double money){
+
+        MoneyMagDod dod = iMoneyMagDodManager.findFixPeriodDetail(id);
+        request.getSession().setAttribute(Constant.DQ, dod);
+
+        Map<String,Object> map = new HashMap<String,Object>();
 
         String result = "";
 
@@ -198,9 +221,6 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         mUser.setBankCard(bankCard);
         mUser.setIdCard(idCard);
         mUser.setName(name);
-
-//        Users user = new Users();
-//        user.setUserId(user_id);
 
         Users user = iUsersManager.queryByPK(users.getUserId());
         mUser.setUser(user);

@@ -120,7 +120,6 @@
         } else {
             countdown--;
             btn.setAttribute("disabled", true);
-//            btn.value = countdown + "秒后重新发送";
             $("#codeBtn").attr("value",countdown + "秒后重新发送");
             btn.className = "btn_sendcode2";
             tg.className = "register2";

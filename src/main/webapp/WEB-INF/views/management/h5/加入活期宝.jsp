@@ -54,19 +54,19 @@
             },
             doOnBluer : function() {
                 if(!/^\d+(?:.\d{1,2})?$/.test($("#hqId").val())){
-                    alert("请输入数字!");
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入数字!";
+                    $("#input_check1").val("");
                 }
 
                 $.ajax({
-                    "url" : "${contextPath}/moneymag/hq/onBluer",
+                    "url" : "${contextPath}/moneymag/hq/onBluerhq",
                     "type" : "post",
                     "data" : {"money":  $("#hqId").val()},
                     "dataType" : "json",
                     "success" : function(result) {
                         console.log("success:" + result.data.object.earnings + "===result.result:" + result.data.object.result);
                         if(result.data.object.result != null && result.data.object.result != "") {
-//                            $("#input_check1").val(result.data.object.result);
-//                            $("#dialog").find("span").html(result.data.object.result);
                             $("#input_check1").val("");
                             dialog.style.display="block";
                             dialog.innerHTML=result.data.object.result;
