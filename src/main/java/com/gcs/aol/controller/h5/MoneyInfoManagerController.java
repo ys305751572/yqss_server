@@ -1,10 +1,7 @@
 package com.gcs.aol.controller.h5;
 
 import com.gcs.aol.constant.Constant;
-import com.gcs.aol.entity.MoneyMag;
-import com.gcs.aol.entity.MoneyMagCommon;
-import com.gcs.aol.entity.MoneyMagDod;
-import com.gcs.aol.entity.Users;
+import com.gcs.aol.entity.*;
 import com.gcs.aol.service.*;
 import com.gcs.aol.service.impl.MoneyMagManagerImpl;
 import com.gcs.sysmgr.controller.GenericEntityController;
@@ -34,6 +31,9 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
 
     @Autowired
     private IMoneyMagCommonManager moneyMagCommonManager;
+
+    @Autowired
+    private IBannerManager bannerManager;
 
     public static final Integer user_id = 6;
 
@@ -71,7 +71,9 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
                 map.put("dq", moneyMag);
             }
         }
+        List<Banner> list2 = bannerManager.queryAll();
         model.addAttribute("map",map);
+        model.addAttribute("list",list2);
         return "management/h5/理财";
     }
 

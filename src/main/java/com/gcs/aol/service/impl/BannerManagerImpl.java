@@ -29,6 +29,15 @@ public class BannerManagerImpl extends GenericManagerImpl<Banner,BannerDAO> impl
     private BannerDAO dao;
 
     @Override
+    public List<Banner> findTitleBuyIsList(Integer isList) {
+
+        List<Banner> list = this.queryTop("id",false,5);
+        return list;
+//        return dao.findTitleBuyIsList(isList);
+    }
+
+
+    @Override
     public Page<Banner> findPage(final Banner banner, int currentPage, int pageSize) {
         Specification<Banner> spec = new Specification<Banner>() {
             @Override
@@ -46,4 +55,7 @@ public class BannerManagerImpl extends GenericManagerImpl<Banner,BannerDAO> impl
         };
         return dao.findAll(spec,new PageRequest(currentPage,pageSize, Sort.Direction.DESC,"id"));
     }
+
+
+
 }

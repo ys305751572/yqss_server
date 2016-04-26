@@ -7,7 +7,27 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link href="${contextPath}/resources/h5/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/h5/css/style.css">
-	<script type="text/javascript" src="${contextPath}/resources/h5/js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/h5/js/jquery-2.1.4.min.js">
+		window.onload = function() {
+			var oUl1 = document.getElementById("ul1");
+			var aLi = oUl1.getElementsByTagName("li");
+			var oDiv = document.getElementById("tab-list");
+			var aDiv = oDiv.getElementsByTagName("div");
+			for(var i = 0; i < aLi.length; i++) {
+				aLi[i].index = i;
+				aLi[i].onmouseover = function() {
+					for(var i = 0; i < aLi.length; i++) {
+						aLi[i].className = "";
+					}
+					this.className = "active";
+					for(var j = 0; j < aDiv.length; j++) {
+						aDiv[j].className = "hide";
+					}
+					aDiv[this.index].className = "show";
+				}
+			}
+		}
+	</script>
 	<title>理财</title>
 </head>
 <body style="background: #f7f7f7">
@@ -15,9 +35,11 @@
         <a href="javascript:history.go(-1)"><img src="${contextPath}/resources/h5/image/Fill 6.png"></a>
         <span>理财</span>
     </div>
-	<header class="header">
-		<img src="${contextPath}/resources/h5/image/P6  banner.png">
-	</header>
+	<c:forEach items="${list}" var="map">
+		<header class="header">
+			<img src="${map.path}">
+		</header>
+	</c:forEach>
 	<section class="section">
 		<a href="${contextPath}/moneymag/hq/detail" class="content_box">
 		 <div class="topbar">
