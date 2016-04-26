@@ -11,6 +11,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.jstl.core.Config;
 
 import com.gcs.pay.excute.PayRequest;
 import com.gcs.utils.CommonUtils;
@@ -135,6 +136,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 			params.put("itemName","test");
 			params.put("itemDesc","test");
 			params.put("tag","3");
+			params.put("url", "http://localhost:8080");
 		}
 		else {
 			// 微信

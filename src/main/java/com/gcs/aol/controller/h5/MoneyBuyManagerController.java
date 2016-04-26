@@ -166,7 +166,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
             if (!iMoneyMagUserManager.isCertification(user.getUserId())) {
                 // 跳转到认证页
-                return "management/h5/实证名认";
+                return "management/h5/实名证认";
             } else {
                 // 跳转到输入密码页面
                 return "management/h5/输入交易密码";
