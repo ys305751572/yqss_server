@@ -2,6 +2,7 @@ package com.gcs.aol.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -42,5 +43,10 @@ public class MoneyMagManagerImpl extends GenericManagerImpl<MoneyMag, MoneyMagDA
 	public MoneyMag findByUserId(Integer userId) {
 		List<MoneyMag> list = this.queryByProperty("user.id", userId);
 		return list != null && !list.isEmpty() ? list.get(0) : null;
+	}
+
+	@Override
+	public Map<String, String> h5Index(Integer userId) {
+		return null;
 	}
 }
