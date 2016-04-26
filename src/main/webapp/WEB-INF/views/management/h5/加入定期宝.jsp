@@ -23,7 +23,7 @@
         <div  class="form-group" style="margin-bottom: 0px ;">
             <label for="input_check1" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;">转入金额</label>
             <span>元</span>
-            <input type="text" id="input_check1" placeholder="请输入转入金额" style="text-align: right;"  onblur="yqss.fn.doOnBluer();"/>
+            <input type="text" id="input_check1"  style="text-align: right;"  onblur="yqss.fn.doOnBluer();"/>
         </div>
         <div  class="form-group"style="margin-bottom: 0px ">
             <label for="input_check2" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;" >期限</label>
@@ -34,6 +34,12 @@
             <label for="input_check3" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;">年化收益率</label>
             <input type="text" id="input_check3" style="text-align: right;" value="${dod.yearYield}">
             </input>
+        </div>
+        <div class="danger" id="dialog">
+            <span style="color: red;">请填写投资金额!!!</span>
+        </div>
+        <div class="danger" id="dialog_tips">
+            <span style="color: red;">请输入数字！！！</span>
         </div>
         <div class="btn_box">
             <button type="submit" class="btn-default1" >立即加入</button>
@@ -57,7 +63,8 @@
                 var money = $("#input_check1").val();
 
                 if (null == money || money == "") {
-                    alert("请输入转入金额");
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入投资金额!";
                     flag = false;
                     return;
                 }
@@ -72,18 +79,17 @@
                 if(!/^\d+(?:.\d{1,2})?$/.test($("#input_check1").val())){
                     dialog.style.display="block";
                     dialog.innerHTML="请输入数字!";
-
                 }
 
                 $.ajax({
                     "url" : "${contextPath}/moneymag/hq/onBluerdq",
                     "type" : "post",
-                    "data" : {"money":  $("#input_check1").val()},
+                    "data" : {"money":  $("#input_check1").val(),
+                              "id": ${dod.id}},
                     "dataType" : "json",
                     "success" : function(result) {
                         console.log("===result.result:" + result.data.object.result);
                         if(result.data.object.result != null && result.data.object.result != "") {
-                            $("#input_check1").val("");
                             dialog.style.display="block";
                             dialog.innerHTML=result.data.object.result;
 

@@ -23,7 +23,7 @@
         <div  class="form-group">
             <label for="hqId" class="form-group-lable">投资金额</label>
             <span>元</span>
-            <input type="text" id="hqId" placeholder="请输入投资金额" style="text-align: right;" onblur="yqss.fn.doOnBluer();" />
+            <input type="text" id="hqId"  style="text-align: right;" onblur="yqss.fn.doOnBluer();" />
         </div>
         <div  class="form-group form-group2">
             <label for="input_check1">预计每日收益</label>
@@ -88,7 +88,17 @@
             },
 
             doSubmit : function() {
-                window.location.href = "${contextPath}/moneymag/hq/addHQBao?money=" + $("#hqId").val();
+                var flag = true;
+                var money = $("#hqId").val();
+                if(money == null || money == "") {
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入投资金额!";
+                    flag = false;
+                    return;
+                }
+                if(flag){
+                     window.location.href = "${contextPath}/moneymag/hq/addHQBao?money=" + $("#hqId").val();
+                }
         }
     }
     }
