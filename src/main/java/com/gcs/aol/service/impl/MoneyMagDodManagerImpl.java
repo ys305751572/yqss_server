@@ -124,9 +124,9 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 	}
 
 	@Override
-	public String payConfig(HttpServletRequest request, HttpServletResponse response,Integer dodId, Integer type) {
+	public Map<String,Object> payConfig(HttpServletRequest request, HttpServletResponse response,Integer dodId, Integer type) {
 		Map<String,Object> params = new HashMap<String,Object>();
-		if(type == 0) {
+		if(type == 2) {
 			// 支付宝
 			String sn = CommonUtils.generateSn();
 			params.put("sn",sn);
@@ -141,7 +141,6 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 			request.setAttribute("prepayid",prepayid);
 			params = PayRequest.pay(request,response);
 		}
-		String paramJson = new GsonBuilder().create().toJson(params);
-		return paramJson;
+		return params;
 	}
 }

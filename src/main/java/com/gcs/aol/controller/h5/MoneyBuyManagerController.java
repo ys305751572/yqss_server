@@ -277,8 +277,8 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         tr.setUser(_user);
         iMoneyMagTRManager.save(tr);
 
-        request.getSession().removeAttribute(Constant.TR);
-        request.getSession().removeAttribute(Constant.HQ);
+//        request.getSession().removeAttribute(Constant.TR);
+//        request.getSession().removeAttribute(Constant.HQ);
 
         return "SUCCESS";
     }
@@ -300,8 +300,8 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         tr.setUser(_user);
         iMoneyMagTRManager.save(tr);
 
-        request.getSession().removeAttribute(Constant.TR);
-        request.getSession().removeAttribute(Constant.DQ);
+//        request.getSession().removeAttribute(Constant.TR);
+//        request.getSession().removeAttribute(Constant.DQ);
 
         return "SUCCESS";
     }

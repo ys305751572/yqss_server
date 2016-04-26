@@ -79,9 +79,9 @@
                 <div class="pay">
                     <span>请选择支付方式</span>
                     <div class="pay_way">
-                        <a id="pay" href="${contextPath}/weixin/payConfig?type=" + ${tr.dod.type}><img src="${contextPath}/resources/h5/image/p6-7-1pay.png"></a>
+                        <a id="pay" href="${contextPath}/weixin/payConfig?type=2"><img src="${contextPath}/resources/h5/image/p6-7-1pay.png"></a>
                         <img src="${contextPath}/resources/h5/image/Oval 60 Copy.png">
-                        <a id="weixin" href="${contextPath}/weixin/payConfig?type=" + ${tr.dod.type}><img src="${contextPath}/resources/h5/image/p6-7-1weixin.png"></a>
+                        <a id="weixin" href="${contextPath}/weixin/payConfig?type=1"><img src="${contextPath}/resources/h5/image/p6-7-1weixin.png"></a>
                     </div>
                 </div>
             </div>
