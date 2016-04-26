@@ -52,7 +52,7 @@ public class MoneyPayController {
         String status = result.get("result_code").toString();
         if ("SUCCESS".equals(status)) {
             String sn = result.get("out_trade_no").toString();
-
+            System.out.println("SUCCESS");
             try {
 //                BorrowRepayRecord record = new BorrowRepayRecord();
 //                record.setSn(sn);

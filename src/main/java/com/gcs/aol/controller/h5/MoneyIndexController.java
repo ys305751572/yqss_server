@@ -20,6 +20,6 @@ public class MoneyIndexController {
     @RequestMapping(value = "/h5Index")
     @ResponseBody
     public Result h5Index(Integer userId) {
-        return Result.success(moneyMagManager.h5Index(userId));
+        return Result.success(moneyMagManager.h5Index(userId),"h5Index");
     }
 }
