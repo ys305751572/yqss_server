@@ -6,15 +6,15 @@ $(function(){
 window.Location = {
     alipay: function (message) {
         try {
-            window.APP_NATIVE.appAlert(message);
+            window.APP_NATIVE.alipay(message);
         } catch (e) {
             alert("222");
             return;
         }
     },
-    weixin: function () {
+    weixin: function (message) {
         try {
-            window.APP_NATIVE.appPush();
+            window.APP_NATIVE.weixin(message);
         } catch (e) {
             alert("222");
             return;
