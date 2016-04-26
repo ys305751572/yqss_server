@@ -74,8 +74,8 @@
         </script>
     </div>
     <div class="bottom_tip">
-        <span class="bottom_tip_left"><img
-                src="${contextPath}/resources/h5/image/Path + Stroke 111 (2).png">100%本息保障</span>
+        <span class="bottom_tip_left">
+            <img src="${contextPath}/resources/h5/image/Path + Stroke 111 (2).png">100%本息保障</span>
         <span class="bottom_tip_right">可买${dod.residue}元</span>
     </div>
 </section>
@@ -96,14 +96,15 @@
     <div class="content_tip">
 			<span>
 				<c:if test="${dod.residue2 lt dod.moneyLimit}">
-					<a href="${contextPath}/moneymag/hq/addDQIndex?id=${dod.id}">
+                    <a href="${contextPath}/moneymag/hq/addDQIndex?id=${dod.id}">
                         <button class="btn_buy" type="button">我要购买</button>
-                        </c:if>
-                        <c:if test="${dod.residue2 ge dod.moneyLimit}">
-                        <button class="btn_buy" type="button" disabled="disabled"
-                                style="border:1px solid #b5b5b5;color: #cccccc;">已售罄
-                        </button>
-                        </c:if>
+                    </a>
+                </c:if>
+                <c:if test="${dod.residue2 ge dod.moneyLimit}">
+                    <button class="btn_buy" type="button" disabled="disabled"
+                            style="border:1px solid #b5b5b5;color: #cccccc;">已售罄
+                    </button>
+                </c:if>
 			</span>
     </div>
 </footer>

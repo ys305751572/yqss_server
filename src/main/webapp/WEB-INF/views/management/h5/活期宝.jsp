@@ -36,48 +36,32 @@
 			</div>
 			<span class="num aui-progress_count" style="color: #797979;">${dod.percent}</span>
 			<span style="font-size: 1.2rem;color: #797979;">%</span>
-	<script type="text/javascript">	
-		$(function(){	
-	var _width = $('.num');//获取百分比数值
-	var width = _width.text();
-	var t = 50;
-    $('.main1').css('width',width+'%');//将数值赋值给main的width
-    $('.main1').css('background',"#ffb80c");
-     if (width < t) {
-    	$('.main1').css('background',"#ffb80c");
-    }
-    else if (width > t) {
-    	$('.main1').css('background',"#4edcc4");
-	};
-});
-</script>
-</div>
-
+			<script type="text/javascript">
+				$(function () {
+					var _width = $('.num');//获取百分比数值
+					var width = _width.text();
+					var t = 50;
+					$('.main1').css('width', width + '%');//将数值赋值给main的width
+					$('.main1').css('background', "#ffb80c");
+					if (width < t) {
+						$('.main1').css('background', "#ffb80c");
+					}
+					else if (width > t) {
+						$('.main1').css('background', "#4edcc4");
+					}
+					;
+				});
+			</script>
+		</div>
 		<div class="bottom_tip">
-			<span class="bottom_tip_left"><img src="${contextPath}/resources/h5/image/Path + Stroke 111 (2).png">100%本息保障</span>
+			<span class="bottom_tip_left">
+				<img src="${contextPath}/resources/h5/image/Path + Stroke 111 (2).png">100%本息保障</span>
 			<span class="bottom_tip_right">可买${dod.residue}元</span>
 		</div>
 	</section>
-	<section class="menu">
-		<div class="menu_tip">
-		<a href="#"><img src="${contextPath}/resources/h5/image/Fill 372.png"><br><span>当日计息</span></a>
-		</div>
-		<div class="menu_tip"><a href="#"><img src="${contextPath}/resources/h5/image/Fill 390.png" style="padding-bottom: 11px"><br><span>快速提现</span></a></div>
-		<div class="menu_tip"><a href="#"><img src="${contextPath}/resources/h5/image/Group.png"><br><span>真实借款</span></a></div>
-	</section>
 	<section class="products">
-		<form class="products_introduce">
-			<ul>
-			<li class="caption_intro">产品介绍</li>
-				<li><span class="caption_tip">活期宝&nbsp;</span>|&nbsp;随存随取 按日计息</li>
-				<li>100%本息保障的活期理财产品</li>
-				<li>年化收益稳定6%-8%、秒杀各路宝宝</li>
-				<li>即时体现，方便快捷</li>
-				<li>适合人群：资金短暂闲置的朋友</li>
-			</ul>
-		</form>
 		<div class="products_img">
-		<img src="${contextPath}/resources/h5/image/IMG_4947.png">
+			${dod.content}
 		</div>
 	</section>
 	<section class="about">

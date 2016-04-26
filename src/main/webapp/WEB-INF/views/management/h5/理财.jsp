@@ -7,27 +7,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link href="${contextPath}/resources/h5/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/h5/css/style.css">
-	<script type="text/javascript" src="${contextPath}/resources/h5/js/jquery-2.1.4.min.js">
-		window.onload = function() {
-			var oUl1 = document.getElementById("ul1");
-			var aLi = oUl1.getElementsByTagName("li");
-			var oDiv = document.getElementById("tab-list");
-			var aDiv = oDiv.getElementsByTagName("div");
-			for(var i = 0; i < aLi.length; i++) {
-				aLi[i].index = i;
-				aLi[i].onmouseover = function() {
-					for(var i = 0; i < aLi.length; i++) {
-						aLi[i].className = "";
-					}
-					this.className = "active";
-					for(var j = 0; j < aDiv.length; j++) {
-						aDiv[j].className = "hide";
-					}
-					aDiv[this.index].className = "show";
-				}
-			}
-		}
-	</script>
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/h5/css/lrtk.css" />
+	<script type="text/javascript" src="${contextPath}/resources/h5/js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/h5/js/koala.min.1.5.js"></script>
 	<title>理财</title>
 </head>
 <body style="background: #f7f7f7">
@@ -36,9 +18,45 @@
         <span>理财</span>
     </div>
 	<c:forEach items="${list}" var="map">
-		<header class="header">
-			<img src="${map.path}">
-		</header>
+	<c:forEach items="${list}" var="map">
+	<header class="header banner">
+		<div id="fsD1" class="focus">
+			<div id="D1pic1" class="fPic">
+				<div class="fcon" style="display: none;">
+					<a target="_blank" href="#"><img src="${map.path}"
+													 style="opacity: 1; "></a>
+					<span class="shadow"><a target="_blank" href="#"></a></span>
+				</div>
+				<div class="fbg">
+					<div class="D1fBt" id="D1fBt">
+						<a href="javascript:void(0)" hidefocus="true"
+						   target="_self" class="current"></a>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<script type="text/javascript">
+			Qfast.add('widgets', { path:
+					"${contextPath}/resources/h5/js/terminator2.2.min.js", type: "js", requires: ['fx'] });
+			Qfast(false, 'widgets', function () {
+				K.tabs({
+					id: 'fsD1',   //焦点图包裹id
+					conId: "D1pic1",  //** 大图域包裹id
+					tabId:"D1fBt",
+					tabTn:"a",
+					conCn: '.fcon', //** 大图域配置class
+					auto: 1,   //自动播放 1或0
+					effect: 'fade',   //效果配置
+					eType: 'click', //** 鼠标事件
+					pageBt:true,//是否有按钮切换页码
+					bns: ['.prev', '.next'],//** 前后按钮配置class
+					interval: 3000  //** 停顿时间
+				})
+			})
+		</script>
+		</c:forEach>
 	</c:forEach>
 	<section class="section">
 		<a href="${contextPath}/moneymag/hq/detail" class="content_box">
