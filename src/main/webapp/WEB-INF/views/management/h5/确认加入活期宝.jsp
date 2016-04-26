@@ -10,40 +10,9 @@
     <link href="${contextPath}/resources/h5/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="${contextPath}/resources/js/jquery-1.7.2.min.js"></script>
+    <script src="${contextPath}/resources/pay/js.js"></script>
 
     <title>确认加入活期宝</title>
-    <style type="text/css">
-        .checkbox1 {
-            position: relative;
-        }
-        .checkbox1 label {
-            display: block;
-            width: 28px;
-            height: 28px;
-            border-radius: 15px;
-            -webkit-transition: all .5s ease;
-            -moz-transition: all .5s ease;
-            -o-transition: all .5s ease;
-            -ms-transition: all .5s ease;
-            transition: all .5s ease;
-            cursor: pointer;
-            position: absolute;
-            top: -4px;
-            left: 0px;
-            z-index: 1;
-            background: #fff;
-            border: 2px solid #e8e8e8;
-            -webkit-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
-            -moz-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
-
-        }
-        .checkbox1 input[type=checkbox]:checked + label {
-            background: url("../image/Group3.png");
-        }
-        .checkbox1 input{
-            transform: translate(20%,-25%);
-        }
-    </style>
 </head>
 <body>
 <div class="back" style="background: #dd403b;">
@@ -79,9 +48,9 @@
                 <div class="pay">
                     <span>请选择支付方式</span>
                     <div class="pay_way">
-                        <a id="pay" href="${contextPath}/weixin/payConfig?type=2"><img src="${contextPath}/resources/h5/image/p6-7-1pay.png"></a>
+                        <button id="pay" onclick="yqss.fn.pay()"><img src="${contextPath}/resources/h5/image/p6-7-1pay.png"></button>
                         <img src="${contextPath}/resources/h5/image/Oval 60 Copy.png">
-                        <a id="weixin" href="${contextPath}/weixin/payConfig?type=1"><img src="${contextPath}/resources/h5/image/p6-7-1weixin.png"></a>
+                        <button id="weixin" onclick="yqss.fn.weixin()"><img src="${contextPath}/resources/h5/image/p6-7-1weixin.png"></button>
                     </div>
                 </div>
             </div>
@@ -112,8 +81,7 @@
                     $.post("${contextPath}/moneymag/hq/confirmJoinHQ",function(result) {
                         if(result == "SUCCESS") {
 
-                            //yqss.fn.show();
-                            $("#hide1").show();
+                            yqss.fn.show();
 
                         }
                         else {
@@ -122,18 +90,21 @@
                     });
                 }
             },
-            <%--show : function() {--%>
-                <%--//展示第三方支付标志--%>
-                <%--$("#hide1").show();--%>
-            <%--},--%>
-            <%--pay : function() {--%>
-                <%--//window.location.href = "${contextPath}/weixin/payConfig";--%>
-                <%--window.location.href = "${contextPath}/moneymag/dq/addDQBao?type=" + ${tr.dod.type};--%>
-            <%--},--%>
-            <%--weixin : function() {--%>
-                <%--//window.location.href = "${contextPath}/weixin/payConfig";--%>
-                <%--window.location.href = "${contextPath}/moneymag/dq/addDQBao?type=" + ${tr.dod.type};--%>
-            <%--}--%>
+            show : function() {
+                //展示第三方支付标志
+                $("#hide1").show();
+            },
+            pay : function() {
+
+                $.post("${contextPath}/weixin/payConfig?type=2",function(result) {
+                    window.Location.alipay(result);
+                });
+            },
+            weixin : function() {
+                $.post("${contextPath}/weixin/payConfig?type=1",function(result) {
+                    window.Location.weixin(result);
+                });
+            }
         }
     }
 

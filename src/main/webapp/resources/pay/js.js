@@ -4,7 +4,7 @@ $(function(){
   });
 });
 window.Location = {
-    appAlert: function (message) {
+    alipay: function (message) {
         try {
             window.APP_NATIVE.appAlert(message);
         } catch (e) {
@@ -12,7 +12,7 @@ window.Location = {
             return;
         }
     },
-    appPush: function () {
+    weixin: function () {
         try {
             window.APP_NATIVE.appPush();
         } catch (e) {

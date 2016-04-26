@@ -23,7 +23,7 @@
         <div  class="form-group" style="margin-bottom: 0px ;">
             <label for="input_check1" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;">转入金额</label>
             <span>元</span>
-            <input type="text" id="input_check1" style="text-align: right;"></input>
+            <input type="text" id="input_check1" style="text-align: right;" />
         </div>
         <div  class="form-group"style="margin-bottom: 0px ">
             <label for="input_check2" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;" >期限</label>

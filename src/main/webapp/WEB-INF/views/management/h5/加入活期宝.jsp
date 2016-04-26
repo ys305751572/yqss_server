@@ -23,7 +23,7 @@
         <div  class="form-group">
             <label for="hqId" class="form-group-lable">投资金额</label>
             <span>元</span>
-            <input type="text" id="hqId" placeholder="请输入投资金额"style="text-align: right;" onblur="yqss.fn.doOnBluer();" ></input>
+            <input type="text" id="hqId" placeholder="请输入投资金额" style="text-align: right;" onblur="yqss.fn.doOnBluer();" />
         </div>
         <div  class="form-group form-group2">
             <label for="input_check1">预计每日收益</label>
@@ -53,10 +53,9 @@
                 });
             },
             doOnBluer : function() {
-                <%--$.post("${contextPath}/moneymag/hq/onBluer?money=" +),function(result) {--%>
-                    <%--console.log("result:" + result.earnings);--%>
-                    <%--$("#input_check1").val(result.earnings);--%>
-                <%--};--%>
+                if(!/^\d+(?:.\d{1,2})?$/.test($("#hqId").val())){
+                    alert("请输入数字!");
+                }
 
                 $.ajax({
                     "url" : "${contextPath}/moneymag/hq/onBluer",
@@ -64,23 +63,35 @@
                     "data" : {"money":  $("#hqId").val()},
                     "dataType" : "json",
                     "success" : function(result) {
-                        console.log("success:" + result);
-                        $("#input_check1").val(result);
+                        console.log("success:" + result.data.object.earnings + "===result.result:" + result.data.object.result);
+                        if(result.data.object.result != null && result.data.object.result != "") {
+//                            $("#input_check1").val(result.data.object.result);
+//                            $("#dialog").find("span").html(result.data.object.result);
+                            $("#input_check1").val("");
+                            dialog.style.display="block";
+                            dialog.innerHTML=result.data.object.result;
+
+                        }
+                        else {
+                            $("#input_check1").val(result.data.object.earnings);
+                            dialog.style.display="none";
+                        }
+
                     },
                     "error" : function(result) {
                         console.log("error:" + result);
-                    }
+
+
+                    },
                 });
 
             },
 
             doSubmit : function() {
-
                 window.location.href = "${contextPath}/moneymag/hq/addHQBao?money=" + $("#hqId").val();
-            }
         }
     }
-
+    }
     $(function() {
         yqss.fn.init();
     });

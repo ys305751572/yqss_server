@@ -81,7 +81,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
     @RequestMapping(value = "/hq/onBluer")
     @ResponseBody
-    public Double onBluer(HttpServletRequest request, Double money, Double earnings,Double e){
+    public Result onBluer(HttpServletRequest request, Double money, Double earnings,Double e){
 
         MoneyMagDod dod = iMoneyMagDodManager.findDueOnDemandDetail();
         request.getSession().setAttribute(Constant.HQ, dod);
@@ -97,7 +97,21 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         e = b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 
         //df.format(earnings);
-        return e;
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("earnings",e);
+
+        String result = "";
+
+        if (money > dod.getResidue()) {
+            result = "超出金额";
+        }
+
+        if (money == null) {
+            result = "请输入投资金额";
+        }
+
+        map.put("result",result);
+        return Result.success(map);
     }
 
     @RequestMapping(value = "/hq/addHQBao")
@@ -129,13 +143,13 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
             if (!iMoneyMagUserManager.isCertification(user.getUserId())) {
                 // 跳转到认证页
-                return "management/h5/实名认证";
+                return "management/h5/实证名认";
             } else {
                 // 跳转到输入密码页面
                 return "management/h5/输入交易密码";
             }
         } else {
-            return "输入投资金额不对，请重新输入！";
+            return "error";
         }
     }
 

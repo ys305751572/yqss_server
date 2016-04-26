@@ -83,9 +83,9 @@
                 <div class="pay">
                     <span>请选择支付方式</span>
                     <div class="pay_way">
-                        <a href="#"><img src="${contextPath}/resources/h5/image/p6-7-1pay.png"></a>
+                        <button id="pay" onclick="yqss.fn.pay()"><img src="${contextPath}/resources/h5/image/p6-7-1pay.png"></button>
                         <img src="${contextPath}/resources/h5/image/Oval 60 Copy.png">
-                        <a href="#"><img src="${contextPath}/resources/h5/image/p6-7-1weixin.png"></a>
+                        <button id="weixin" onclick="yqss.fn.weixin()"><img src="${contextPath}/resources/h5/image/p6-7-1weixin.png"></button>
                     </div>
                 </div>
             </div>
@@ -129,6 +129,17 @@
                 //展示第三方支付标志
                 $("#hide1").show();
 
+            },
+            pay : function() {
+
+                $.post("${contextPath}/weixin/payConfig?type=2",function(result) {
+                    window.Location.alipay(result);
+                });
+            },
+            weixin : function() {
+                $.post("${contextPath}/weixin/payConfig?type=1",function(result) {
+                    window.Location.weixin(result);
+                });
             }
         }
     }
