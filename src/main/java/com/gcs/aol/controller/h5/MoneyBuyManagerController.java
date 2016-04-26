@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -270,6 +271,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
         MoneyMagDod _dod = iMoneyMagDodManager.queryByPK(dod.getId());
         tr.setDod(_dod);
+        tr.setCreateDate(System.currentTimeMillis());
 
         Users _user = iUsersManager.queryByProperty("userId", user.getUserId()).get(0);
         tr.setUser(_user);
@@ -282,6 +284,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
     }
 
     @RequestMapping(value = "/hq/confirmJoinDQ")
+    @ResponseBody
     public String confirmJoinDQ(HttpServletRequest request) {
 
         MoneyMagTR tr = (MoneyMagTR) request.getSession().getAttribute(Constant.TR);
@@ -291,6 +294,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
         MoneyMagDod _dod = iMoneyMagDodManager.queryByPK(dod.getId());
         tr.setDod(_dod);
+        tr.setCreateDate(System.currentTimeMillis());
 
         Users _user = iUsersManager.queryByProperty("userId", user.getUserId()).get(0);
         tr.setUser(_user);
@@ -299,15 +303,15 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         request.getSession().removeAttribute(Constant.TR);
         request.getSession().removeAttribute(Constant.DQ);
 
-        return null;
+        return "SUCCESS";
     }
 
     @RequestMapping(value = "/sendCode")
     @ResponseBody
-    public Result sendCode(String mobile) {
+    public String sendCode(String mobile) {
 
         if(StringUtils.isBlank(mobile) ) {
-            return Result.failure("参数错误");
+            return "error";
         }
 
         try {
@@ -316,15 +320,15 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
             // 成功
             if (SmsSend.send(mobile, code)) {
                 codeMap.put(mobile,code);
-                return Result.success();
+                return "success";
             }
             // 失败
             else {
-                return Result.failure(ErrorCode.ERROR_09);
+                return "error";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return Result.failure();
+            return "error";
         }
     }
 

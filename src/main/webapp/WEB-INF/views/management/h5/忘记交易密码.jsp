@@ -102,34 +102,36 @@
                     mobile: mobile
                 },
                 success: function (result) {
-                    if (result.status != 0) {
+                    if (result == "success") {
                         alert(result.msg);
+                        jian(btn);
+                        function jian(btn) {
+                            var tg = document.getElementById("codeBtn");
+                            if (countdown == 0) {
+                                btn.removeAttribute("disabled");
+                                btn.value = "点击发送验证码";
+                                countdown = 60;
+                                btn.className = "btn_sendcode1";
+                                tg.className = "register1";
+                            } else {
+                                countdown--;
+                                btn.setAttribute("disabled", true);
+                                btn.value = countdown + "秒后重新发送";
+                                btn.className = "btn_sendcode2";
+                                tg.className = "register2";
+                                setTimeout(function () {
+                                    jian(btn)
+                                }, 1000)
+                            }
+                        }
                     }
                 }
             });
-            jian(btn);
+            //jian(btn);
         }
     }
 
-    function jian(btn) {
-        var tg = document.getElementById("tg1");
-        if (countdown == 0) {
-            btn.removeAttribute("disabled");
-            btn.value = "点击发送验证码";
-            countdown = 60;
-            btn.className = "btn_sendcode1";
-            tg.className = "register1";
-        } else {
-            countdown--;
-            btn.setAttribute("disabled", true);
-            btn.value = countdown + "秒后重新发送";
-            btn.className = "btn_sendcode2";
-            tg.className = "register2";
-            setTimeout(function () {
-                jian(btn)
-            }, 1000)
-        }
-    }
+
 </script>
 
 </body>

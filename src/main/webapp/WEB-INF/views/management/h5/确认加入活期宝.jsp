@@ -12,6 +12,38 @@
     <script src="${contextPath}/resources/js/jquery-1.7.2.min.js"></script>
 
     <title>确认加入活期宝</title>
+    <style type="text/css">
+        .checkbox1 {
+            position: relative;
+        }
+        .checkbox1 label {
+            display: block;
+            width: 28px;
+            height: 28px;
+            border-radius: 15px;
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            -o-transition: all .5s ease;
+            -ms-transition: all .5s ease;
+            transition: all .5s ease;
+            cursor: pointer;
+            position: absolute;
+            top: -4px;
+            left: 0px;
+            z-index: 1;
+            background: #fff;
+            border: 2px solid #e8e8e8;
+            -webkit-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+            -moz-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+
+        }
+        .checkbox1 input[type=checkbox]:checked + label {
+            background: url("../image/Group3.png");
+        }
+        .checkbox1 input{
+            transform: translate(20%,-25%);
+        }
+    </style>
 </head>
 <body>
 <div class="back" style="background: #dd403b;">
@@ -30,23 +62,27 @@
             <span style="color: #de433f">元</span>
             <input type="text" id="input_check1" readonly="readonly" placeholder="" value="${tr.earnings}"/>
         </div>
-        <div class="radio">
-            <input type="checkbox" name="radio2" id="radio3" value="radio3">
-            <label for="radio3">
-                同意<a href="${contextPath}/moneymag/detail" style="color: #e9827f;text-decoration: none;">《xxx协议》</a>
-            </label>
+
+        <div class="checkbox1">
+            <input type="checkbox" value="1" id="checkboxInput" name="radio2"/>
+            <label for="checkboxInput"></label>
+            <span style="position: relative;left: 40px;">同意<a href="${contextPath}/moneymag/detail" style="color: #e9827f;text-decoration: none;">《xxx协议》</a>
+            </span>
         </div>
+
         <div class="btn_box">
             <button type="submit" class="btn-default1" >立即加入</button>
         </div>
-        <div class="aui-dialog aui-hidden" id="dialog">
-            <span class="aui-dialog-tip">请选择支付方式</span>
-            <div class="aui-dialog-body">
-                <div class="aui-dialog-pay1">
-                    <a href="#"><img src="image/p6-7-1支付宝.png" style="width: 30%;"></a>
-                </div>
-                <div class="aui-dialog-pay2">
-                    <a href="#"><img src="image/p6-7-1微信.png" style="width: 30%;"></a>
+
+        <div class="hide1" id="hide1">
+            <div class="background">
+                <div class="pay">
+                    <span>请选择支付方式</span>
+                    <div class="pay_way">
+                        <a id="pay" href="${contextPath}/weixin/payConfig?type=" + ${tr.dod.type}><img src="${contextPath}/resources/h5/image/p6-7-1pay.png"></a>
+                        <img src="${contextPath}/resources/h5/image/Oval 60 Copy.png">
+                        <a id="weixin" href="${contextPath}/weixin/payConfig?type=" + ${tr.dod.type}><img src="${contextPath}/resources/h5/image/p6-7-1weixin.png"></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,7 +112,8 @@
                     $.post("${contextPath}/moneymag/hq/confirmJoinHQ",function(result) {
                         if(result == "SUCCESS") {
 
-                            yqss.fn.show();
+                            //yqss.fn.show();
+                            $("#hide1").show();
 
                         }
                         else {
@@ -85,10 +122,18 @@
                     });
                 }
             },
-            show : function() {
-                //展示第三方支付标志
-
-            }
+            <%--show : function() {--%>
+                <%--//展示第三方支付标志--%>
+                <%--$("#hide1").show();--%>
+            <%--},--%>
+            <%--pay : function() {--%>
+                <%--//window.location.href = "${contextPath}/weixin/payConfig";--%>
+                <%--window.location.href = "${contextPath}/moneymag/dq/addDQBao?type=" + ${tr.dod.type};--%>
+            <%--},--%>
+            <%--weixin : function() {--%>
+                <%--//window.location.href = "${contextPath}/weixin/payConfig";--%>
+                <%--window.location.href = "${contextPath}/moneymag/dq/addDQBao?type=" + ${tr.dod.type};--%>
+            <%--}--%>
         }
     }
 
