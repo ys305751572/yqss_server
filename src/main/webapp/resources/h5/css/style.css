@@ -19,6 +19,9 @@ body{
 	box-shadow: -1px 1px 1px 1px #e6e6e6,
 				1px 1px 1px 1px #e6e6e6;
 }
+.section a{
+	text-decoration: none;
+}
 .topbar{
 	display: flex;
 	border-bottom: 1px solid #f7f7f7;
@@ -253,17 +256,16 @@ body{
 .back{
 	text-align: center;
 	position: relative;
-	height: 36px;
-	line-height: 36px;
+	height: 40px;
+	line-height: 40px;
 	width: 100%;
 	color: #fff;
+	font-size: 1.4em;
 }
 .back img{
 	position: absolute;
-	left: 4%;
-	top: 50%;
-	width: 4%;
-	transform: translate(-50%,-50%);
+  	top: 4px;
+  	left: 2%;
 }
 .header_tip_box{
 	display: flex;
@@ -276,4 +278,35 @@ body{
 }
 .footer_btn a{
 	text-decoration: none;
+}
+.show{
+		display: block;
+	}
+	.hide{
+		display: none;
+	}
+	.tab-list li{
+		list-style-type: none;
+		width: 10px;
+		height: 10px;
+		display: inline-block;
+		margin: 0 10px;
+		background: #fff;
+		border-radius: 5px;
+	}
+	.tab-list li:active,.tab-list li:hover{
+		background: #b72420;
+	}
+.tab-list{
+	text-align: center;
+}
+.ul_active{
+	transform: translate(-65%);
+	display: block;
+	position: absolute;
+	bottom: 0px;
+	left: 50%;
+}
+.banner{
+	position: relative;
 }
