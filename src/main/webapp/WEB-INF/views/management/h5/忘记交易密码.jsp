@@ -22,7 +22,6 @@
             }
 
             if(code ==""){
-                alert()
                 dialog.style.display="block";
                 dialog.innerHTML="请输入验证码";
                 return;
@@ -40,8 +39,8 @@
 <div class="container">
     <input type="text" class="check_box" id="mobile" placeholder="请输入手机号码">
     <div class="input_box">
-        <input type="text" placeholder="请输入验证码" id="code"></input>
-        <span><button id="codeBtn" onclick="settime(this)">获取验证码</button></span>
+        <input type="text" placeholder="请输入验证码" id="code" />
+        <span><input type="button" id="codeBtn" onclick="settime(this)" value="获取验证码"/></span>
     </div>
     <div class="danger" id="dialog" style="color: red;">
         <span></span>
@@ -102,17 +101,16 @@
                     mobile: mobile
                 },
                 success: function (result) {
-                    if (result.status != 0) {
-                        alert(result.msg);
+                    if (result == "success") {
+                        alert(result);
                     }
                 }
             });
             jian(btn);
         }
     }
-
     function jian(btn) {
-        var tg = document.getElementById("tg1");
+        var tg = document.getElementById("codeBtn");
         if (countdown == 0) {
             btn.removeAttribute("disabled");
             btn.value = "点击发送验证码";
@@ -122,7 +120,8 @@
         } else {
             countdown--;
             btn.setAttribute("disabled", true);
-            btn.value = countdown + "秒后重新发送";
+//            btn.value = countdown + "秒后重新发送";
+            $("#codeBtn").attr("value",countdown + "秒后重新发送");
             btn.className = "btn_sendcode2";
             tg.className = "register2";
             setTimeout(function () {

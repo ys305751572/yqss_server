@@ -38,8 +38,8 @@ public class MoneyPayController {
     @ResponseBody
     public Result payConfig(HttpServletRequest request,HttpServletResponse response,Integer dodId,Integer type) {
 
-        String resultJson = moneyMagDodManager.payConfig(request,response,dodId,type);
-        return Result.success(resultJson,"payConfig");
+        Map<String,Object> resultParam = moneyMagDodManager.payConfig(request,response,dodId,type);
+        return Result.success(resultParam,"payConfig");
     }
     /*********************************************************************************************
      *  暂留

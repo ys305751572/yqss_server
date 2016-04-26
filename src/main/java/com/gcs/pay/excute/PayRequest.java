@@ -77,7 +77,8 @@ public class PayRequest {
 //			prepayReqHandler.setParameter("timestamp", timestamp);
 //			prepayReqHandler.setParameter("traceid", traceid);
 
-			prepayReqHandler.setParameter("spbill_create_ip", CommonUtils.getRealAddress(request));
+//			prepayReqHandler.setParameter("spbill_create_ip", CommonUtils.getRealAddress(request));
+			prepayReqHandler.setParameter("spbill_create_ip", "61.183.142.106");
 			prepayReqHandler.setParameter("total_fee", "1"); 
 //			prepayReqHandler.setParameter("total_fee", request.getAttribute("fee").toString()); 
 			prepayReqHandler.setParameter("trade_type", ConstantUtil.TRADE_TYPE); 

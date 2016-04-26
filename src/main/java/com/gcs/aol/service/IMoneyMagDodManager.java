@@ -30,5 +30,5 @@ public interface IMoneyMagDodManager extends GenericManager<MoneyMagDod>{
 	 * @param type 支付类型 0:支付宝 1.微信
      * @return
      */
-	public String payConfig(HttpServletRequest request, HttpServletResponse response, Integer dodId, Integer type);
+	public Map<String,Object> payConfig(HttpServletRequest request, HttpServletResponse response, Integer dodId, Integer type);
 }

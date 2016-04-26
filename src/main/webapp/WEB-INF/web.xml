@@ -92,9 +92,7 @@
 		<servlet-name>Captcha</servlet-name>
 		<url-pattern>/Captcha.jpg</url-pattern>
 	</servlet-mapping>
-	<session-config>
-		<session-timeout>30</session-timeout>
-	</session-config>
+
 	<welcome-file-list>
 		<welcome-file>/management/index</welcome-file>
 	</welcome-file-list>
@@ -122,4 +120,8 @@
 		<error-code>403</error-code>
 		<location>/WEB-INF/views/error/403.jsp</location>
 	</error-page>
+
+	<session-config>
+		<session-timeout>0</session-timeout>
+	</session-config>
 </web-app>
