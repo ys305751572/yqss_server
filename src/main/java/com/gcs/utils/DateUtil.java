@@ -24,8 +24,14 @@ public class DateUtil {
 	 */
 	public static void main(String[] args) throws ParseException,
 			java.text.ParseException {
-		Timestamp d = new Timestamp(System.currentTimeMillis()); 
-		System.out.println(d.getDateTime());
+//		Timestamp d = new Timestamp(System.currentTimeMillis());
+//		System.out.println(d.getDateTime());
+
+		try {
+			System.out.println(getDistanceDays(System.currentTimeMillis(),1461203220708L));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static long getNowTimestamp(){
@@ -328,5 +334,27 @@ public class DateUtil {
 		DateFormat sdf = new SimpleDateFormat(dateFormat);
 		String str = sdf.format(date);
 		return str;
+	}
+
+	/**
+	 * 两个时间之间相差距离多少天
+	 * @param one 时间参数 1：
+	 * @param two 时间参数 2：
+	 * @return 相差天数
+	 */
+	public static long getDistanceDays(Long str1, Long str2) throws Exception{
+		long days=0;
+		try {
+			long diff ;
+			if(str1<str2) {
+				diff = str2 - str1;
+			} else {
+				diff = str1 - str2;
+			}
+			days = diff / (1000 * 60 * 60 * 24);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return days;
 	}
 }
