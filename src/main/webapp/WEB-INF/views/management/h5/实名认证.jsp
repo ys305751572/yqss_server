@@ -99,7 +99,6 @@
                 var idCard = $("#idCard").val();
                 var bankCard = $("#bankCard").val();
                 var tips = $("#dialog_tips").val();
-                var dialog = $("#dialog").val();
                 var myname = /^[\u4e00-\u9fa5]+$/;
                 var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
                 if (null == name || name == "") {

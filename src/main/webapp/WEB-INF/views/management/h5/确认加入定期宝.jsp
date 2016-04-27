@@ -25,6 +25,7 @@
             <label for="hqId" class="form-group-lable">转入金额</label>
             <span>元</span>
             <input type="text" id="hqId" readonly="readonly" value="${tr.money}" style="text-align: right;" />
+            <input type="hidden" id="sn" value="" style="text-align: right;" />
         </div>
         <div  class="form-group form-group2">
             <label for="month">期限</label>
@@ -87,6 +88,7 @@
                 if(flag) {
                     $.post("${contextPath}/moneymag/hq/confirmJoinDQ",function(result) {
                         if(result == "SUCCESS") {
+                            $("#sn").val(result.data.tr.sn);
                             dialog.style.display="none";
                             yqss.fn.show();
 
@@ -104,13 +106,13 @@
             },
             pay : function() {
 
-                $.post("${contextPath}/weixin/payConfig?type=2",function(result) {
+                $.post("${contextPath}/weixin/payConfig?type=2&sn=" + $("#sn").val(),function(result) {
 //                    window.android.showToast(result);
                     android.alipay(result);
                 });
             },
             weixin : function() {
-                $.post("${contextPath}/weixin/payConfig?type=1",function(result) {
+                $.post("${contextPath}/weixin/payConfig?type=1&sn=" + $("#sn").val(),function(result) {
 //                    window.android.showToast(result);
                     android.weixin(result);
                 });

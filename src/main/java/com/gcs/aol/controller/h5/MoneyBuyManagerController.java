@@ -315,7 +315,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
      */
     @RequestMapping(value = "/hq/confirmJoinHQ")
     @ResponseBody
-    public String confirmJoinHQ(HttpServletRequest request) {
+    public Result confirmJoinHQ(HttpServletRequest request) {
 
         MoneyMagTR tr = (MoneyMagTR) request.getSession().getAttribute(Constant.TR);
         Users user = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
@@ -328,12 +328,12 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
         Users _user = iUsersManager.queryByProperty("userId", user.getUserId()).get(0);
         tr.setUser(_user);
-        iMoneyMagTRManager.save(tr);
+        tr.setSn(CommonUtils.generateSn());
+        tr = iMoneyMagTRManager.save(tr);
 
 //        request.getSession().removeAttribute(Constant.TR);
 //        request.getSession().removeAttribute(Constant.HQ);
-
-        return "SUCCESS";
+        return Result.success(tr,"tr");
     }
 
     @RequestMapping(value = "/hq/confirmJoinDQ")

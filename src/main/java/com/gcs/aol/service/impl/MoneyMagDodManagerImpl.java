@@ -127,12 +127,11 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 	}
 
 	@Override
-	public Map<String,Object> payConfig(HttpServletRequest request, HttpServletResponse response,Integer dodId, Integer type) {
+	public Map<String,Object> payConfig(HttpServletRequest request, HttpServletResponse response,Integer dodId, Integer type,String sn) {
 		Map<String,Object> params = new HashMap<String,Object>();
 		int totelFee = 1;
 		if(type == 2) {
 			// 支付宝
-			String sn = CommonUtils.generateSn();
 			params.put("sn", sn);
 			params.put("totelFee", totelFee);
 			params.put("itemName", "test");
@@ -143,7 +142,6 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		else {
 			// 微信
 			String prepayid = null; //预支付款ID
-			String sn = CommonUtils.generateSn();
 			request.setAttribute("fee",totelFee);
 			request.setAttribute("sn",sn);
 			request.setAttribute("prepayid",prepayid);

@@ -25,6 +25,7 @@
             <label for="hqId" class="form-group-lable">投资金额</label>
             <span>元</span>
             <input type="text" id="hqId" readonly="readonly" value="${tr.money}" style="text-align: right;" />
+            <input type="hidden" id="sn" value="" style="text-align: right;" />
         </div>
         <div  class="form-group form-group2">
             <label for="input_check1">预计每日收益</label>
@@ -82,7 +83,8 @@
                 }
                 if(flag) {
                     $.post("${contextPath}/moneymag/hq/confirmJoinHQ",function(result) {
-                        if(result == "SUCCESS") {
+                        if(result.status == 0) {
+                            $("#sn").val(result.data.tr.sn);
                             dialog.style.display="none";
                             yqss.fn.show();
 
@@ -99,13 +101,12 @@
             },
             pay : function() {
 
-                $.post("${contextPath}/weixin/payConfig?type=2",function(result) {
-                    alert("message: " + result);
+                $.post("${contextPath}/weixin/payConfig?type=2&sn=" + $("#sn").val(),function(result) {
                     android.alipay(result);
                 });
             },
             weixin : function() {
-                $.post("${contextPath}/weixin/payConfig?type=1",function(result) {
+                $.post("${contextPath}/weixin/payConfig?type=1&sn=" + $("#sn").val(),function(result) {
                     android.weixin(result);
                 });
             }

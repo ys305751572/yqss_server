@@ -43,9 +43,9 @@ public class MoneyPayController {
 
     @RequestMapping(value = "/payConfig")
     @ResponseBody
-    public String payConfig(HttpServletRequest request, HttpServletResponse response, Integer dodId, Integer type) {
+    public String payConfig(HttpServletRequest request, HttpServletResponse response, Integer dodId, Integer type,String sn) {
 
-        Map<String, Object> resultParam = moneyMagDodManager.payConfig(request, response, dodId, type);
+        Map<String, Object> resultParam = moneyMagDodManager.payConfig(request, response, dodId, type,sn);
         return new GsonBuilder().create().toJson(resultParam);
     }
 
