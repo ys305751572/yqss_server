@@ -61,6 +61,7 @@ html{font-size: 87.5%;
     top: 80%;
     left: 50%;
     transform: translate(-50%,-50%);
+    -webkit-transform:translate(-50%,-50%);
 }
 .btn-default1:active{
     background: rgba(0,0,0,0.1);
@@ -463,10 +464,12 @@ input[type="radio"] .styled:checked + label::after {
     font-size: 1.4em;
 }
 .back img{
+    width: .6em;
     position: absolute;
-    top: 8px;
     left: 8px;
-    width: 14px;
+    top: 50%;
+    transform: translate(50%,-50%);
+    -webkit-transform: translate(50%,-50%);
 }
 .danger{
     display: none;
