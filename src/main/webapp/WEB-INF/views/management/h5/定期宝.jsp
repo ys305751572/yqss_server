@@ -21,7 +21,8 @@
     <div class="header_tip_box">
         <div class="header_tip">
             <input type="hidden" id="id" name="id" value="${dod.id}">
-            <span class="header_tip1">${dod.yearYield}0%</span>
+            <span class="header_tip1">${dod.yearYield}0</span>
+            <span class="header_tip3">%</span>
             <br>
             <span class="header_tip2">年化收益率</span>
         </div>
@@ -53,8 +54,7 @@
                 </div>
             </div>
         </div>
-        <span class="num aui-progress_count" style="color: #797979;">${dod.percent}</span><span
-            style="font-size: 1.2rem;color: #797979;">%</span>
+        <span class="num aui-progress_count" style="color: #797979;">${dod.percent}</span><span style="font-size: 1.2rem;color: #797979;">%</span>
         <script type="text/javascript">
             $(function () {
                 var _width = $('.num');//获取百分比数值
