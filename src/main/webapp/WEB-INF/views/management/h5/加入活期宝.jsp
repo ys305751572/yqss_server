@@ -19,16 +19,16 @@
     <span>加入活期宝</span>
 </div>
 <div class="container">
-    <div class="form-inline">
-        <div  class="form-group">
-            <label for="hqId" class="form-group-lable">投资金额</label>
-            <span>元</span>
-            <input type="text" id="hqId"  style="text-align: right;" onblur="yqss.fn.doOnBluer();" />
+    <div class="form-inline" style="padding-top: 0px;">
+        <div  class="form-group" style="margin-bottom: 0px;padding-bottom: 1.3em;padding-top: 1.3em;">
+            <label for="hqId" class="form-group-lable" style="margin-bottom: 0px;font-weight: 300; font-size: 1.3rem;">投资金额</label>
+            <span style="font-size: 1.3rem;">元</span>
+            <input type="text" id="hqId"  style="text-align: right;font-size: 1.3rem;color: #b7b7b7;" onblur="yqss.fn.doOnBluer();" />
         </div>
-        <div  class="form-group form-group2">
-            <label for="input_check1">预计每日收益</label>
-            <span style="color: #de433f">元</span>
-            <input type="text" id="input_check1" readonly="readonly" placeholder=""/>
+        <div  class="form-group form-group2" style="padding-bottom: 1.3em;padding-top: 1.3em;">
+            <label for="input_check1" style="margin-bottom: 0px;font-weight:300;font-size: 1.3rem;">预计每日收益</label>
+            <span style="color: #de433f;font-size: 1.3rem;">元</span>
+            <input type="text" id="input_check1" style="font-size: 1.3rem;color: #de433f" readonly="readonly" placeholder=""/>
         </div>
         <div class="danger" id="dialog">
             <span style="color: red;">请填写投资金额!!!</span>
@@ -36,7 +36,7 @@
         <div class="danger" id="dialog_tips">
             <span style="color: red;">请输入数字！！！</span>
         </div>
-        <div class="btn_box">
+        <div class="btn_box" style="font-size: 1.4rem;">
             <button type="submit" class="btn-default1" >立即加入</button>
         </div>
     </div>

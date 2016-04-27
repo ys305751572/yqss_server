@@ -32,12 +32,22 @@
             <input type="text" id="input_check1" readonly="readonly" placeholder="" value="${tr.earnings}"/>
         </div>
 
-        <div class="checkbox1">
-            <input type="checkbox" value="1" id="checkboxInput" name="radio2"/>
-            <label for="checkboxInput"></label>
-            <span style="position: relative;left: 40px;">同意<a href="${contextPath}/moneymag/detail" style="color: #e9827f;text-decoration: none;">《xxx协议》</a>
-            </span>
+        <%--<div class="checkbox1">--%>
+            <%--<input type="checkbox" value="1" id="checkboxInput" name="radio2"/>--%>
+            <%--<label for="checkboxInput"></label>--%>
+            <%--<span style="position: relative;left: 40px;">同意<a href="${contextPath}/moneymag/detail" style="color: #e9827f;text-decoration: none;">《xxx协议》</a>--%>
+            <%--</span>--%>
+        <%--</div>--%>
+
+        <div class="checkbox">
+            <input type="checkbox" value="1" id="checkboxInput" name="radio2">
+            <label for="checkboxInput"></label><span class="agree">同意</span><a href="${contextPath}/moneymag/detail" class="agree">《xxx协议》</a>
         </div>
+
+
+
+
+
 
         <div class="btn_box">
             <button type="submit" class="btn-default1" >立即加入</button>
@@ -48,9 +58,9 @@
                 <div class="pay">
                     <span>请选择支付方式</span>
                     <div class="pay_way">
-                        <button id="pay" onclick="yqss.fn.pay()"><img src="${contextPath}/resources/h5/image/p6-7-1pay.png"></button>
+                        <button id="pay" onclick="yqss.fn.pay()" style="border: none;background-color: rgba(0,0,0,0);outline: none"><img src="${contextPath}/resources/h5/image/p6-7-1pay.png"></button>
                         <img src="${contextPath}/resources/h5/image/Oval 60 Copy.png">
-                        <button id="weixin" onclick="yqss.fn.weixin()"><img src="${contextPath}/resources/h5/image/p6-7-1weixin.png"></button>
+                        <button id="weixin" onclick="yqss.fn.weixin()" style="border: none;background-color: rgba(0,0,0,0);outline: none"><img src="${contextPath}/resources/h5/image/p6-7-1weixin.png"></button>
                     </div>
                 </div>
             </div>

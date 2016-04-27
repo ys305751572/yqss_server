@@ -376,8 +376,13 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
         String code = codeMap.get(mobile);
 
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("requestCode",code);
+        map.put("mobile",mobile);
+        request.setAttribute("map", map);
+
         if(StringUtils.isBlank(requestCode) || !requestCode.equals(code)) {
-            return ErrorCode.ERROR_10;
+            return "management/h5/忘记交易密码2";
         }
 
         return "management/h5/设置交易密码";

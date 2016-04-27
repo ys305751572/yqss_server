@@ -13,32 +13,17 @@
     <script type="text/javascript">
         function changeStyle() {
             var flag = true;
-            var flag2 = true;
-            var mobile = $("#mobile").val();
             var code = $("#code").val();
+            var requestCode = ${map.requestCode}
             var dialog = document.getElementById("dialog");
-            if(mobile == ""){
-                alert("请输入手机号码");
-                flag = false;
-                return flag;
-            }
 
-            if(code ==""){
-                dialog.style.display="block";
-                dialog.innerHTML="请输入验证码";
-                flag = false;
-                return;
-            }
-            if(flag) {
-                window.location.href = "${contextPath}/moneymag/hq/confirmCode?mobile=" + $("#mobile").val() + '&requestCode=' + $("#code").val();
-            }
             if(code != requestCode){
                 dialog.style.display="block";
                 dialog.innerHTML="验证码错误，请重新输入！";
-                flag2 = false;
-                return flag2;
+                flag = false;
+                return flag;
             }
-            if(flag2) {
+            if(flag) {
                 window.location.href = "${contextPath}/moneymag/hq/confirmCode?mobile=" + $("#mobile").val() + '&requestCode=' + $("#code").val();
             }
         }
@@ -50,7 +35,7 @@
     <span>忘记交易密码</span>
 </div>
 <div class="container">
-    <input type="text" class="check_box" id="mobile" placeholder="请输入手机号码">
+    <input type="text" class="check_box" id="mobile" value="${map.mobile}">
     <div class="input_box">
         <input type="text" placeholder="请输入验证码" id="code" />
         <span><input type="button" id="codeBtn" onclick="settime(this)" value="获取验证码"/></span>

@@ -102,7 +102,6 @@
                     "error" : function(result) {
                         console.log("error:" + result);
 
-
                     },
                 });
 
