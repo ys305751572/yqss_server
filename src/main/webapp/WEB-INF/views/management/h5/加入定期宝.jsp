@@ -23,7 +23,7 @@
         <div  class="form-group" style="margin-bottom: 0px ;">
             <label for="input_check1" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;">转入金额</label>
             <span>元</span>
-            <input type="text" id="input_check1"  style="text-align: right;"  onblur="yqss.fn.doOnBluer();"/>
+            <input type="text" id="input_check1"  style="text-align: right;"  />
         </div>
         <div  class="form-group"style="margin-bottom: 0px ">
             <label for="input_check2" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;" >期限</label>
@@ -61,10 +61,24 @@
             doSubmit : function() {
                 var flag = true;
                 var money = $("#input_check1").val();
-
+                var residue = ${map.residue};
                 if (null == money || money == "") {
                     dialog.style.display="block";
                     dialog.innerHTML="请输入投资金额!";
+                    flag = false;
+                    return;
+                }
+
+                if(!/^\d+(?:.\d{1,2})?$/.test($("#input_check1").val())){
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入数字!";
+                    flag = false;
+                    return;
+                }
+
+                if (money > residue) {
+                    dialog.style.display="block";
+                    dialog.innerHTML="投资金额超过上限，请重新输入!";
                     flag = false;
                     return;
                 }
@@ -75,37 +89,37 @@
 
             },
 
-            doOnBluer : function() {
-                if(!/^\d+(?:.\d{1,2})?$/.test($("#input_check1").val())){
-                    dialog.style.display="block";
-                    dialog.innerHTML="请输入数字!";
-                }
+            <%--doOnBluer : function() {--%>
+                <%--if(!/^\d+(?:.\d{1,2})?$/.test($("#input_check1").val())){--%>
+                    <%--dialog.style.display="block";--%>
+                    <%--dialog.innerHTML="请输入数字!";--%>
+                <%--}--%>
 
-                $.ajax({
-                    "url" : "${contextPath}/moneymag/hq/onBluerdq",
-                    "type" : "post",
-                    "data" : {"money":  $("#input_check1").val(),
-                              "id": ${dod.id}},
-                    "dataType" : "json",
-                    "success" : function(result) {
-                        console.log("===result.result:" + result.data.object.result);
-                        if(result.data.object.result != null && result.data.object.result != "") {
-                            dialog.style.display="block";
-                            dialog.innerHTML=result.data.object.result;
+                <%--$.ajax({--%>
+                    <%--"url" : "${contextPath}/moneymag/hq/onBluerdq",--%>
+                    <%--"type" : "post",--%>
+                    <%--"data" : {"money":  $("#input_check1").val(),--%>
+                              <%--"id": ${dod.id}},--%>
+                    <%--"dataType" : "json",--%>
+                    <%--"success" : function(result) {--%>
+                        <%--console.log("===result.result:" + result.data.object.result);--%>
+                        <%--if(result.data.object.result != null && result.data.object.result != "") {--%>
+                            <%--dialog.style.display="block";--%>
+                            <%--dialog.innerHTML=result.data.object.result;--%>
 
-                        }
-                        else {
-                            dialog.style.display="none";
-                        }
+                        <%--}--%>
+                        <%--else {--%>
+                            <%--dialog.style.display="none";--%>
+                        <%--}--%>
 
-                    },
-                    "error" : function(result) {
-                        console.log("error:" + result);
+                    <%--},--%>
+                    <%--"error" : function(result) {--%>
+                        <%--console.log("error:" + result);--%>
 
-                    },
-                });
+                    <%--},--%>
+                <%--});--%>
 
-            },
+            <%--},--%>
         }
     }
 

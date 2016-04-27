@@ -62,16 +62,32 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
 
     @RequestMapping(value = "/hq/addHQIndex")
-    public String addHQIndex(HttpServletRequest request) {
+    public String addHQIndex(HttpServletRequest request,Double residue, Model model) {
+
+        MoneyMagDod dod = iMoneyMagDodManager.findDueOnDemandDetail();
+
+        model.addAttribute("dod", dod);
+
+
+        residue = dod.getResidue();
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("residue",residue);
+        request.setAttribute("map", map);
 
         return "management/h5/加入活期宝";
     }
 
     @RequestMapping(value = "/hq/addDQIndex")
-    public String addDQIndex(HttpServletRequest request,Integer id, Model model) {
+    public String addDQIndex(HttpServletRequest request,Integer id,Double residue, Model model) {
 
         MoneyMagDod dod = iMoneyMagDodManager.findFixPeriodDetail(id);
         model.addAttribute("dod", dod);
+
+
+        residue = dod.getResidue();
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("residue",residue);
+        request.setAttribute("map", map);
 
         request.getSession().setAttribute(Constant.DQ, dod);
 
@@ -116,28 +132,28 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         return Result.success(map);
     }
 
-    @RequestMapping(value = "/hq/onBluerdq")
-    @ResponseBody
-    public Result onBluerdq(HttpServletRequest request,Integer id, Double money){
-
-        MoneyMagDod dod = iMoneyMagDodManager.findFixPeriodDetail(id);
-        request.getSession().setAttribute(Constant.DQ, dod);
-
-        Map<String,Object> map = new HashMap<String,Object>();
-
-        String result = "";
-
-        if (money > dod.getResidue()) {
-            result = "超出金额";
-        }
-
-        if (money == null) {
-            result = "请输入投资金额";
-        }
-
-        map.put("result",result);
-        return Result.success(map);
-    }
+//    @RequestMapping(value = "/hq/onBluerdq")
+//    @ResponseBody
+//    public Result onBluerdq(HttpServletRequest request,Integer id, Double money){
+//
+//        MoneyMagDod dod = iMoneyMagDodManager.findFixPeriodDetail(id);
+//        request.getSession().setAttribute(Constant.DQ, dod);
+//
+//        Map<String,Object> map = new HashMap<String,Object>();
+//
+//        String result = "";
+//
+//        if (money > dod.getResidue()) {
+//            result = "超出金额";
+//        }
+//
+//        if (money == null) {
+//            result = "请输入投资金额";
+//        }
+//
+//        map.put("result",result);
+//        return Result.success(map);
+//    }
 
     @RequestMapping(value = "/hq/addHQBao")
     public String addHQBao(HttpServletRequest request, Double money, Double e, Double earnings,Model model) {
@@ -370,7 +386,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
     }
 
     @RequestMapping(value = "/hq/confirmCode")
-    public String confirmCode(HttpServletRequest request,String mobile,String requestCode) {
+    public String confirmCode(HttpServletRequest request,String mobile,String requestCode,String codeBtn) {
 
         Users user = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
         if(user == null) {
@@ -380,8 +396,10 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         String code = codeMap.get(mobile);
 
         Map<String,Object> map = new HashMap<String,Object>();
-        map.put("requestCode",code);
+        map.put("code",code);
+        map.put("requestCode",requestCode);
         map.put("mobile",mobile);
+        map.put("codeBtn",codeBtn);
         request.setAttribute("map", map);
 
         if(StringUtils.isBlank(requestCode) || !requestCode.equals(code)) {

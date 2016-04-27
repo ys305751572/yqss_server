@@ -90,12 +90,30 @@
             doSubmit : function() {
                 var flag = true;
                 var money = $("#hqId").val();
+                var residue = ${map.residue};
                 if(money == null || money == "") {
                     dialog.style.display="block";
                     dialog.innerHTML="请输入投资金额!";
                     flag = false;
                     return;
                 }
+
+                if(!/^\d+(?:.\d{1,2})?$/.test($("#hqId").val())){
+                    $("#input_check1").val("");
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入数字!";
+                    flag = false;
+                    return;
+                }
+
+                if (money > residue) {
+                    $("#input_check1").val("");
+                    dialog.style.display="block";
+                    dialog.innerHTML="投资金额超过上限，请重新输入!";
+                    flag = false;
+                    return;
+                }
+
                 if(flag){
                      window.location.href = "${contextPath}/moneymag/hq/addHQBao?money=" + $("#hqId").val();
                 }

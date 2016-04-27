@@ -39,7 +39,7 @@
                 return flag2;
             }
             if(flag2) {
-                window.location.href = "${contextPath}/moneymag/hq/confirmCode?mobile=" + $("#mobile").val() + '&requestCode=' + $("#code").val();
+                window.location.href = "${contextPath}/moneymag/hq/confirmCode?mobile=" + $("#mobile").val() + '&requestCode=' + $("#code").val() + '&codeBtn' + $("#codeBtn").val();
             }
         }
     </script>

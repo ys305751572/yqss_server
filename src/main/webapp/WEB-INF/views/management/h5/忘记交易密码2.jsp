@@ -13,8 +13,8 @@
     <script type="text/javascript">
         function changeStyle() {
             var flag = true;
-            var code = $("#code").val();
-            var requestCode = ${map.requestCode}
+            var requestCode = $("#requestCode").val();
+            var code = ${map.code};
             var dialog = document.getElementById("dialog");
 
             if(code != requestCode){
@@ -24,7 +24,7 @@
                 return flag;
             }
             if(flag) {
-                window.location.href = "${contextPath}/moneymag/hq/confirmCode?mobile=" + $("#mobile").val() + '&requestCode=' + $("#code").val();
+                window.location.href = "${contextPath}/moneymag/hq/confirmCode?mobile=" + $("#mobile").val() + '&requestCode=' + $("#requestCode").val();
             }
         }
     </script>
@@ -37,7 +37,7 @@
 <div class="container">
     <input type="text" class="check_box" id="mobile" value="${map.mobile}">
     <div class="input_box">
-        <input type="text" placeholder="请输入验证码" id="code" />
+        <input type="text"  id="requestCode" value="${map.requestCode}"/>
         <span><input type="button" id="codeBtn" onclick="settime(this)" value="获取验证码"/></span>
     </div>
     <div class="danger" id="dialog" style="color: red;">
