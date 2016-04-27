@@ -16,4 +16,8 @@ public interface IMoneyMagTRManager extends GenericManager<MoneyMagTR>{
 	public void createMoneyMagTR(Integer userId,Integer dodId,Double money);
 	
 	public Page<MoneyMagTR> list(String mobile,String name,Integer id,int currentPgae,int pagesize);
+
+	public MoneyMagTR findBySn(String sn);
+
+	public void modifyTrStatus(String sn);
 }

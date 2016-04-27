@@ -2,6 +2,7 @@ package com.gcs.aol.controller.h5;
 
 import com.gcs.aol.constant.Constant;
 import com.gcs.aol.service.IMoneyMagDodManager;
+import com.gcs.aol.service.IMoneyMagTRManager;
 import com.gcs.pay.util.XMLUtil;
 import com.gcs.utils.Result;
 import com.google.gson.Gson;
@@ -41,6 +42,9 @@ public class MoneyPayController {
     @Autowired
     private IMoneyMagDodManager moneyMagDodManager;
 
+    @Autowired
+    private IMoneyMagTRManager moneyMagTRManager;
+
     @RequestMapping(value = "/payConfig")
     @ResponseBody
     public String payConfig(HttpServletRequest request, HttpServletResponse response, Integer dodId, Integer type,String sn) {
@@ -57,10 +61,7 @@ public class MoneyPayController {
             String sn = result.get("out_trade_no").toString();
             System.out.println("SUCCESS");
             try {
-//                BorrowRepayRecord record = new BorrowRepayRecord();
-//                record.setSn(sn);
-//                record.setAmount(Integer.parseInt(result.get("total_fee").toString()) / 100.0);
-//                borrowService.repayFinish(record);
+                moneyMagTRManager.modifyTrStatus(sn);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -79,10 +80,10 @@ public class MoneyPayController {
         if ("TRADE_SUCCESS".equals(status) || "FINISH".equals(status)) {
             System.out.println("SUCCESS");
             try {
+                moneyMagTRManager.modifyTrStatus(sn);
 //                BorrowRepayRecord record = new BorrowRepayRecord();
 //                record.setSn(sn);
 //                record.setAmount(amount);
-//
 //                borrowService.repayFinish(record);
             } catch (Exception e) {
                 e.printStackTrace();

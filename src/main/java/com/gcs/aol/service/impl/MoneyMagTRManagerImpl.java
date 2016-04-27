@@ -84,4 +84,16 @@ public class MoneyMagTRManagerImpl extends GenericManagerImpl<MoneyMagTR, MoneyM
 		return dao.findAll(spec, new PageRequest(currentPgae, pagesize, Sort.Direction.DESC, "id"));
 	}
 
+	@Override
+	public MoneyMagTR findBySn(String sn) {
+		return dao.findBySn(sn);
+	}
+
+	@Override
+	public void modifyTrStatus(String sn) {
+		MoneyMagTR tr = findBySn(sn);
+		if(tr.getStatus() != null || tr.getStatus() == 0) {
+			dao.modifyTrStatus(sn);
+		}
+	}
 }
