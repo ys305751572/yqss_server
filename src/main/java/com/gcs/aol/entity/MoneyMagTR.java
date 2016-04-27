@@ -38,7 +38,7 @@ public class MoneyMagTR extends IdAbstartEntity{
 	private Long createDate;
 
 	@Column(name = "status")
-	private Integer status;
+	private Integer status = 0;
 
 	public Integer getStatus() {
 		return status;

@@ -3,23 +3,14 @@ $(function(){
         alert("123");
   });
 });
-window.Location = {
-    alipay: function (message) {
-        try {
-            window.APP_NATIVE.alipay(message);
-        } catch (e) {
-            alert("222");
-            return;
-        }
-    },
-    weixin: function (message) {
-        try {
-            window.APP_NATIVE.weixin(message);
-        } catch (e) {
-            alert("222");
-            return;
-        }
-    }
-};
-
-
+//window.android = {
+//    showToast: function (message) {
+//        alert("message:" + message);
+//        try {
+//            window.APP_NATIVE.showToast(message);
+//        } catch (e) {
+//            alert("222");
+//            return;
+//        }
+//    }
+//};

@@ -40,10 +40,10 @@ public class MoneyPayController {
 
     @RequestMapping(value = "/payConfig")
     @ResponseBody
-    public Result payConfig(HttpServletRequest request,HttpServletResponse response,Integer dodId,Integer type) {
+    public String payConfig(HttpServletRequest request,HttpServletResponse response,Integer dodId,Integer type) {
 
         Map<String,Object> resultParam = moneyMagDodManager.payConfig(request,response,dodId,type);
-        return Result.success(resultParam,"payConfig");
+        return new GsonBuilder().create().toJson(resultParam);
     }
 
     @RequestMapping(value="notify/weixinmoney", method = RequestMethod.POST)

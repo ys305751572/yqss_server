@@ -102,12 +102,14 @@
             pay : function() {
 
                 $.post("${contextPath}/weixin/payConfig?type=2",function(result) {
-                    window.Location.alipay(result);
+//                    window.android.showToast(result);
+                    android.showToast(result);
                 });
             },
             weixin : function() {
                 $.post("${contextPath}/weixin/payConfig?type=1",function(result) {
-                    window.Location.weixin(result);
+//                    window.android.showToast(result);
+                    android.showToast(result);
                 });
             }
         }
