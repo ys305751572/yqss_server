@@ -224,7 +224,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         mUser.setIdCard(idCard);
         mUser.setName(name);
 
-        List<Users> list = iUsersManager.queryByProperty("userId", mUser.getUser().getUserId());
+        List<Users> list = iUsersManager.queryByProperty("userId", users.getUserId());
         if(list != null && !list.isEmpty()) {
             Users user = list.get(0);
             mUser.setUser(user);
@@ -285,7 +285,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         MoneyMagUser mUser = iMoneyMagUserManager.findByUserId(user.getUserId());
         mUser.setTradingPassword(password);
 
-        Users _user = (Users) (iUsersManager.queryByProperty("userId", mUser.getUser().getUserId()).get(0));
+        Users _user = (Users) (iUsersManager.queryByProperty("userId", user.getUserId()).get(0));
         mUser.setUser(_user);
 
         iMoneyMagUserManager.save(mUser);

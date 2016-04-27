@@ -149,6 +149,6 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 			request.setAttribute("prepayid",prepayid);
 			params = PayRequest.pay(request,response);
 		}
-		return null;
+		return params;
 	}
 }

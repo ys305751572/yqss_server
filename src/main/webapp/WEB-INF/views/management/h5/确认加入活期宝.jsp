@@ -107,6 +107,7 @@
             pay : function() {
 
                 $.post("${contextPath}/weixin/payConfig?type=2",function(result) {
+                    alert("message: " + result);
                     android.showToast(result);
                 });
             },
