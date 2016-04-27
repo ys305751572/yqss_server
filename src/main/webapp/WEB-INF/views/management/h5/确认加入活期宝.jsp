@@ -101,12 +101,12 @@
 
                 $.post("${contextPath}/weixin/payConfig?type=2",function(result) {
                     alert("message: " + result);
-                    android.showToast(result);
+                    android.alipay(result);
                 });
             },
             weixin : function() {
                 $.post("${contextPath}/weixin/payConfig?type=1",function(result) {
-                    android.showToast(result);
+                    android.weixin(result);
                 });
             }
         }

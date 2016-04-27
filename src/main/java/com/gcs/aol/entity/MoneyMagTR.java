@@ -40,6 +40,17 @@ public class MoneyMagTR extends IdAbstartEntity{
 	@Column(name = "status")
 	private Integer status = 0;
 
+	@Column(name = "sn")
+	private String sn = "";
+
+	public String getSn() {
+		return sn;
+	}
+
+	public void setSn(String sn) {
+		this.sn = sn;
+	}
+
 	public Integer getStatus() {
 		return status;
 	}

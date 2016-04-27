@@ -106,13 +106,13 @@
 
                 $.post("${contextPath}/weixin/payConfig?type=2",function(result) {
 //                    window.android.showToast(result);
-                    android.showToast(result);
+                    android.alipay(result);
                 });
             },
             weixin : function() {
                 $.post("${contextPath}/weixin/payConfig?type=1",function(result) {
 //                    window.android.showToast(result);
-                    android.showToast(result);
+                    android.weixin(result);
                 });
             }
         }

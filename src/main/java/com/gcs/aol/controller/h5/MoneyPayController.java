@@ -60,7 +60,6 @@ public class MoneyPayController {
 //                BorrowRepayRecord record = new BorrowRepayRecord();
 //                record.setSn(sn);
 //                record.setAmount(Integer.parseInt(result.get("total_fee").toString()) / 100.0);
-//
 //                borrowService.repayFinish(record);
             } catch (Exception e) {
                 e.printStackTrace();
