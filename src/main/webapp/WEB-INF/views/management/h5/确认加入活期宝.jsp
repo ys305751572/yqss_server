@@ -84,7 +84,7 @@
                 if(flag) {
                     $.post("${contextPath}/moneymag/hq/confirmJoinHQ",function(result) {
                         if(result.status == 0) {
-                            $("#sn").val(result.data.tr.sn);
+                            $("#sn").val(result.tr.sn);
                             dialog.style.display="none";
                             yqss.fn.show();
 
