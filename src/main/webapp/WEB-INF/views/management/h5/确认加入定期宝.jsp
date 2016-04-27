@@ -87,7 +87,7 @@
                 }
                 if(flag) {
                     $.post("${contextPath}/moneymag/hq/confirmJoinDQ",function(result) {
-                        if(result == "SUCCESS") {
+                        if(result.status) {
                             $("#sn").val(result.tr.sn);
                             dialog.style.display="none";
                             yqss.fn.show();
