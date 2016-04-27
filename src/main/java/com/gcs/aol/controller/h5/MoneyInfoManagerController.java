@@ -71,7 +71,7 @@ public class MoneyInfoManagerController extends GenericEntityController<MoneyMag
                 map.put("dq", moneyMag);
             }
         }
-        List<Banner> list2 = bannerManager.queryAll();
+        List<Banner> list2 = bannerManager.queryTop("id","isList",1,false,5);
         model.addAttribute("map",map);
         model.addAttribute("list",list2);
         return "management/h5/理财";
