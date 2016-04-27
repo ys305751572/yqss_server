@@ -315,7 +315,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
      */
     @RequestMapping(value = "/hq/confirmJoinHQ")
     @ResponseBody
-    public Result confirmJoinHQ(HttpServletRequest request) {
+    public Map<String,Object> confirmJoinHQ(HttpServletRequest request) {
 
         MoneyMagTR tr = (MoneyMagTR) request.getSession().getAttribute(Constant.TR);
         Users user = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
@@ -333,12 +333,15 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
 //        request.getSession().removeAttribute(Constant.TR);
 //        request.getSession().removeAttribute(Constant.HQ);
-        return Result.success(tr,"tr");
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("status",0);
+        map.put("tr",tr);
+        return map;
     }
 
     @RequestMapping(value = "/hq/confirmJoinDQ")
     @ResponseBody
-    public Result confirmJoinDQ(HttpServletRequest request) {
+    public Map<String,Object> confirmJoinDQ(HttpServletRequest request) {
 
         MoneyMagTR tr = (MoneyMagTR) request.getSession().getAttribute(Constant.TR);
         Users user = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
@@ -356,7 +359,10 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 //        request.getSession().removeAttribute(Constant.TR);
 //        request.getSession().removeAttribute(Constant.DQ);
 
-        return Result.success(tr,"tr");
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("status",0);
+        map.put("tr",tr);
+        return map;
     }
 
     @RequestMapping(value = "/sendCode")
