@@ -30,7 +30,15 @@
                 return;
             }
             if(flag) {
-                window.location.href = "${contextPath}/moneymag/hq/confirmCode?mobile=" + $("#mobile").val() + '&requestCode=' + $("#code").val();
+                $.post("${contextPath}/moneymag/hq/confirmCode",{"mobile": $("#mobile").val(), "requestCode" : $("#code").val() },function(result) {
+                    if(result == "success") {
+                        window.location.href = "${contextPath}/moneymag/setPasswordIndex";
+                    }
+                    else {
+                        dialog.style.display="block";
+                        dialog.innerHTML="验证码错误，请重新输入！"
+                    }
+                });
             }
             if(code != requestCode){
                 dialog.style.display="block";
@@ -115,7 +123,6 @@
                 },
                 success: function (result) {
                     if (result == "success") {
-                        alert(result);
                     }
                 }
             });

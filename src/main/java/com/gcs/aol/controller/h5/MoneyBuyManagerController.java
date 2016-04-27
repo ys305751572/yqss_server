@@ -386,6 +386,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
     }
 
     @RequestMapping(value = "/hq/confirmCode")
+    @ResponseBody
     public String confirmCode(HttpServletRequest request,String mobile,String requestCode,String codeBtn) {
 
         Users user = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
@@ -403,11 +404,19 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         request.setAttribute("map", map);
 
         if(StringUtils.isBlank(requestCode) || !requestCode.equals(code)) {
-            return "management/h5/忘记交易密码2";
+            return "error";
+//            return "management/h5/忘记交易密码2";
         }
 
+//        return "management/h5/设置交易密码";
+        return "success";
+    }
+
+    @RequestMapping(value = "/setPasswordIndex")
+    public String setPasswordIndex() {
         return "management/h5/设置交易密码";
     }
+
 
     @RequestMapping(value = "/detail")
     public String detail(Integer type,Model model) {
