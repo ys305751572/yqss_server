@@ -102,11 +102,13 @@
             pay : function() {
 
                 $.post("${contextPath}/weixin/payConfig?type=2&sn=" + $("#sn").val(),function(result) {
+                    alert(result);
                     android.alipay(result);
                 });
             },
             weixin : function() {
                 $.post("${contextPath}/weixin/payConfig?type=1&sn=" + $("#sn").val(),function(result) {
+                    alert(result);
                     android.weixin(result);
                 });
             }
