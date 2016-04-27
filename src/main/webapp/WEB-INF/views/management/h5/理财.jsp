@@ -18,7 +18,6 @@
         <span>理财</span>
     </div>
 	<c:forEach items="${list}" var="map">
-	<c:forEach items="${list}" var="map">
 	<header class="header banner">
 		<div id="fsD1" class="focus">
 			<div id="D1pic1" class="fPic">
@@ -33,31 +32,29 @@
 						   target="_self" class="current"></a>
 					</div>
 				</div>
-
 			</div>
-
 		</div>
 		<script type="text/javascript">
-			Qfast.add('widgets', { path:
-					"${contextPath}/resources/h5/js/terminator2.2.min.js", type: "js", requires: ['fx'] });
+			Qfast.add('widgets', {
+				path: "${contextPath}/resources/h5/js/terminator2.2.min.js", type: "js", requires: ['fx']
+			});
 			Qfast(false, 'widgets', function () {
 				K.tabs({
 					id: 'fsD1',   //焦点图包裹id
 					conId: "D1pic1",  //** 大图域包裹id
-					tabId:"D1fBt",
-					tabTn:"a",
+					tabId: "D1fBt",
+					tabTn: "a",
 					conCn: '.fcon', //** 大图域配置class
 					auto: 1,   //自动播放 1或0
 					effect: 'fade',   //效果配置
 					eType: 'click', //** 鼠标事件
-					pageBt:true,//是否有按钮切换页码
+					pageBt: true,//是否有按钮切换页码
 					bns: ['.prev', '.next'],//** 前后按钮配置class
 					interval: 3000  //** 停顿时间
 				})
 			})
 		</script>
 		</c:forEach>
-	</c:forEach>
 	<section class="section">
 		<a href="${contextPath}/moneymag/hq/detail" class="content_box">
 		 <div class="topbar">

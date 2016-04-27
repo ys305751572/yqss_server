@@ -21,14 +21,12 @@
     <div class="header_tip_box">
         <div class="header_tip">
             <input type="hidden" id="id" name="id" value="${dod.id}">
-            <span class="header_tip1">${dod.yearYield}0</span>
-            <span class="header_tip3">%</span>
+            <span class="header_tip1">${dod.yearYield}0%</span>
             <br>
             <span class="header_tip2">年化收益率</span>
         </div>
         <div class="header_tip">
-            <span class="header_tip1">${dod.month}</span>
-            <span class="header_tip3">个月</span>
+            <span class="header_tip1">${dod.month}个月</span>
             <br>
             <span class="header_tip2">期限</span>
         </div>
