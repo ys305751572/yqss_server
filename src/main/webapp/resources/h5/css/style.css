@@ -263,9 +263,13 @@ body{
 	font-size: 1.4em;
 }
 .back img{
+	width: .6em;
 	position: absolute;
-  	top: 4px;
-  	left: 2%;
+	left: 8px;
+	top: 50%;
+	transform: translate(50%,-50%);
+	-webkit-transform: translate(50%,-50%);
+
 }
 .header_tip_box{
 	display: flex;
