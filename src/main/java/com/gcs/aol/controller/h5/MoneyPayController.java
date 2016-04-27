@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -40,15 +43,15 @@ public class MoneyPayController {
 
     @RequestMapping(value = "/payConfig")
     @ResponseBody
-    public String payConfig(HttpServletRequest request,HttpServletResponse response,Integer dodId,Integer type) {
+    public String payConfig(HttpServletRequest request, HttpServletResponse response, Integer dodId, Integer type) {
 
-        Map<String,Object> resultParam = moneyMagDodManager.payConfig(request,response,dodId,type);
+        Map<String, Object> resultParam = moneyMagDodManager.payConfig(request, response, dodId, type);
         return new GsonBuilder().create().toJson(resultParam);
     }
 
-    @RequestMapping(value="notify/weixinmoney", method = RequestMethod.POST)
+    @RequestMapping(value = "notify/weixinmoney", method = RequestMethod.POST)
     public void notifyWeixinBorrow(HttpServletRequest request) {
-        Map<String,Object> result = parse(request);
+        Map<String, Object> result = parse(request);
         String status = result.get("result_code").toString();
         if ("SUCCESS".equals(status)) {
             String sn = result.get("out_trade_no").toString();
@@ -65,7 +68,7 @@ public class MoneyPayController {
         }
     }
 
-    @RequestMapping(value="notify/alipaymoney", method = RequestMethod.POST)
+    @RequestMapping(value = "notify/alipaymoney", method = RequestMethod.POST)
     public void notifyAlipayBorrow(HttpServletRequest request) {
         String status = request.getParameter("trade_status").toString();
         String sn = request.getParameter("out_trade_no").toString();
@@ -74,7 +77,7 @@ public class MoneyPayController {
         double amount = Double.parseDouble(request.getParameter("total_fee").toString());
         System.out.println("total_fee:" + amount);
 
-        if("TRADE_SUCCESS".equals(status) || "FINISH".equals(status)) {
+        if ("TRADE_SUCCESS".equals(status) || "FINISH".equals(status)) {
             System.out.println("SUCCESS");
             try {
 //                BorrowRepayRecord record = new BorrowRepayRecord();
@@ -89,8 +92,8 @@ public class MoneyPayController {
     }
 
     @SuppressWarnings("unchecked")
-    public Map<String,Object> parse(HttpServletRequest request) {
-        Map<String,Object> resultMap = null;
+    public Map<String, Object> parse(HttpServletRequest request) {
+        Map<String, Object> resultMap = null;
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
             String line = null;
@@ -108,8 +111,12 @@ public class MoneyPayController {
         return resultMap;
     }
 
+    public Result payConfig(Integer dodId, Integer type) {
+        return Result.success();
+    }
+
     /*********************************************************************************************
-     *  暂留
+     * 暂留
      *********************************************************************************************/
 
 
@@ -120,37 +127,36 @@ public class MoneyPayController {
 
     @RequestMapping(value = "/toOauth")
     @ResponseBody
-    public String toOauth(HttpServletRequest request,HttpServletResponse response) {
+    public String toOauth(HttpServletRequest request, HttpServletResponse response) {
 
-        Map<String,String> payInfo = null;
+        Map<String, String> payInfo = null;
         String code = request.getParameter("code");
         WxMpUser user = (WxMpUser) request.getSession().getAttribute(Constant.WEIXIN_USER);
-        if(user == null && code == null) {
-            String queryString =  request.getQueryString() != null ? "?" + request.getQueryString() : "";
+        if (user == null && code == null) {
+            String queryString = request.getQueryString() != null ? "?" + request.getQueryString() : "";
             String fullUrl = "http://8ac4879b.ngrok.io" + request.getRequestURI() + queryString;
-            String url = wxMpService.oauth2buildAuthorizationUrl(fullUrl,WxConsts.OAUTH2_SCOPE_USER_INFO,"weixin_state");
+            String url = wxMpService.oauth2buildAuthorizationUrl(fullUrl, WxConsts.OAUTH2_SCOPE_USER_INFO, "weixin_state");
             try {
                 response.sendRedirect(url);
                 return null;
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else if(user != null){
+        } else if (user != null) {
             System.out.println("user != null:" + user.getOpenId());
             payInfo = getPayInfo(user);
             return new GsonBuilder().create().toJson(payInfo);
         }
-        if(code != null) {
+        if (code != null) {
             try {
                 WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
                 WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null);
                 System.out.println("code != null" + wxMpUser.getOpenId());
 
-                if(wxMpUser != null) {
-                    request.getSession().setAttribute(Constant.WEIXIN_USER,wxMpUser);
+                if (wxMpUser != null) {
+                    request.getSession().setAttribute(Constant.WEIXIN_USER, wxMpUser);
                     payInfo = getPayInfo(wxMpUser);
-                    return  new GsonBuilder().create().toJson(payInfo);
+                    return new GsonBuilder().create().toJson(payInfo);
                 }
             } catch (WxErrorException e) {
                 e.printStackTrace();
@@ -167,7 +173,7 @@ public class MoneyPayController {
         String tradeType = "JSAPI";
         String ip = "61.183.142.106";
         String notifyUrl = "http:/6mai.cc/yqss/login";
-        Map<String, String> payInfo = wxMpService.getJSSDKPayInfo(openId,outTradeNo,amt,body,tradeType,ip,notifyUrl);
+        Map<String, String> payInfo = wxMpService.getJSSDKPayInfo(openId, outTradeNo, amt, body, tradeType, ip, notifyUrl);
         return payInfo;
     }
 }

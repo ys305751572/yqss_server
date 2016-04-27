@@ -18,6 +18,8 @@ import com.gcs.utils.CommonUtils;
 import com.gcs.utils.Result;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.gcs.utils.CommonUtils;
+import com.gcs.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -131,16 +133,15 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		if(type == 2) {
 			// 支付宝
 			String sn = CommonUtils.generateSn();
-			params.put("sn",sn);
-			params.put("totelFee",totelFee);
-			params.put("itemName","test");
-			params.put("itemDesc","test");
-			params.put("tag","3");
+			params.put("sn", sn);
+			params.put("totelFee", totelFee);
+			params.put("itemName", "test");
+			params.put("itemDesc", "test");
+			params.put("tag", "3");
 			params.put("url", "http://localhost:8080");
 		}
 		else {
 			// 微信
-
 			String prepayid = null; //预支付款ID
 			String sn = CommonUtils.generateSn();
 			request.setAttribute("fee",totelFee);
@@ -148,6 +149,6 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 			request.setAttribute("prepayid",prepayid);
 			params = PayRequest.pay(request,response);
 		}
-		return params;
+		return null;
 	}
 }

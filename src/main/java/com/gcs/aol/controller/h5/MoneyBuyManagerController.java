@@ -8,6 +8,7 @@ import com.gcs.aol.service.*;
 import com.gcs.aol.service.impl.MoneyMagManagerImpl;
 import com.gcs.cache.CacheService;
 import com.gcs.sysmgr.controller.GenericEntityController;
+import com.gcs.sysmgr.entity.main.User;
 import com.gcs.utils.CommonUtils;
 import com.gcs.utils.Result;
 import org.apache.commons.lang3.StringUtils;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -222,11 +224,12 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         mUser.setIdCard(idCard);
         mUser.setName(name);
 
-        Users user = iUsersManager.queryByPK(users.getUserId());
-        mUser.setUser(user);
-
+        List<Users> list = iUsersManager.queryByProperty("userId", mUser.getUser().getUserId());
+        if(list != null && !list.isEmpty()) {
+            Users user = list.get(0);
+            mUser.setUser(user);
+        }
         iMoneyMagUserManager.save(mUser);
-
         request.getSession().setAttribute(Constant.CERTIFICATION_INFO, mUser);
 
         return "management/h5/设置交易密码";

@@ -31,4 +31,5 @@ public interface IMoneyMagDodManager extends GenericManager<MoneyMagDod>{
      * @return
      */
 	public Map<String,Object> payConfig(HttpServletRequest request, HttpServletResponse response, Integer dodId, Integer type);
+
 }
