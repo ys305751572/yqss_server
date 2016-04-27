@@ -29,6 +29,10 @@
         </div>
     </form>
 
+    <div class="danger" id="dialog" style="color: red;">
+        <span style="color: red;"></span>
+    </div>
+
     <div class="btn_box">
         <button type="submit" class="btn-default1"  onclick="yqss.fn.doSubmit();">确定</button>
     </div>
@@ -50,25 +54,33 @@
                 var password1 = $("#password1").val();
                 if (null == password || password == "") {
 //                    $sixmac.notify("请输入交易密码", "error");
-                    alert("请输入交易密码");
+//                    alert("请输入交易密码");
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入交易密码！";
                     flag = false;
                     return;
                 }
                 if (password.length < 5 || password.length > 11) {
 //                    $sixmac.notify("请输入5~10位交易密码", "error");
-                    alert("请输入5~10位交易密码");
+//                    alert("请输入5~10位交易密码");
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入5~10位交易密码！";
                     flag = false;
                     return;
                 }
                 if (null == password1 || password1 == "") {
 //                    $sixmac.notify("请输入确认密码", "error");
-                    alert("请输入确认密码");
+//                    alert("请输入确认密码");
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入确认密码！";
                     flag = false;
                     return;
                 }
                 if (password1 != password) {
 //                    $sixmac.notify("两次密码输入不一致，请重新输入！", "error");
-                    alert("两次密码输入不一致，请重新输入！");
+//                    alert("两次密码输入不一致，请重新输入！");
+                    dialog.style.display="block";
+                    dialog.innerHTML="两次密码输入不一致，请重新输入！";
                     flag = false;
                     return;
                 }

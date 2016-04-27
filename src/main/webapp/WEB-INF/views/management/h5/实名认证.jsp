@@ -67,14 +67,14 @@
     <input id="name" type="text" class="check_box" maxlength="10" placeholder="请输入姓名">
     <input id="idCard" type="text" class="check_box" maxlength="18" placeholder="请输入身份证号">
     <input id="bankCard" type="text" class="check_box" maxlength="16" placeholder="请输入银行卡号">
-    <div class="danger" id="dialog_tips" style="color: red;">
+    <div class="danger" id="dialog" style="color: red;">
         <span style="color: red;"></span>
     </div>
     <div class="btn_box">
         <button type="submit" id="subInfoBtn" class="btn-default1">立即加入</button>
     </div>
 </div>
-<div class="dialog_bg" id="dialog">
+<div class="dialog_bg" id="dialog_tips">
     <div class="dialog_box">
         <div class="dialog_sucess">恭喜认证成功</div>
         <button class="btn_confirm" onclick="yqss.fn.do()">确定</button>
@@ -101,47 +101,48 @@
                 var tips = $("#dialog_tips").val();
                 var dialog = $("#dialog").val();
                 var myname = /^[\u4e00-\u9fa5]+$/;
+                var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
                 if (null == name || name == "") {
-                    //$sixmac.notify("请输入姓名", "error");
-                    alert("请输入姓名");
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入姓名！";
                     flag = false;
                     return;
                 }
 
                 if (!myname.test(name)) {
-                    //$sixmac.notify("请输入中文姓名", "error");
-                    alert("请输入中文姓名");
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入中文姓名！";
                     flag = false;
                     return;
                 }
 
                 if (idCard == "") {
-                    //$sixmac.notify("请输入身份证号", "error");
-                    alert("请输入身份证号");
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入身份证号！";
                     flag = false;
                     return;
                 }
-                if (isNaN(idCard)) {
-                    alert("请输入数字身份证号");
-                    //$sixmac.notify("请输入数字身份证号", "error");
+                if (!reg.test(idCard)) {
+                    dialog.style.display="block";
+                    dialog.innerHTML="身份证号不合法！";
                     flag = false;
                     return;
                 }
 
                 if (bankCard == "") {
-                    alert("请输入银行卡号");
-                    //$sixmac.notify("请输入银行卡号", "error");
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入银行卡号！";
                     flag = false;
                     return;
                 }
                 if (isNaN(bankCard)) {
-                    alert("请输入数字银行卡号");
-                    //$sixmac.notify("请输入数字银行卡号", "error");
+                    dialog.style.display="block";
+                    dialog.innerHTML="请输入数字银行卡号！";
                     flag = false;
                     return;
                 }
                 if(flag) {
-                    $("#dialog").show();
+                    $("#dialog_tips").show();
                     }
 
                 return flag;

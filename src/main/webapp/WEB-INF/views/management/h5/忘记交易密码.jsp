@@ -18,7 +18,9 @@
             var code = $("#code").val();
             var dialog = document.getElementById("dialog");
             if(mobile == ""){
-                alert("请输入手机号码");
+                dialog.style.display="block";
+                dialog.innerHTML="请输入手机号码！";
+                //alert("请输入手机号码");
                 flag = false;
                 return flag;
             }
@@ -112,7 +114,9 @@
     function settime(btn) {
         var mobile = $('#mobile').val();
         if (null == mobile || mobile == '') {
-            alert('手机号不能为空');
+            dialog.style.display="block";
+            dialog.innerHTML="请输入手机号码！";
+            //alert('手机号不能为空');
         } else {
             // 发送验证码
             $.ajax({

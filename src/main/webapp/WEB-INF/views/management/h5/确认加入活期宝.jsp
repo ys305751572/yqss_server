@@ -32,22 +32,14 @@
             <input type="text" id="input_check1" readonly="readonly" placeholder="" value="${tr.earnings}"/>
         </div>
 
-        <%--<div class="checkbox1">--%>
-            <%--<input type="checkbox" value="1" id="checkboxInput" name="radio2"/>--%>
-            <%--<label for="checkboxInput"></label>--%>
-            <%--<span style="position: relative;left: 40px;">同意<a href="${contextPath}/moneymag/detail" style="color: #e9827f;text-decoration: none;">《xxx协议》</a>--%>
-            <%--</span>--%>
-        <%--</div>--%>
-
         <div class="checkbox">
             <input type="checkbox" value="1" id="checkboxInput" name="radio2">
             <label for="checkboxInput"></label><span class="agree">同意</span><a href="${contextPath}/moneymag/detail" class="agree">《xxx协议》</a>
         </div>
 
-
-
-
-
+        <div class="danger" id="dialog" style="color: red;">
+            <span style="color: red;"></span>
+        </div>
 
         <div class="btn_box">
             <button type="submit" class="btn-default1" >立即加入</button>
@@ -83,14 +75,15 @@
                 var isCheck =$('input:checkbox[name="radio2"]:checked').val();
                 console.log(isCheck);
                 if(isCheck == null || isCheck ==""){
-                    alert("还未同意该协议");
+                    dialog.style.display="block";
+                    dialog.innerHTML="还未同意该协议！";
                     flag = false;
                     return;
                 }
                 if(flag) {
                     $.post("${contextPath}/moneymag/hq/confirmJoinHQ",function(result) {
                         if(result == "SUCCESS") {
-
+                            dialog.style.display="none";
                             yqss.fn.show();
 
                         }
