@@ -123,7 +123,6 @@
                 },
                 success: function (result) {
                     if (result == "success") {
-                        alert(result);
                     }
                 }
             });
