@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -228,7 +229,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
     }
 
     @RequestMapping(value = "/hq/certification")
-    public String certification(HttpServletRequest request,String name, String idCard, String bankCard) {
+    public String certification(HttpServletRequest request,String name,String names, String idCard, String bankCard) {
 
         Users users = (Users) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
         if(users == null) {
@@ -238,7 +239,12 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         MoneyMagUser mUser = new MoneyMagUser();
         mUser.setBankCard(bankCard);
         mUser.setIdCard(idCard);
-        mUser.setName(name);
+        try {
+            names = new String(name.getBytes("ISO-8859-1"), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        mUser.setName(names);
 
         List<Users> list = iUsersManager.queryByProperty("userId", users.getUserId());
         if(list != null && !list.isEmpty()) {
