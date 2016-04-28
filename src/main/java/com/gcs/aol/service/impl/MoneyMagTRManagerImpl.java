@@ -41,7 +41,7 @@ public class MoneyMagTRManagerImpl extends GenericManagerImpl<MoneyMagTR, MoneyM
 
 		if(list != null && !list.isEmpty()) {
 			for (MoneyMagTR moneyMagTR : list) {
-				if(moneyMagTR.getStatus() == 1) {
+				if(moneyMagTR.getStatus() != null && moneyMagTR.getStatus() == 1) {
 					totalMoney += moneyMagTR.getMoney();
 				}
 			}

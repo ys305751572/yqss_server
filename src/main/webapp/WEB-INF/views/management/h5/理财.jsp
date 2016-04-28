@@ -18,7 +18,7 @@
     <a href="javascript:history.go(-1)"><img src="${contextPath}/resources/h5/image/Fill 6.png"></a>
     <span>理财</span>
 </div>
-<header class="header banner" style="height: 180px;">
+<header class="header banner">
     <div id="fsD1" class="focus">
         <div id="D1pic1" class="fPic">
             <c:forEach items="${list}" var="banner">
