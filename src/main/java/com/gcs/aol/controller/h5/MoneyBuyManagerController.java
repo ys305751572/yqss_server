@@ -104,7 +104,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
 
         MoneyMagDod dod = iMoneyMagDodManager.findDueOnDemandDetail();
         request.getSession().setAttribute(Constant.HQ, dod);
-        earnings =  (money * dod.getYearYield()) / 365;
+        earnings =  (money * dod.getYearYield()) / 36500;
 
 
         MoneyMagTR tr = new MoneyMagTR();
@@ -170,7 +170,7 @@ public class MoneyBuyManagerController extends GenericEntityController<MoneyMag,
         MoneyMagDod dod = iMoneyMagDodManager.findDueOnDemandDetail();
         request.getSession().setAttribute(Constant.HQ, dod);
 
-        e = (money * dod.getYearYield()) / 365;
+        e = (money * dod.getYearYield()) / 36500;
 
         BigDecimal b = new BigDecimal(e);
         earnings = b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();

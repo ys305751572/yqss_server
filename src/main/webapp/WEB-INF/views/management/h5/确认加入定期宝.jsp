@@ -22,38 +22,39 @@
 <div class="container">
     <div class="form-inline">
         <div  class="form-group">
-            <label for="hqId" class="form-group-lable">转入金额</label>
+            <label for="hqId" class="form-group-lable" style="color: #948b8b; font-size: 1.4rem;font-weight: 100;margin-bottom: 0px;">转入金额</label>
             <span>元</span>
-            <input type="text" id="hqId" readonly="readonly" value="${tr.money}" style="text-align: right;" />
+            <input type="text" id="hqId" readonly="readonly" value="${tr.money}" style="text-align: right;font-size: 1.4rem;" />
             <input type="hidden" id="sn" value="" style="text-align: right;" />
         </div>
         <div  class="form-group form-group2">
-            <label for="month">期限</label>
-            <span style="color: #de433f">个月</span>
-            <input type="text" id="month" readonly="readonly" placeholder="" value="${dod2.month}"/>
+            <label for="month"  style="color: #948b8b;font-size: 1.4rem;font-weight: 100;margin-bottom: 0px;">期限</label>
+            <span style="color: #de433f;font-size: 1.4rem">个月</span>
+            <input type="text" id="month" style="text-align: right;color: #de433f;font-size: 1.4rem;" readonly="readonly" placeholder="" value="${dod2.month}"/>
         </div>
         <div  class="form-group form-group2">
-            <label for="year_yield">年收益率</label>
-            <input type="text" id="year_yield" readonly="readonly" placeholder="" value="${dod2.yearYield}"/>
+            <label for="year_yield" style="color: #948b8b;font-size: 1.4rem;font-weight: 100;margin-bottom: 0px;">年收益率</label>
+            <span style="color: #de433f;font-size: 1.4rem">%</span>
+            <input type="text" id="year_yield" style="font-size: 1.4rem;text-align: right;" readonly="readonly" placeholder="" value="${dod2.yearYield}"/>
         </div>
 
         <div class="checkbox">
             <input type="checkbox" value="1" id="checkboxInput" name="radio2">
-            <label for="checkboxInput"></label><span class="agree">同意</span><a href="${contextPath}/moneymag/detail" class="agree">《xxx协议》</a>
+            <label for="checkboxInput"></label><span class="agree" style="font-size: 1.4rem">同意</span><a href="${contextPath}/moneymag/detail" class="agree" style="font-size: 1.4rem">《xxx协议》</a>
         </div>
 
-        <div class="danger" id="dialog" style="color: red;">
+        <div class="danger" id="dialog" style="color: red;font-size: 1.4rem">
             <span style="color: red;"></span>
         </div>
 
-        <div class="btn_box">
+        <div class="btn_box" style="font-size: 1.4rem">
             <button type="submit" class="btn-default1" >立即加入</button>
         </div>
 
         <div class="hide1" id="hide1">
             <div class="background">
                 <div class="pay">
-                    <span>请选择支付方式</span>
+                    <span style="font-size: 1.4rem;">请选择支付方式</span>
                     <div class="pay_way">
                         <button id="pay" onclick="yqss.fn.pay()" style="border: none;background-color: rgba(0,0,0,0);outline: none"><img src="${contextPath}/resources/h5/image/p6-7-1pay.png"></button>
                         <img src="${contextPath}/resources/h5/image/Oval 60 Copy.png">

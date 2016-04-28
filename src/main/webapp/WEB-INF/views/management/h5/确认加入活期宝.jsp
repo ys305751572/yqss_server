@@ -22,27 +22,27 @@
 <div class="container">
     <div class="form-inline">
         <div  class="form-group">
-            <label for="hqId" class="form-group-lable">投资金额</label>
-            <span>元</span>
-            <input type="text" id="hqId" readonly="readonly" value="${tr.money}" style="text-align: right;" />
+            <label for="hqId" class="form-group-lable" style="color: #948b8b; font-size: 1.4rem;font-weight: 100;margin-bottom: 0px;">投资金额</label>
+            <span style="font-size: 1.4rem;color: #948b8b;">元</span>
+            <input type="text" id="hqId" readonly="readonly" value="${tr.money}" style="text-align: right;font-size: 1.4rem;" />
             <input type="hidden" id="sn" value="" style="text-align: right;" />
         </div>
         <div  class="form-group form-group2">
-            <label for="input_check1">预计每日收益</label>
-            <span style="color: #de433f">元</span>
-            <input type="text" id="input_check1" readonly="readonly" placeholder="" value="${tr.earnings}"/>
+            <label for="input_check1" style="color: #948b8b;font-size: 1.4rem;font-weight: 100;margin-bottom: 0px;">预计每日收益</label>
+            <span style="color: #de433f;font-size: 1.4rem">元</span>
+            <input type="text" id="input_check1" style="text-align: right;font-size: 1.4rem;color: #de433f" readonly="readonly" placeholder="" value="${tr.earnings}"/>
         </div>
 
         <div class="checkbox">
             <input type="checkbox" value="1" id="checkboxInput" name="radio2">
-            <label for="checkboxInput"></label><span class="agree">同意</span><a href="${contextPath}/moneymag/detail" class="agree">《xxx协议》</a>
+            <label for="checkboxInput"></label><span class="agree" style="font-size: 1.4rem">同意</span><a href="${contextPath}/moneymag/detail" class="agree" style="font-size: 1.4rem">《xxx协议》</a>
         </div>
 
         <div class="danger" id="dialog" style="color: red;">
             <span style="color: red;"></span>
         </div>
 
-        <div class="btn_box">
+        <div class="btn_box" style="font-size: 1.4rem">
             <button type="submit" class="btn-default1" >立即加入</button>
         </div>
 

@@ -21,27 +21,28 @@
 <div class="container">
     <div class="form-inline">
         <div  class="form-group" style="margin-bottom: 0px ;">
-            <label for="input_check1" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;">转入金额</label>
-            <span>元</span>
-            <input type="text" id="input_check1"  style="text-align: right;"  />
+            <label for="input_check1" style="color: #948b8b;font-size: 1.4rem;font-weight: 200;position: relative;top: 5px;">转入金额</label>
+            <span style="font-size: 1.4rem">元</span>
+            <input type="text" id="input_check1"  style="text-align: right;font-size: 1.4rem"  />
         </div>
         <div  class="form-group"style="margin-bottom: 0px ">
-            <label for="input_check2" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;" >期限</label>
-            <span>个月</span>
-            <input type="text"  id="input_check2" style="text-align: right;" value="${dod.month}"></input>
+            <label for="input_check2" style="color: #948b8b;font-size: 1.4rem;font-weight: 200;position: relative;top: 5px;" >期限</label>
+            <span style="font-size: 1.4rem">个月</span>
+            <input type="text"  id="input_check2" style="text-align: right;font-size: 1.4rem" value="${dod.month}"></input>
         </div>
         <div  class="form-group">
-            <label for="input_check3" style="color: #948b8b;font-size: 0.8rem;font-weight: 200;position: relative;top: 5px;">年化收益率</label>
-            <input type="text" id="input_check3" style="text-align: right;" value="${dod.yearYield}">
+            <label for="input_check3" style="color: #948b8b;font-size: 1.4rem;font-weight: 200;position: relative;top: 5px;">年化收益率</label>
+            <span style="font-size: 1.4rem">%</span>
+            <input type="text" id="input_check3" style="text-align: right;font-size: 1.4rem" value="${dod.yearYield}">
             </input>
         </div>
-        <div class="danger" id="dialog">
+        <div class="danger" id="dialog" style="color: red;font-size: 1.4rem">
             <span style="color: red;">请填写投资金额!!!</span>
         </div>
         <div class="danger" id="dialog_tips">
             <span style="color: red;">请输入数字！！！</span>
         </div>
-        <div class="btn_box">
+        <div class="btn_box" style="font-size: 1.4rem">
             <button type="submit" class="btn-default1" >立即加入</button>
         </div>
     </div>
