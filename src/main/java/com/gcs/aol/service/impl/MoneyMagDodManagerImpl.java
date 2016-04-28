@@ -138,7 +138,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 			params.put("itemDesc", "test");
 			params.put("tag", "3");
 //			params.put("url", "http://121.41.17.108:8080/yqss_server/weixin/notify/alipaymoney");
-			params.put("url", "http://121.40.63.108:8080/yqss_server/weixin/notify/alipaymoney");
+			params.put("url", "http://123:59.155.131:8080/yqss_server/weixin/notify/alipaymoney");
 		}
 		else {
 			// 微信

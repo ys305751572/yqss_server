@@ -34,7 +34,7 @@ public class PayRequest {
 
         // 回调地址(正式)
 //        String notify_url = "http://121.41.17.108:8080/yqss_server/weixin/notify/weixinmoney";
-        String notify_url = "http://121.40.63.108:8080/yqss_server/weixin/notify/weixinmoney";
+        String notify_url = "http://123:59.155.131:8080/yqss_server/weixin/notify/weixinmoney";
 
         String currTime = TenpayUtil.getCurrTime();
         String strTime = currTime.substring(8, currTime.length());
