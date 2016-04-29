@@ -20,4 +20,7 @@ public interface MoneyMagTRDAO extends IBaseJpaRepository<MoneyMagTR>{
     @Transactional
     @Query("update MoneyMagTR a set a.status = 1 where a.sn = ?1")
     public void modifyTrStatus(String sn);
+
+    @Query("select sum(a.money) from MoneyMagTR a where a.status = 1 and a.dod.id = ?1")
+    public Double haveBuy(Integer dodId);
 }

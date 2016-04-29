@@ -48,6 +48,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		MoneyMagDod entity = this.queryByProperty("type", 1).get(0);
 		// 根据理财产品ID查询已转入金额总和
 		Double totalMoney = manager.countMoneyByDodId(entity.getId());
+		totalMoney = ( totalMoney == null ? 0 : totalMoney);
 		entity.setResidue(NumberUtils.format(entity.getMoneyLimit() - totalMoney));
 		entity.setPercent((int)NumberUtils.format(totalMoney / entity.getMoneyLimit() * 100));
 		return entity;
@@ -59,6 +60,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 		
 		for (MoneyMagDod moneyMagDod : list) {
 			Double totalMoney = manager.countMoneyByDodId(moneyMagDod.getId());
+			totalMoney = ( totalMoney == null ? 0 : totalMoney);
 			moneyMagDod.setResidue(NumberUtils.format(moneyMagDod.getMoneyLimit() - totalMoney));
 			moneyMagDod.setPercent((int)NumberUtils.format(totalMoney / moneyMagDod.getMoneyLimit() * 100));
 		}
@@ -138,7 +140,7 @@ public class MoneyMagDodManagerImpl extends GenericManagerImpl<MoneyMagDod, Mone
 			params.put("itemDesc", "test");
 			params.put("tag", "3");
 //			params.put("url", "http://121.41.17.108:8080/yqss_server/weixin/notify/alipaymoney");
-			params.put("url", "http://123:59.155.131:8080/yqss_server/weixin/notify/alipaymoney");
+			params.put("url", "http://121.40.63.108:8080/yqss_server/weixin/notify/alipaymoney");
 		}
 		else {
 			// 微信
