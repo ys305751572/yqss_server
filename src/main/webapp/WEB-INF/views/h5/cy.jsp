@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/web/css/common.css">
     <script src="${contextPath}/resources/js/jquery-1.7.2.min.js"></script>
-    <title>炒油</title>
+    <title>看看一个大四女生，如何开上玛莎拉蒂</title>
     <script type="text/javascript">
         var countdown = 60;
         function settime(btn) {
@@ -81,7 +81,7 @@
         你可能要问了，炒油难不难？真的这么容易赚钱吗？我没有经验，也不太懂得如何去操作，更不晓得行情，也能炒油赚钱吗？会不会亏啊？
     </p>
     <p>
-        我的回答是：把我转势，一定会成功！因为，就原油本身的投资属性来说，他的投资价值空间是不可限量的！我总结了以下4条原因，共享投资原油的朋友参考。
+        我的回答是：把握趋势，一定会成功！因为，就原油本身的投资属性来说，他的投资价值空间是不可限量的！我总结了以下4条原因，供投资原油的朋友参考。
     </p>
     <p>
         1.保证金交易：原油采取保证金交易，将投资成本大大降低，用3%的资金可以做100%的交易，用小成本就能轻松博取大利润。
@@ -104,14 +104,13 @@
         <fieldset class="fieldset">
             <div class="inputbox">
                 <span class="img_box"> <img src="${contextPath}/resources/web/images/4.png"></span>
-                <input type="text" id="mobile" name="mobile" placeholder="请输入手机号码" pattern="^1[345678][0-9]{9}$"
-                       required="required"/>
+                <input type="text" id="mobile" name="mobile" placeholder="请输入手机号码" />
             </div>
             <div class="password">
-                <input type="text" id="code" name="code" placeholder="请输入您的验证码" required="required" class="inp" />
+                <input type="text" id="code" name="code" placeholder="请输入您的验证码" class="inp" />
                 <input type="button" id="codeBtn" value="点击输入验证码" class="btn"></button>
             </div>
-            <input type="submit" id="doSubmit" value="立即加入" class="submit"/>
+            <input type="button" id="doSubmit" value="立即加入" class="submit"/>
         </fieldset>
     </form>
 </section>
@@ -131,6 +130,22 @@
         });
 
         $("#doSubmit").click(function () {
+            var mobile = $("#mobile").val();
+            if(mobile == '' || mobile == null) {
+                alert("手机号不能为空");
+                return;
+            }
+            var p = /^1[345678][0-9]{9}$/;
+            if(!p.test(mobile)) {
+                alert("手机号格式错误");
+                return;
+            }
+
+            var code = $("#code").val();
+            if(code == '' || code == null) {
+                alert("验证码不能为空");
+                return;
+            }
             $.ajax({
                 url: "${contextPath}/moneymag/act/insert",
                 type: "POST",
@@ -146,6 +161,9 @@
                     else {
                         alert(data.msg);
                     }
+                },
+                error : function(data) {
+                    alert("error:" + data);
                 }
             });
         });
