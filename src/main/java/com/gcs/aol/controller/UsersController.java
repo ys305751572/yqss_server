@@ -90,7 +90,7 @@ public class UsersController extends GenericEntityController<Users, Users, Users
 		Users users = new Users();
 		users.setName(paramMap.get("name"));
 		users.setGender(StringUtils.isNotBlank(paramMap.get("gender")) ? Integer.parseInt(paramMap.get("gender")): null);
-		
+		users.setMobile(paramMap.get("mobile"));
 		Long regTimeQ = StringUtils.isNotBlank(paramMap.get("regTimeQ")) ? DateUtils.stringToLong(paramMap.get("regTimeQ") + " 00:00:00", "yyyy-MM-dd HH:mm:ss") : null;
 		Long regTimeZ = StringUtils.isNotBlank(paramMap.get("regTimeZ")) ? DateUtils.stringToLong(paramMap.get("regTimeZ") + " 00:00:00", "yyyy-MM-dd HH:mm:ss") : null;
 		Page<Users> page = manager.findAll(users,regTimeQ,regTimeZ, pp.getStart(), pp.getLength());

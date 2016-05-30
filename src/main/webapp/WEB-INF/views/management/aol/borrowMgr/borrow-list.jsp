@@ -65,11 +65,12 @@ Date.prototype.format = function(format){
 				});
 				var delId = "";
 				
-				var columns = [ {'text':'借款用户','dataIndex':'user','render':userRender,'width':'70px'},
+				var columns = [ {'text':'登录用户','dataIndex':'user','render':userRender,'width':'70px'},
 							    {'text':'借款额度','dataIndex':'limitMoney','render':moneyRender,'width':'60px'},
 							    {'text':'最大期限','dataIndex':'maxDay','render':dayRender,'width':'60px'},
-							    {'text':'用户名称','dataIndex':'username','width':'60px'},
+							    {'text':'借款用户','dataIndex':'username','width':'60px'},
 							    {'text':'身份证','dataIndex':'idCard','width':'60px'},
+								{'text':'学校','dataIndex':'schoolName','width':'60px'},
 							    {'text':'审核状态','dataIndex':'isList','render':isListRender,'width':'60px'},
 							    {'text':'申请时间','dataIndex':'createDate','render': timeRender,'width':'70'}
 							    ];
@@ -137,7 +138,8 @@ Date.prototype.format = function(format){
 					var arrayObj = [
 						{"name":"regTimeQ","value":$("#regTimeQ").val()},
 						{"name":"regTimeZ","value":$("#regTimeZ").val()},
-						{"name":"isList","value":$("#isList").val()}
+						{"name":"isList","value":$("#isList").val()},
+						{"name":"schoolName","value":$("#schoolName").val()}
 					];
 					dataTableObj.search(arrayObj);
 				}
@@ -244,7 +246,7 @@ Date.prototype.format = function(format){
 										<input type="text" name="regTimeZ"  id="regTimeZ"   readonly  class="form_datetime"  required="required"  style="width: 90px"/>
 									</td>
 									<td width="20px">&nbsp;</td>
-									
+
 								</tr>
 							</table>
 							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
@@ -258,6 +260,16 @@ Date.prototype.format = function(format){
 										<option <c:if test="${isList=='2'}">selected="selected" </c:if> value="2">拒绝</option>
 									</select>
 									</td>
+
+								</tr>
+							</table>
+							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
+								<tr>
+									<td>学校：</td>
+									<td>
+										<input type="text" name="schoolName"  id="schoolName" style="width: 90px"/>
+									</td>
+									<td width="20px">&nbsp;</td>
 									<td width="20px">&nbsp;</td>
 									<td height="40px" align="right">
 										<button id="btnSendTop" name="btnSendTop"  style="width:50px;cursor:pointer;"type="button" class="btn btn-primary" onclick="searchBtnClick()"></i>搜索</button>

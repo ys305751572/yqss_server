@@ -52,6 +52,9 @@ public class ProductBorrowManagerImpl extends GenericManagerImpl<ProductBorrow, 
 				if(pb.getUser().getUserId() != null) {
 					list.add(cb.equal(root.get("userId").as(Integer.class), pb.getUser().getUserId()));
 				}
+				if(StringUtils.isNotBlank(pb.getSchoolName())) {
+					list.add(cb.like(root.get("schoolName").as(String.class), "%" + pb.getSchoolName() + "%"));
+				}
 				if(retimeQ != null) {
 					list.add(cb.ge(root.get("createDate").as(Long.class), retimeQ));
 				}

@@ -65,11 +65,12 @@ Date.prototype.format = function(format){
 				});
 				var delId = "";
 				
-				var columns = [ {'text':'借款用户','dataIndex':'user','render':userRender,'width':'70px'},
+				var columns = [ {'text':'登录用户','dataIndex':'user','render':userRender,'width':'70px'},
 							    {'text':'购买期数','dataIndex':'stage','width':'60px'},
 							    {'text':'剩余期数','dataIndex':'period','width':'60px'},
-							    {'text':'用户名称','dataIndex':'username','width':'60px'},
+							    {'text':'借款名称','dataIndex':'username','width':'60px'},
 							    {'text':'身份证','dataIndex':'idCard','width':'60px'},
+								{'text':'学校','dataIndex':'schoolName','width':'60px'},
 							    {'text':'创建时间','dataIndex':'createDate','render': timeRender,'width':'70'}
 							    ];
 				var arrayObj = [];
@@ -115,7 +116,8 @@ Date.prototype.format = function(format){
 				function searchBtnClick(){
 					var arrayObj = [
 						{"name":"regTimeQ","value":$("#regTimeQ").val()},
-						{"name":"regTimeZ","value":$("#regTimeZ").val()}
+						{"name":"regTimeZ","value":$("#regTimeZ").val()},
+						{"name":"schoolName","value":$("#schoolName").val()}
 					];
 					dataTableObj.search(arrayObj);
 				}
@@ -210,6 +212,14 @@ Date.prototype.format = function(format){
 										<input type="text" name="regTimeQ"  id="regTimeQ"  readonly   class="form_datetime"  required="required"  style="width: 90px"/>
 										~
 										<input type="text" name="regTimeZ"  id="regTimeZ"   readonly  class="form_datetime"  required="required"  style="width: 90px"/>
+									</td>
+								</tr>
+							</table>
+							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
+								<tr>
+									<td>学校：</td>
+									<td>
+										<input type="text" name="schoolName"  id="schoolName" style="width: 90px"/>
 									</td>
 									<td width="20px">&nbsp;</td>
 									<td height="40px" align="right">

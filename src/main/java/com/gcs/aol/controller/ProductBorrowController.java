@@ -77,6 +77,7 @@ public class ProductBorrowController extends GenericEntityController<ProductBorr
 		
 		ProductBorrow pb = new ProductBorrow();
 		pb.getUser().setUserId(paramMap.get("userId") == null ? null : Integer.parseInt(paramMap.get("userId")));
+		pb.setSchoolName(paramMap.get("schoolName"));
 		String regTimeQ = paramMap.get("regTimeQ");
 		String regTimeZ = paramMap.get("regTimeZ");
 		
