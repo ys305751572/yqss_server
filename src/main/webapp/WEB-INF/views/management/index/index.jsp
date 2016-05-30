@@ -241,6 +241,14 @@
                            </li>
                        </ul>
                    </li>
+                    <li id="menu9">
+                        <a href="#" name="firstMenu"><span class="aol aol-system"></span>炒油用户管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li id="menu9_1" onclick="changeMenu(this.id,'理财管理&nbsp;>&nbsp;炒油用户列表')">
+                                <a href="${contextPath}/management/act/index" target="mainIFrame">炒油用户列表</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

@@ -35,7 +35,7 @@ import java.util.Map;
 @RequestMapping(value = "/moneymag")
 public class MoneyBuyManagerController extends GenericEntityController<MoneyMag, MoneyMag, MoneyMagManagerImpl> {
 
-    private static Map<String,String> codeMap = new HashMap<String,String>();
+    public static Map<String,String> codeMap = new HashMap<String,String>();
 
 
     static {
