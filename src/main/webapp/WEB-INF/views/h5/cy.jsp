@@ -110,6 +110,9 @@
                 <input type="text" id="code" name="code" placeholder="请输入您的验证码" class="inp" />
                 <input type="button" id="codeBtn" value="点击输入验证码" class="btn"></button>
             </div>
+            <div style="text-align: center;color: #ef6a1e;margin-top: 3rem;font-size: 1.6rem;font-weight: 700;position: relative;top: 1rem;">
+                <span>点击立即加入送千元油卡 </span>
+            </div>
             <input type="button" id="doSubmit" value="立即加入" class="submit"/>
         </fieldset>
     </form>
