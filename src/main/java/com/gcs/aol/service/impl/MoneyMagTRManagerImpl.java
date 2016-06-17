@@ -36,7 +36,8 @@ public class MoneyMagTRManagerImpl extends GenericManagerImpl<MoneyMagTR, MoneyM
 
 	@Override
 	public Double countMoneyByDodId(Integer dodId) {
-		return dao.haveBuy(dodId);
+		Double d = dao.haveBuy(dodId);
+		return d == null ? 0 : d.doubleValue();
 	}
 
 	@Override

@@ -15,7 +15,6 @@
 </head>
 <body style="background: #f7f7f7">
 <div class="back" style="background: #dd403b;">
-    <a href="javascript:history.go(-1)"><img src="${contextPath}/resources/h5/image/Fill 6.png"></a>
     <span>理财</span>
 </div>
 <header class="header banner">

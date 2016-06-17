@@ -8,6 +8,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.gcs.aol.entity.ProductBorrow;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,15 +34,18 @@ public class ProductBorrowRepayRecordManagerImpl extends GenericManagerImpl<Prod
 	}
 
 	@Override
-	public Page<ProductBorrowRepayRecord> findPage(final Integer borrowInfoId, Integer currentPage, Integer pageSize) {
+	public Page<ProductBorrowRepayRecord> findPage(final ProductBorrowRepayRecord record, Integer currentPage, Integer pageSize) {
 		Specification<ProductBorrowRepayRecord> spec = new Specification<ProductBorrowRepayRecord>() {
 
 			@Override
 			public Predicate toPredicate(Root<ProductBorrowRepayRecord> root, CriteriaQuery<?> arg1, CriteriaBuilder cb) {
 				List<Predicate> list = new ArrayList<Predicate>();
 				
-				if(borrowInfoId != null) {
-					list.add(cb.equal(root.get("borrow_info_id").as(Integer.class), borrowInfoId));
+//				if(borrowInfoId != null) {
+//					list.add(cb.equal(root.get("borrow_info_id").as(Integer.class), borrowInfoId));
+//				}
+				if(StringUtils.isNotBlank(record.getProductBorrow().getUser().getName())) {
+					list.add(cb.like(root.get("productBorrow").get("user").get("name").as(String.class),"%" + record.getProductBorrow().getUser().getName() + "%"));
 				}
 				return cb.and(list.toArray(new Predicate[list.size()]));
 			}

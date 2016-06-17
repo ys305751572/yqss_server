@@ -175,6 +175,12 @@
                             <li id="menu3_2" onclick="changeMenu(this.id,'借贷管理&nbsp;>&nbsp;购买列表')">
                                <a href="${contextPath}/management/pb/listPage" target="mainIFrame">购买列表</a>
                            </li>
+                           <li id="menu3_4" onclick="changeMenu(this.id,'借贷管理&nbsp;>&nbsp;借贷还款记录列表')">
+                               <a href="${contextPath}/management/borrow/record/index" target="mainIFrame">借贷还款记录列表</a>
+                           </li>
+                           <li id="menu3_5" onclick="changeMenu(this.id,'借贷管理&nbsp;>&nbsp;借贷还款记录列表')">
+                               <a href="${contextPath}/management/pb/record/index" target="mainIFrame">借贷还款记录列表</a>
+                           </li>
                        </ul>
                    </li>
                    <li id="menu4">
@@ -218,6 +224,9 @@
                            </li>
                            <li id="menu7_5" onclick="changeMenu(this.id,'基础设置管理&nbsp;>&nbsp;举报列表')">
                                <a href="${contextPath}/management/report/listPage" target="mainIFrame">举报列表</a>
+                           </li>
+                           <li id="menu7_6" onclick="changeMenu(this.id,'基础设置管理&nbsp;>&nbsp;修改密码')">
+                               <a href="${contextPath}/management/commons/password" target="mainIFrame">修改密码</a>
                            </li>
                        </ul>
                    </li>

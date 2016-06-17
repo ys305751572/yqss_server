@@ -65,15 +65,19 @@ Date.prototype.format = function(format){
 				});
 				var delId = "";
 				var columns = [ 
-							    {'text':'还款金额','dataIndex':'money','render': moneyRender,'width':'60px'},
+							    {'text':'登录用户','dataIndex':'money','render': userRender,'width':'60px'},
+								{'text':'借款用户名字','dataIndex':'money','render': borrowUserNameRender,'width':'60px'},
+								{'text':'借款用户手机','dataIndex':'money','render': borrowUserMobileRender,'width':'60px'},
+								{'text':'借款用户学校','dataIndex':'money','render': borrowUserSchoolRender,'width':'60px'},
+								{'text':'借款用户省份证','dataIndex':'money','render': borrowUserIdCardRender,'width':'60px'},
+								{'text':'还款金额','dataIndex':'money','render': moneyRender,'width':'60px'},
 							    {'text':'申请时间','dataIndex':'createDate','render': timeRender,'width':'70'}
 							    ];
 				var arrayObj = [];
 				var dataTableObj ;
 				$(function() {
 					arrayObj = [{name : "borrowInfoId", value : $("#borrowInfoId").val()}];
-					console.log("arrayObj:" + arrayObj);
-					
+
 					dataTableObj  = new czTools.dataTable({"columns":columns,"render":"doctorListDataTable",
 												"url":"${contextPath}/management/borrow/record/list",
 												"searchArr":arrayObj,
@@ -98,7 +102,26 @@ Date.prototype.format = function(format){
 				    });
 					
 				});
-				
+
+				function borrowUserIdCardRender(row) {
+					return row.borrow.idCard;
+				}
+
+				function borrowUserSchoolRender(row) {
+					return row.borrow.schoolName;
+				}
+
+				function borrowUserMobileRender(row) {
+					return row.borrow.phone;
+				}
+
+				function borrowUserNameRender(row) {
+					return row.borrow.username;
+				}
+				function userRender(row) {
+					return row.borrow.user.name;
+				}
+
 				function moneyRender(row) {
 					return row.money;
 				}
@@ -119,10 +142,6 @@ Date.prototype.format = function(format){
 					return row.maxDay;
 				}
 				
-				function userRender(row) {
-					return row.user.name;
-				}
-
 				function timeRender(row){
 					var regtime = "";
 					if(row.createDate){
@@ -133,9 +152,7 @@ Date.prototype.format = function(format){
 				
 				function searchBtnClick(){
 					var arrayObj = [
-						{"name":"regTimeQ","value":$("#regTimeQ").val()},
-						{"name":"regTimeZ","value":$("#regTimeZ").val()},
-						{"name":"isList","value":$("#isList").val()}
+						{"name":"name","value":$("#name").val()}
 					];
 					dataTableObj.search(arrayObj);
 				}
@@ -212,6 +229,23 @@ Date.prototype.format = function(format){
 				<input type="hidden" id="borrowInfoId" name="borrowInfoId" value="${map.borrowInfoId}">
 				<div class="box-content"   style="padding: 0px;border: 0px">
 					<!-- 搜索条件start -->
+					<div class="modal-header" style="float: left;width: 100%; ">
+						<form id="form1" name="form1" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
+								<tr>
+									<td>名字：</td>
+									<td>
+										<input type="text" name="name"  id="name" style="width: 90px"/>
+									</td>
+									<td width="20px">&nbsp;</td>
+									<td width="20px">&nbsp;</td>
+									<td height="40px" align="right">
+										<button id="btnSendTop" name="btnSendTop"  style="width:50px;cursor:pointer;"type="button" class="btn btn-primary" onclick="searchBtnClick()"></i>搜索</button>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
 					<!-- 搜索条件end -->
 
 					<!-- 列表start -->

@@ -178,7 +178,8 @@
             {name: 'date',validate:function(value){return(/Invalid|NaN/.test(new Date(value).toString()));},defaultMsg:"日期格式XXXX-XX-XX。"},
             {name: 'mobile', validate: function(value) {return (!/^0?(13[0-9]|15[0-9]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(value));}, defaultMsg: '请输入正确的手机号。'},
             {name: 'price',validate : function(value) {return (!/^\+?(\d*\.\d{2})$/.test(value) && !/^\+?(\d*\.\d{1})$/.test(value));},defaultMsg : '价格请保留两位小数'},
-            {name: 'installment', validate : function(value){return (!/^\d+(,\d+)*$/.test(value));}, defaultMsg:'商品分期请用逗号分割'}
+            {name: 'installment', validate : function(value){return (!/^\d+(,\d+)*$/.test(value));}, defaultMsg:'商品分期请用逗号分割'},
+            {name: 'matchTo', validate : function(value){ return ($("#newPwd").val() != value)}, defaultMsg:'两次密码输入不一致'},
         ],
         reqmark:true,
         callback:null,  //function(obj,params){};

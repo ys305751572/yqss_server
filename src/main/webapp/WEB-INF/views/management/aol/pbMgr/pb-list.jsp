@@ -71,6 +71,7 @@ Date.prototype.format = function(format){
 							    {'text':'借款名称','dataIndex':'username','width':'60px'},
 							    {'text':'身份证','dataIndex':'idCard','width':'60px'},
 								{'text':'学校','dataIndex':'schoolName','width':'60px'},
+								{'text':'审核状态','dataIndex':'isList','render':isListRender,'width':'60px'},
 							    {'text':'创建时间','dataIndex':'createDate','render': timeRender,'width':'70'}
 							    ];
 				var arrayObj = [];
@@ -111,6 +112,18 @@ Date.prototype.format = function(format){
 						regtime = new Date(row.createDate).format("yyyy-MM-dd hh:mm:ss")
 					}
 					return regtime;
+				}
+
+				function isListRender(row) {
+					if(row.isList == 0){
+						return "审核中";
+					}
+					else if(row.isList == 1) {
+						return "同意";
+					}
+					else if(row.isList == 2) {
+						return "拒绝";
+					}
 				}
 				
 				function searchBtnClick(){

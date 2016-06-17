@@ -1,8 +1,6 @@
 package com.gcs.aol.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.gcs.sysmgr.entity.IdAbstartEntity;
 
@@ -12,8 +10,9 @@ public class ProductBorrowRepayRecord extends IdAbstartEntity{
 
 	private static final long serialVersionUID = -3554633858193104732L;
 
-	@Column(name = "borrow_info_id")
-	private Integer borrow_info_id;
+	@ManyToOne
+	@JoinColumn(name = "borrow_info_id")
+	private ProductBorrow productBorrow;
 	
 	@Column(name = "money")
 	private Double money;
@@ -21,12 +20,12 @@ public class ProductBorrowRepayRecord extends IdAbstartEntity{
 	@Column(name = "create_date")
 	private Long createDate;
 
-	public Integer getBorrow_info_id() {
-		return borrow_info_id;
+	public ProductBorrow getProductBorrow() {
+		return productBorrow;
 	}
 
-	public void setBorrow_info_id(Integer borrow_info_id) {
-		this.borrow_info_id = borrow_info_id;
+	public void setProductBorrow(ProductBorrow productBorrow) {
+		this.productBorrow = productBorrow;
 	}
 
 	public Double getMoney() {

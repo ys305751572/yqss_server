@@ -143,8 +143,17 @@ public class ProductBorrowController extends GenericEntityController<ProductBorr
 		HashMap<String, String> paramMap = (HashMap<String, String>) convertToMap(params);
 		String sortStr = paramMap.get("bbSortName");
 		PageParameters pp = PageUtil.getParameter(paramMap, sortStr);
-		
-		Page<ProductBorrowRepayRecord> page = productBorrowRepayRecordManager.findPage(Integer.parseInt(paramMap.get("borrowInfoId")),pp.getStart(), pp.getLength());
+
+		String name = paramMap.get("name");
+		Users users = new Users();
+		users.setName(name);
+		ProductBorrow pb = new ProductBorrow();
+		pb.setUser(users);
+
+		ProductBorrowRepayRecord record = new ProductBorrowRepayRecord();
+		record.setProductBorrow(pb);
+
+		Page<ProductBorrowRepayRecord> page = productBorrowRepayRecordManager.findPage(record,pp.getStart(), pp.getLength());
 		return successed(new DataTableReturnObject(page.getTotalElements(), page.getTotalElements(), pp.getSEcho(), page.getContent()));
 	}
 }

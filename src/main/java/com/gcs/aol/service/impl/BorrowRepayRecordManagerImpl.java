@@ -8,6 +8,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.gcs.aol.entity.Borrow;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,15 +34,18 @@ public class BorrowRepayRecordManagerImpl extends GenericManagerImpl<BorrowRepay
 	}
 
 	@Override
-	public Page<BorrowRepayRecord> findPage(final Integer borrowInfoId,Integer currentPage,Integer pageSize) {
+	public Page<BorrowRepayRecord> findPage(final BorrowRepayRecord record, Integer currentPage, Integer pageSize) {
 		Specification<BorrowRepayRecord> spec = new Specification<BorrowRepayRecord>() {
 
 			@Override
 			public Predicate toPredicate(Root<BorrowRepayRecord> root, CriteriaQuery<?> arg1, CriteriaBuilder cb) {
 				List<Predicate> list = new ArrayList<Predicate>();
 				
-				if(borrowInfoId != null) {
-					list.add(cb.equal(root.get("borrowInfoId").as(Integer.class), borrowInfoId));
+//				if(borrowInfoId != null) {
+//					list.add(cb.equal(root.get("borrowInfoId").as(Integer.class), borrowInfoId));
+//				}
+				if(StringUtils.isNotBlank(record.getBorrow().getUser().getName())) {
+					list.add(cb.like(root.get("borrow").get("user").get("name").as(String.class),"%" + record.getBorrow().getUser().getName() + "%"));
 				}
 				return cb.and(list.toArray(new Predicate[list.size()]));
 			}

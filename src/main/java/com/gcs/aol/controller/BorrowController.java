@@ -146,8 +146,17 @@ public class BorrowController extends GenericEntityController<Borrow, Borrow, Bo
 		HashMap<String, String> paramMap = (HashMap<String, String>) convertToMap(params);
 		String sortStr = paramMap.get("bbSortName");
 		PageParameters pp = PageUtil.getParameter(paramMap, sortStr);
-		
-		Page<BorrowRepayRecord> page = borrowRepayRecordManager.findPage(Integer.parseInt(paramMap.get("borrowInfoId")),pp.getStart(), pp.getLength());
+
+		String name = paramMap.get("name");
+		Users users = new Users();
+		users.setName(name);
+		Borrow borrow = new Borrow();
+		borrow.setUser(users);
+
+		BorrowRepayRecord record = new BorrowRepayRecord();
+		record.setBorrow(borrow);
+
+		Page<BorrowRepayRecord> page = borrowRepayRecordManager.findPage(record,pp.getStart(), pp.getLength());
 		return successed(new DataTableReturnObject(page.getTotalElements(), page.getTotalElements(), pp.getSEcho(), page.getContent()));
 	}
 }
