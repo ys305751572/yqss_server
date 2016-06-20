@@ -13,7 +13,6 @@ import com.gcs.pay.util.ConstantUtil;
 import com.gcs.pay.util.TenpayUtil;
 import com.gcs.pay.util.WXUtil;
 import com.gcs.utils.CommonUtils;
-import org.json.JSONException;
 
 
 public class PayRequest {
@@ -95,7 +94,7 @@ public class PayRequest {
 //			prepayReqHandler.setGateUrl(gateUrl);
             try {
                 prepayid = prepayReqHandler.sendPrepay();
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             if (null != prepayid && !"".equals(prepayid)) {

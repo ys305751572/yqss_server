@@ -130,7 +130,11 @@ Date.prototype.format = function(format){
 					var arrayObj = [
 						{"name":"regTimeQ","value":$("#regTimeQ").val()},
 						{"name":"regTimeZ","value":$("#regTimeZ").val()},
-						{"name":"schoolName","value":$("#schoolName").val()}
+						{"name":"schoolName","value":$("#schoolName").val()},
+						{"name":"username","value":$("#username").val()},
+						{"name":"phone","value":$("#phone").val()},
+						{"name":"name","value":$("#name").val()},
+						{"name":"mobile","value":$("#mobile").val()}
 					];
 					dataTableObj.search(arrayObj);
 				}
@@ -234,6 +238,46 @@ Date.prototype.format = function(format){
 									<td>
 										<input type="text" name="schoolName"  id="schoolName" style="width: 90px"/>
 									</td>
+									<td width="20px">&nbsp;</td>
+								</tr>
+							</table>
+							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
+								<tr>
+									<td>登陆人名字：</td>
+									<td>
+										<input type="text" name="name"  id="name" style="width: 90px"/>
+									</td>
+									<td width="20px">&nbsp;</td>
+									<td width="20px">&nbsp;</td>
+								</tr>
+							</table>
+							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
+								<tr>
+									<td>登陆用户手机：</td>
+									<td>
+										<input type="text" name="mobile"  id="mobile" style="width: 90px"/>
+									</td>
+									<td width="20px">&nbsp;</td>
+									<td width="20px">&nbsp;</td>
+								</tr>
+							</table>
+							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
+								<tr>
+									<td>借款人名字：</td>
+									<td>
+										<input type="text" name="username"  id="username" style="width: 90px"/>
+									</td>
+									<td width="20px">&nbsp;</td>
+									<td width="20px">&nbsp;</td>
+								</tr>
+							</table>
+							<table border="0px" style="height: 40px;word-break: keep-all;white-space:nowrap;float: left;">
+								<tr>
+									<td>借款人手机：</td>
+									<td>
+										<input type="text" name="phone"  id="phone" style="width: 90px"/>
+									</td>
+									<td width="20px">&nbsp;</td>
 									<td width="20px">&nbsp;</td>
 									<td height="40px" align="right">
 										<button id="btnSendTop" name="btnSendTop"  style="width:50px;cursor:pointer;"type="button" class="btn btn-primary" onclick="searchBtnClick()"></i>搜索</button>

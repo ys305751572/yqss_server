@@ -7,7 +7,6 @@ import com.gcs.pay.util.Sha1Util;
 import com.gcs.pay.util.XMLUtil;
 import com.gcs.utils.CommonUtils;
 import org.jdom.JDOMException;
-import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -88,7 +87,7 @@ public class PrepayIdRequestHandler extends RequestHandler {
 	}
 
 	// �ύԤ֧��
-	public String sendPrepay() throws JSONException {
+	public String sendPrepay()  {
 		String prepayid = "";
 //		StringBuffer sb = new StringBuffer("{");
 //		Set es = super.getAllParameters().entrySet();

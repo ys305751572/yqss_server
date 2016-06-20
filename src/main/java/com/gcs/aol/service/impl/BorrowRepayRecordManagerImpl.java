@@ -3,10 +3,7 @@ package com.gcs.aol.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 
 import com.gcs.aol.entity.Borrow;
 import org.apache.commons.lang3.StringUtils;
@@ -38,12 +35,13 @@ public class BorrowRepayRecordManagerImpl extends GenericManagerImpl<BorrowRepay
 		Specification<BorrowRepayRecord> spec = new Specification<BorrowRepayRecord>() {
 
 			@Override
-			public Predicate toPredicate(Root<BorrowRepayRecord> root, CriteriaQuery<?> arg1, CriteriaBuilder cb) {
+			public Predicate toPredicate(Root<BorrowRepayRecord> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
 				List<Predicate> list = new ArrayList<Predicate>();
 				
 //				if(borrowInfoId != null) {
 //					list.add(cb.equal(root.get("borrowInfoId").as(Integer.class), borrowInfoId));
 //				}
+
 				if(StringUtils.isNotBlank(record.getBorrow().getUser().getName())) {
 					list.add(cb.like(root.get("borrow").get("user").get("name").as(String.class),"%" + record.getBorrow().getUser().getName() + "%"));
 				}

@@ -61,6 +61,19 @@ public class ProductBorrowManagerImpl extends GenericManagerImpl<ProductBorrow, 
 				if(retimeZ != null) {
 					list.add(cb.le(root.get("createDate").as(Long.class), retimeZ));
 				}
+				if(StringUtils.isNotBlank(pb.getUser().getName())) {
+					list.add(cb.like(root.get("user").get("name").as(String.class),"%" + pb.getUser().getName() + "%"));
+				}
+				if(StringUtils.isNotBlank(pb.getUsername())) {
+					list.add(cb.like(root.get("username").as(String.class),"%" + pb.getUsername()+ "%"));
+				}
+				if(StringUtils.isNotBlank(pb.getUser().getMobile())) {
+					list.add(cb.like(root.get("user").get("mobile").as(String.class),"%" + pb.getUser().getMobile() + "%"));
+				}
+				if(StringUtils.isNotBlank(pb.getPhone())) {
+					list.add(cb.like(root.get("phone").as(String.class),"%" + pb.getPhone() + "%"));
+				}
+
 				Predicate[] p = new Predicate[list.size()];
 				return cb.and(list.toArray(p));
 			}

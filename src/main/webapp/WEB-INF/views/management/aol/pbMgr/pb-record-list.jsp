@@ -123,9 +123,12 @@
         }
 
         function borrowUserNameRender(row) {
-            return row.productBorrow.username;
+            return row.productBorCommonsControllerrow.username;
         }
         function userRender(row) {
+            if(row.productBorrow.user == null) {
+                return "";
+            }
             return row.productBorrow.user.name;
         }
 

@@ -119,6 +119,9 @@ Date.prototype.format = function(format){
 					return row.borrow.username;
 				}
 				function userRender(row) {
+					if(row.borrow.user == null) {
+						return "";
+					}
 					return row.borrow.user.name;
 				}
 

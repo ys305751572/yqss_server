@@ -58,6 +58,18 @@ public class BorrowManagerImpl extends GenericManagerImpl<Borrow, BorrowDAO> imp
 					list.add(cb.like(root.get("schoolName").as(String.class),"%" + borrow.getSchoolName() + "%"));
 				}
 
+				if(StringUtils.isNotBlank(borrow.getUser().getName())) {
+					list.add(cb.like(root.get("user").get("name").as(String.class),"%" + borrow.getUser().getName() + "%"));
+				}
+				if(StringUtils.isNotBlank(borrow.getUsername())) {
+					list.add(cb.like(root.get("username").as(String.class),"%" + borrow.getUsername()+ "%"));
+				}
+				if(StringUtils.isNotBlank(borrow.getUser().getMobile())) {
+					list.add(cb.like(root.get("user").get("mobile").as(String.class),"%" + borrow.getUser().getMobile() + "%"));
+				}
+				if(StringUtils.isNotBlank(borrow.getPhone())) {
+					list.add(cb.like(root.get("phone").as(String.class),"%" + borrow.getPhone() + "%"));
+				}
 				if(regTimeQ != null ) {
 					list.add(cb.gt(root.get("createDate").as(Long.class),regTimeQ));
 				}

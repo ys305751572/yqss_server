@@ -11,7 +11,7 @@ public class BorrowRepayRecord extends IdAbstartEntity{
 	private static final long serialVersionUID = -1153436278054287161L;
 
 	@ManyToOne
-	@JoinColumn(name = "borrow_info_id")
+	@JoinColumn(name = "borrow_info_id", nullable = false)
 	private Borrow borrow;
 	
 	@Column(name = "money")

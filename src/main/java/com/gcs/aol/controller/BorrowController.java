@@ -75,7 +75,17 @@ public class BorrowController extends GenericEntityController<Borrow, Borrow, Bo
 		Borrow b = new Borrow();
 		b.getUser().setUserId(paramMap.get("userId") != null ? Integer.parseInt(paramMap.get("userId")) : null);
 		b.setIsList(StringUtils.isNotBlank(paramMap.get("isList")) ? Integer.parseInt(paramMap.get("isList")) : null);
+
+		Users users = new Users();
+		users.setName(paramMap.get("name")); // 登陆用户信息
+		users.setMobile(paramMap.get("mobile")); // 用户手机
+
+		b.setUser(users);
+
+		b.setUsername(paramMap.get("username")); // 借款人信息
 		b.setSchoolName(paramMap.get("schoolName"));
+		b.setPhone(paramMap.get("phone"));
+
 		String regTimeQ = paramMap.get("regTimeQ");
 		String regTimeZ = paramMap.get("regTimeZ");
 		Page<Borrow> page = manager.findAll(b,regTimeQ,regTimeZ,pp.getStart(), pp.getLength());
