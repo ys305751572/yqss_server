@@ -101,10 +101,16 @@ Date.prototype.format = function(format){
 				});
 				
 				function userNameRender(row) {
+					if(row.user == null) {
+						return "";
+					}
 					return row.user.name;
 				}
 				
 				function userMobileRender(row) {
+					if(row.user == null) {
+						return "";
+					}
 					return row.user.mobile;
 				}
 				
